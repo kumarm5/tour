@@ -20,3 +20,5 @@ urlpatterns = [
     url(r'^logout/$', logout, {'next_page': '/admin/login/'}),
     url(r'^$', include('tourapp.urls')),    
 ]
+
+admin.site.site_header = 'Administration'
