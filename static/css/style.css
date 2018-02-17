@@ -1,5 +1,5 @@
 body{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;    
 }
 
 .navbar{
@@ -12,3 +12,44 @@ body{
     height: 500px;
 }
 
+.menu-ul{
+    list-style-type: none;
+}
+
+.menu-payubiz{
+    width: 80px;
+    height: 37px;
+    background: url('/static/images/PayUbiz.jpg') left center no-repeat;
+}
+
+.menu-ul li{
+    display: inline-block;
+}
+
+.menu-ul li:last-child{
+    margin-top: 20px;
+}
+
+.menu-ul .btn-email{
+    color: #353435;
+    background: #ffd525;
+    border-color: #ffd525;        
+    border-radius: 0px;
+    margin-top: -20px;
+}
+
+.menu-ul .btn-phone{
+    color: #fff;
+    background: #353435;
+    border-color: #353435;
+    border-radius: 0px;
+    margin-top: -20px;
+}
+
+.carousel-caption{
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.carousel-indicators{
+    display: none;
+}
