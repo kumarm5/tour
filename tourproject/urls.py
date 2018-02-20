@@ -18,7 +18,8 @@ from django.contrib.auth.views import logout
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^logout/$', logout, {'next_page': '/admin/login/'}),
-    url(r'^$', include('tourapp.urls')),    
+    url(r'^$', include('tourapp.urls')),
+    url(r'^departurechart/', include('flight_fixed_departure.urls'))    
 ]
 
 admin.site.site_header = 'Administration'

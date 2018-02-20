@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Flight Fixed Departure Chart</title>
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <link href="{% static 'css/jquery.dataTables.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <br><br><br>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="sector" class="col-md-2 control-label">Search By Sector</label>
+                        <div class="col-md-6">
+                            <select class="form-control">
+                                <option value="">Select Sector</option>
+                                {% for sector_detail in sector_details %}
+                                    <option value="{{ sector_detail.id }}">{{ sector_detail.sector_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <br><br>
+                <table id="sectorTable" class="table-bordered">
+                    <thead>
+                        <tr>
+                            <th>SR NO.</th>
+                            <th>SECTOR</th>
+                            <th>DEP. TIME/ FLIGHT NO</th>
+                            <th>RET. TIME/ FLIGHT NO</th>
+                            <th>DEP DATE</th>
+                            <th>RET DATE</th>
+                            <th>AVAILBILITY</th>
+                            <th>TOTAL SEATS</th>
+                            <th>DEP RATE</th>
+                            <th>RET RATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>	
+                        {% for supplier_detail in supplier_details %}	
+                        <tr>
+                            <td>{{ supplier_detail.id }}</td>	
+                            <td>{{ supplier_detail.sectors.sector_name }}</td>
+                            <td>{{ supplier_detail.departure_time}} / {{ supplier_detail.departure_flt_no }}</td>
+                            <td>{{ supplier_detail.return_time}} / {{ supplier_detail.return_flt_no }}</td>
+                            <td>{{ supplier_detail.departure_date }}</td>
+                            <td>{{ supplier_detail.return_date }}</td>
+                            <td>AVAILABE SEATS</td>
+                            <td>{{ supplier_detail.total_departure_seats }}/ {{ supplier_detail.total_return_seats }}</td>                            
+                            <td>{{ supplier_detail.dep_rate_flash }}</td>
+                            <td>{{ supplier_detail.ret_rate_flash }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#sectorTable').DataTable();
+        });
+    </script>
+{% endblock %}

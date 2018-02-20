@@ -1,0 +1,1 @@
+default_app_config = 'flight_fixed_departure.apps.FlightFixedDepartureConfig'

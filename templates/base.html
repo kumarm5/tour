@@ -14,10 +14,12 @@
 			    <title>Tour and Tourism</title>
             {% endblock %}
 
-			<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-            <link rel="stylesheet" href="{% static 'css/style.css' %}">
+            {% block style %}
+                <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+                <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+                <link rel="stylesheet" href="{% static 'css/style.css' %}">
+            {% endblock %}
 
 			<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 			<!--[if lt IE 9]>
@@ -65,7 +67,7 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">AIR TICKETS <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">BOOK ONLINE</a></li>
-                                        <li><a href="#">FLIGHT FIXED DEPARTURE CHART</a></li>
+                                        <li><a href="{% url 'fixed_departure_chart' %}">FLIGHT FIXED DEPARTURE CHART</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown">
@@ -79,14 +81,13 @@
                                     </ul>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TOUR PACKAGES <span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CAB BOOKING <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">CAR RENTAL TARIFF</a></li>
                                         <li><a href="#">CAB PICK UP DROP LIVE</a></li>
                                         <li><a href="#">CAR OUTSTATION ROUNDTRIP</a></li>                                        
                                     </ul>
                                 </li>
-                                <li><a href="#">CAB BOOKING</a></li>
                                 <li><a href="#">VISA (JUNCTION)</a></li>
                                 <li><a href="#">SERVICES</a></li>
                                 <li><a href="#">FEEDBACK</a></li>
