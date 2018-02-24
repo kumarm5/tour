@@ -4,6 +4,12 @@
 {% block extrahead %}{{ block.super }}
 <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
 {{ media }}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
+<!-- <link href="https://fgelinas.com/code/timepicker/jquery.ui.timepicker.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="{% static 'include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css' %}" type="text/css" />
+<link rel="stylesheet" href="{% static 'css/jquery.ui.timepicker.css' %}" type="text/css" />
+
 {% endblock %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />{% endblock %}
@@ -82,4 +88,21 @@
 
 </div>
 </form></div>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
+<!-- <script src="https://fgelinas.com/code/timepicker/jquery.ui.timepicker.js"></script> -->
+
+<script type="text/javascript" src="{% static 'include/jquery-1.9.0.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'include/ui-1.10.0/jquery.ui.core.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'include/ui-1.10.0/jquery.ui.widget.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'include/ui-1.10.0/jquery.ui.tabs.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'include/ui-1.10.0/jquery.ui.position.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery.ui.timepicker.js' %}"></script>
+
+<script>
+    $(".datepicker").datepicker({ 
+        dateFormat: 'yy-mm-dd' 
+    });
+    $('.timepicker').timepicker();
+</script>
 {% endblock %}

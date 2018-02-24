@@ -193,8 +193,8 @@ class SupplierDetailsForm(forms.ModelForm):
         self.request = kwargs.pop('request', None)
         super(SupplierDetailsForm, self).__init__(*args, **kwargs)
         self.fields['departure_seat_availability'].label = 'Dep. seat available'
-        self.fields['return_seat_availability'].label = 'Ret. seat available'
-
+        self.fields['return_seat_availability'].label = 'Ret. seat available'        
+        
     class Meta:
         model = SupplierDetails
         exclude = ()
@@ -213,8 +213,8 @@ class SupplierDetailsForm(forms.ModelForm):
             ),
             'departure_time': forms.TextInput(
                 attrs = {
-                    'class': 'form-control',
-                    'placeholder': 'HH:MM:SS'
+                    'class': 'form-control timepicker',
+                    'placeholder': 'HH:MM'
                 }
             ),
             'departure_flt_no': forms.TextInput(
@@ -225,8 +225,8 @@ class SupplierDetailsForm(forms.ModelForm):
             ),
             'return_time': forms.TextInput(
                 attrs = {
-                    'class': 'form-control',
-                    'placeholder': 'HH:MM:SS'
+                    'class': 'form-control timepicker',
+                    'placeholder': 'HH:MM'
                 }
             ),
             'return_flt_no': forms.TextInput(
@@ -237,13 +237,13 @@ class SupplierDetailsForm(forms.ModelForm):
             ),
             'departure_date': forms.TextInput(
                 attrs = {
-                    'class': 'form-control',
-                    'placeholder': 'yyyy-mm-dd' 
+                    'class': 'form-control datepicker',
+                    'placeholder': 'yyyy-mm-dd'
                 }
             ),
             'return_date': forms.TextInput(
                 attrs = {
-                    'class': 'form-control',
+                    'class': 'form-control datepicker',
                     'placeholder': 'yyyy-mm-dd'
                 }
             ),
