@@ -15,14 +15,19 @@
         <div class="row">
             <div class="col-md-12">
                 <br><br><br>
-                <form class="form-horizontal">
+                <form class="form-horizontal" action="/departurechart/" id="sector_form" method="POST">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="sector" class="col-md-2 control-label">Search By Sector</label>
                         <div class="col-md-6">
-                            <select class="form-control">
-                                <option value="">Select Sector</option>
+                            <select class="form-control" name="sector_id">
+                                <option value="0">Select Sector</option>
                                 {% for sector_detail in sector_details %}
-                                    <option value="{{ sector_detail.id }}">{{ sector_detail.sector_name }}</option>
+                                    <option value="{{ sector_detail.id }}"
+                                        {% if sector_detail.id == sector_id %}
+                                            selected
+                                        {% endif %}
+                                    >{{ sector_detail.sector_name }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -47,13 +52,13 @@
                     <tbody>	
                         {% for supplier_detail in supplier_details %}	
                         <tr>
-                            <td>{{ supplier_detail.id }}</td>	
+                            <td>{{ forloop.counter }}</td>
                             <td>{{ supplier_detail.sectors.sector_name }}</td>
                             <td>{{ supplier_detail.departure_time}} / {{ supplier_detail.departure_flt_no }}</td>
                             <td>{{ supplier_detail.return_time}} / {{ supplier_detail.return_flt_no }}</td>
                             <td>{{ supplier_detail.departure_date }}</td>
                             <td>{{ supplier_detail.return_date }}</td>
-                            <td>AVAILABE SEATS</td>
+                            <td>{{ supplier_detail.departure_seat_availability }} / {{ supplier_detail.return_seat_availability }}</td>
                             <td>{{ supplier_detail.total_departure_seats }}/ {{ supplier_detail.total_return_seats }}</td>                            
                             <td>{{ supplier_detail.dep_rate_flash }}</td>
                             <td>{{ supplier_detail.ret_rate_flash }}</td>
@@ -73,6 +78,10 @@
     <script>
         $(document).ready(function(){
             $('#sectorTable').DataTable();
+
+            $('select[name="sector_id"]').on('change', function(){
+                $('#sector_form').submit();
+            });
         });
     </script>
 {% endblock %}

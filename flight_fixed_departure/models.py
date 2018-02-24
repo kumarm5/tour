@@ -1,5 +1,4 @@
 from django.db import models
-
 # Create your models here.
 
 class Sector(models.Model):    
@@ -23,6 +22,8 @@ class SupplierDetails(models.Model):
     return_flt_no = models.CharField(max_length=20, verbose_name='Ret. Flight No.')
     departure_date = models.DateField(blank=True, verbose_name='Departure Date')
     return_date = models.DateField(blank=True, verbose_name='Return Date')
+    departure_seat_availability = models.IntegerField(default=0, verbose_name='Departure Seat Availability')
+    return_seat_availability = models.IntegerField(default=0, verbose_name='Return Seat Availability')
     total_departure_seats = models.IntegerField(default=0, verbose_name='Total Dep. Seats')
     total_return_seats = models.IntegerField(default=0, verbose_name='Total Ret. Seats')
     dep_rate_flash = models.IntegerField(default=0, verbose_name='Dep. Rate Flash')
@@ -65,11 +66,12 @@ class SupplierDepartureSeatInfo(models.Model):
 
     def __str__(self):
         return self.first_name
-
+    
     class Meta:
         db_table = 'supplier_departure_seat_info'
         verbose_name = 'Supplier Departure Seat'
         verbose_name_plural = 'Supplier Departure Seats'
+
 
 class SupplierDepartureSeatRemarkInline(models.Model):
     supplier_seat = models.ForeignKey('SupplierDepartureSeatInfo', on_delete=models.CASCADE, related_name='seat_supplier_departure_detail')

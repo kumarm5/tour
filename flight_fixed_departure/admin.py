@@ -1,10 +1,11 @@
 from django.contrib import admin
 from .models import *
 from .forms import *
+import logging
 import pdb
 
 # Register your models here.
-
+    
 class SectorAdmin(admin.ModelAdmin):
     form = SectorForm
     fields = (('sector_name', 'status'),)
@@ -27,7 +28,7 @@ class SupplierPaymentInlineAdmin(admin.StackedInline):
 class SupplierDetailsAdmin(admin.ModelAdmin):
     list_display = ('supplier_name','sectors','departure_date')
     form = SupplierDetailsForm
-    fields = (('sectors', 'supplier_name', 'departure_time') , ('departure_flt_no', 'return_time', 'return_flt_no'), ('departure_date', 'return_date', 'total_departure_seats'), ('total_return_seats', 'dep_rate_flash', 'ret_rate_flash'), ('dep_rate_supplier', 'ret_rate_supplier'), ('other_details'))
+    fields = (('sectors', 'supplier_name', 'departure_time') , ('departure_flt_no', 'return_time', 'return_flt_no'), ('departure_date', 'return_date', 'total_departure_seats'), ('total_return_seats', 'departure_seat_availability', 'return_seat_availability'), ('dep_rate_flash', 'ret_rate_flash'), ('dep_rate_supplier', 'ret_rate_supplier'), ('other_details'))
     inlines = [SupplierPaymentInlineAdmin,]
 
 admin.site.register(SupplierDetails, SupplierDetailsAdmin)

@@ -192,6 +192,8 @@ class SupplierDetailsForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(SupplierDetailsForm, self).__init__(*args, **kwargs)
+        self.fields['departure_seat_availability'].label = 'Dep. seat available'
+        self.fields['return_seat_availability'].label = 'Ret. seat available'
 
     class Meta:
         model = SupplierDetails
@@ -243,6 +245,18 @@ class SupplierDetailsForm(forms.ModelForm):
                 attrs = {
                     'class': 'form-control',
                     'placeholder': 'yyyy-mm-dd'
+                }
+            ),
+            'departure_seat_availability': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter available departure seats'
+                }
+            ),
+            'return_seat_availability': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter available return seats'
                 }
             ),
             'total_departure_seats': forms.TextInput(
