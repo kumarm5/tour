@@ -82,6 +82,10 @@
             $('select[name="sector_id"]').on('change', function(){
                 $('#sector_form').submit();
             });
+
+            setTimeout(function(){
+                location.reload();
+            }, 300000);
         });
     </script>
 {% endblock %}

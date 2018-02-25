@@ -18,6 +18,7 @@
     {% block extra_head %}
         {{ block.super }}
         <link href="{% static 'css/jquery.dataTables.min.css' %}" rel="stylesheet">
+        <link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet">       
     {% endblock %}
 </head>
 <body class="hold-transition skin-blue sidebar-mini {% block body_class %}{% block bodyclass %}{% endblock %}{% endblock %}">
@@ -81,11 +82,23 @@
 
 {% block extra_foot %}
     {{ block.super }}
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>    
     <script>
     $(document).ready(function(){    
         
+        function stopPropagation(evt) {
+            if (evt.stopPropagation !== undefined) {
+                evt.stopPropagation();
+            } else {
+                evt.cancelBubble = true;
+            }
+        }
+
         // Setup - add a text input to each footer cell
         $('#result_list thead tr#filterrow th').each( function () {
             var title = $('#example thead th').eq( $(this).index() ).text();     
@@ -97,23 +110,20 @@
         });
 
         // DataTable
-        var table = $('#result_list').DataTable();
-        
+        var table = $('#result_list').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [                
+                // 'excel',                
+            ]
+        });
+
         // Apply the filter
         $("#result_list thead input").on( 'keyup change', function () {
             table
                 .column( $(this).parent().index()+':visible' )
                 .search( this.value )
                 .draw();
-        } );
-
-        function stopPropagation(evt) {
-            if (evt.stopPropagation !== undefined) {
-                evt.stopPropagation();
-            } else {
-                evt.cancelBubble = true;
-            }
-        }
+        });
 
     });
     </script>

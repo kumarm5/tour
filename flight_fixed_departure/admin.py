@@ -26,7 +26,7 @@ class SupplierPaymentInlineAdmin(admin.StackedInline):
             return 1
 
 class SupplierDetailsAdmin(admin.ModelAdmin):
-    list_display = ('supplier_name','sectors','departure_date')
+    list_display = ('supplier_name','sectors','departure_date','return_date')
     form = SupplierDetailsForm
     fields = (('sectors', 'supplier_name', 'departure_time') , ('departure_flt_no', 'return_time', 'return_flt_no'), ('departure_date', 'return_date', 'total_departure_seats'), ('total_return_seats', 'departure_seat_availability', 'return_seat_availability'), ('dep_rate_flash', 'ret_rate_flash'), ('dep_rate_supplier', 'ret_rate_supplier'), ('other_details'))
     inlines = [SupplierPaymentInlineAdmin,]
@@ -46,14 +46,25 @@ class SupplierDepartureSeatRemarkAdminInline(admin.StackedInline):
             return 1
 
 class SupplierDepartureSeatInfoAdmin(admin.ModelAdmin):
-    list_display = ('supplier', 'first_name', 'mobile_no', 'booking_agent')
+    list_display = ('supplier', 'first_name', 'last_name', 'sector_name', 'departure_date')
     form = SupplierDepartureSeatInfoForm   
     fields = (('supplier', 'first_name', 'middle_name') , ('last_name', 'mobile_no', 'date_of_birth'), ('passport_no', 'passport_exp', 'rate_given'), ('booking_agent',),)
     inlines = [SupplierDepartureSeatRemarkAdminInline,]
 
-    # def save_model(self, request, obj, form, change):        
-    #     obj.date_of_birth= obj.date_of_birth.strftime("%d-%m-%Y")        
-    #     super(SupplierDepartureSeatInfoAdmin, self).save_model(request, obj, form, change)        
+    def sector_name(self, obj):        
+        return obj.supplier.sectors.sector_name
+    sector_name.short_description = 'Sector'
+
+    def departure_date(self, obj):
+        return obj.supplier.departure_date
+    departure_date.short_description = 'Departure Date'
+
+    def save_model(self, request, obj, form, change):        
+        if change is False:
+            seat_avail = int(obj.supplier.departure_seat_availability) - 1
+            SupplierDetails.objects.filter(pk=obj.supplier.pk).update(departure_seat_availability=seat_avail)
+
+        super(SupplierDepartureSeatInfoAdmin, self).save_model(request, obj, form, change)
 
 admin.site.register(SupplierDepartureSeatInfo, SupplierDepartureSeatInfoAdmin)
 
@@ -70,9 +81,17 @@ class SupplierReturnSeatRemarkAdminInline(admin.StackedInline):
             return 1
 
 class SupplierReturnSeatInfoAdmin(admin.ModelAdmin):
-    list_display = ('supplier', 'first_name', 'mobile_no', 'booking_agent')
+    list_display = ('supplier', 'first_name', 'last_name', 'sector_name', 'return_date')
     form = SupplierReturnSeatInfoForm
     fields = (('supplier', 'first_name', 'middle_name') , ('last_name', 'mobile_no', 'date_of_birth'), ('passport_no', 'passport_exp', 'rate_given'), ('booking_agent',),)
     inlines = [SupplierReturnSeatRemarkAdminInline,]
+    
+    def sector_name(self, obj):        
+        return obj.supplier.sectors.sector_name
+    sector_name.short_description = 'Sector'
+
+    def return_date(self, obj):
+        return obj.supplier.return_date
+    return_date.short_description = 'Return Date'
             
 admin.site.register(SupplierReturnSeatInfo, SupplierReturnSeatInfoAdmin)
