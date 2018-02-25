@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import widgets
+from tourproject import settings
 from .models import *
 import pdb
 
@@ -39,10 +40,25 @@ class SectorForm(forms.ModelForm):
         }
 
 class SupplierDepartureSeatInfoForm(forms.ModelForm):
+    date_of_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'class':'form-control date_of_birth_picker', 'placeholder': 'dd-mm-yyyy', 'readonly': 'true'}))
+    
+    passport_exp = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'class':'form-control passport_expiry_date', 'placeholder': 'dd-mm-yyyy', 'readonly': 'true'}))
     
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(SupplierDepartureSeatInfoForm, self).__init__(*args, **kwargs)
+
+    # def save(self, commit=False):
+    #     pdb.set_trace()        
+    #     data = self.cleaned_data        
+    #     self.cleaned_data['date_of_birth'] = data['date_of_birth'].strftime("%Y-%m-%d")  
+    #     super(SupplierDepartureSeatInfoForm, self).save(commit=True)
+
+    # def clean_date_of_birth(self):
+    #     date_of_birth = self.cleaned_data.get('date_of_birth')
+    #     pdb.set_trace()
+    #     date_of_birth = date_of_birth.strftime("%Y-%m-%d")
+    #     return date_of_birth
 
     class Meta:
         model = SupplierDepartureSeatInfo        
@@ -78,24 +94,25 @@ class SupplierDepartureSeatInfoForm(forms.ModelForm):
                     'placeholder': 'Enter mobile number'
                 }
             ),
-            'date_of_birth': forms.TextInput(
-                attrs = {
-                    'class': 'form-control',
-                    'placeholder': 'yyyy-mm-dd'
-                }
-            ),
+            # 'date_of_birth': forms.TextInput(
+            #     attrs = {
+            #         'class': 'form-control date_of_birth_picker',
+            #         'placeholder': 'dd-mm-yyyy',
+            #     }
+            # ),
             'passport_no': forms.TextInput(
                 attrs = {
                     'class': 'form-control',
                     'placeholder': 'Enter passport number'
                 }
             ),
-            'passport_exp': forms.TextInput(
-                attrs = {
-                    'class': 'form-control',
-                    'placeholder': 'Enter passport expiry date'
-                }
-            ),
+            # 'passport_exp': forms.TextInput(
+            #     attrs = {
+            #         'class': 'form-control passport_expiry_date',
+            #         'placeholder': 'Enter passport expiry date',
+            #         'readonly': 'true'
+            #     }
+            # ),
             'booking_agent': forms.TextInput(
                 attrs = {
                     'class': 'form-control',
@@ -109,20 +126,19 @@ class SupplierDepartureSeatInfoForm(forms.ModelForm):
                 }
             )
         }
-
+        
 class SupplierReturnSeatInfoForm(forms.ModelForm):
+
+    date_of_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'class':'form-control date_of_birth_picker', 'placeholder': 'dd-mm-yyyy', 'readonly': 'true'}))
+    
+    passport_exp = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'class':'form-control passport_expiry_date', 'placeholder': 'dd-mm-yyyy', 'readonly': 'true'}))
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(SupplierReturnSeatInfoForm, self).__init__(*args, **kwargs)
 
-    def save(self, commit=True):
-        pdb.set_trace()
-        super(SupplierReturnSeatInfoForm, self).save(commit=True)
-
-
     class Meta:
-        model = SupplierReturnSeatInfo        
+        model = SupplierReturnSeatInfo
         exclude = ()
 
         widgets = {
@@ -157,8 +173,8 @@ class SupplierReturnSeatInfoForm(forms.ModelForm):
             ),
             'date_of_birth': forms.TextInput(
                 attrs = {
-                    'class': 'form-control',
-                    'placeholder': 'yyyy-mm-dd'
+                    'class': 'form-control date_of_birth_picker',
+                    'placeholder': 'dd-mm-yyyy'
                 }
             ),
             'passport_no': forms.TextInput(
@@ -188,7 +204,11 @@ class SupplierReturnSeatInfoForm(forms.ModelForm):
         }
 
 class SupplierDetailsForm(forms.ModelForm):
+
+    departure_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'class':'form-control departure_date_picker', 'placeholder': 'dd-mm-yyyy', 'readonly': 'true'}))
     
+    return_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'class':'form-control return_date_picker', 'placeholder': 'dd-mm-yyyy', 'readonly': 'true'}))
+
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(SupplierDetailsForm, self).__init__(*args, **kwargs)
@@ -235,18 +255,18 @@ class SupplierDetailsForm(forms.ModelForm):
                     'placeholder': 'Enter return flight no.'
                 }
             ),
-            'departure_date': forms.TextInput(
-                attrs = {
-                    'class': 'form-control datepicker',
-                    'placeholder': 'yyyy-mm-dd'
-                }
-            ),
-            'return_date': forms.TextInput(
-                attrs = {
-                    'class': 'form-control datepicker',
-                    'placeholder': 'yyyy-mm-dd'
-                }
-            ),
+            # 'departure_date': forms.TextInput(
+            #     attrs = {
+            #         'class': 'form-control datepicker',
+            #         'placeholder': 'yyyy-mm-dd'
+            #     }
+            # ),
+            # 'return_date': forms.TextInput(
+            #     attrs = {
+            #         'class': 'form-control datepicker',
+            #         'placeholder': 'yyyy-mm-dd'
+            #     }
+            # ),
             'departure_seat_availability': forms.TextInput(
                 attrs = {
                     'class': 'form-control',

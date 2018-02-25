@@ -69,8 +69,8 @@ class SupplierDepartureSeatInfo(models.Model):
     
     class Meta:
         db_table = 'supplier_departure_seat_info'
-        verbose_name = 'Supplier Departure Seat'
-        verbose_name_plural = 'Supplier Departure Seats'
+        verbose_name = 'Passenger Departure Seat'
+        verbose_name_plural = 'Passenger Departure Seats'
 
 
 class SupplierDepartureSeatRemarkInline(models.Model):
@@ -102,8 +102,8 @@ class SupplierReturnSeatInfo(models.Model):
 
     class Meta:
         db_table = 'supplier_return_seat_info'
-        verbose_name = 'Supplier Return Seat'
-        verbose_name_plural = 'Supplier Return Seats'
+        verbose_name = 'Passenger Return Seat'
+        verbose_name_plural = 'Passenger Return Seats'
 
 class SupplierReturnSeatRemarkInline(models.Model):
     supplier_seat = models.ForeignKey('SupplierReturnSeatInfo', on_delete=models.CASCADE, related_name='seat_supplier_return_detail')

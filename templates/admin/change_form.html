@@ -5,10 +5,10 @@
 <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script>
 {{ media }}
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
 <!-- <link href="https://fgelinas.com/code/timepicker/jquery.ui.timepicker.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="{% static 'include/ui-1.10.0/ui-lightness/jquery-ui-1.10.0.custom.min.css' %}" type="text/css" />
 <link rel="stylesheet" href="{% static 'css/jquery.ui.timepicker.css' %}" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
 
 {% endblock %}
 
@@ -100,9 +100,39 @@
 <script type="text/javascript" src="{% static 'js/jquery.ui.timepicker.js' %}"></script>
 
 <script>
-    $(".datepicker").datepicker({ 
-        dateFormat: 'yy-mm-dd' 
+    $(".return_date_picker, .departure_date_picker").datepicker({ 
+        dateFormat: 'dd-mm-yy' 
     });
+
     $('.timepicker').timepicker();
+    
+    $(".date_of_birth_picker").datepicker({
+        dateFormat : 'dd-mm-yy',
+        changeMonth : true,
+        changeYear : true,        
+        yearRange: '-100y:c+nn',
+    });
+
+    $(".passport_expiry_date").datepicker({
+        dateFormat : 'dd-mm-yy',
+        changeMonth : true,
+        changeYear : true,        
+        yearRange: '2018:2050',
+    });
+
+    // function for formatting the date in django forms
+    format_date = function(ccsclass){
+        if($('.'+cssclass+'').val() != undefined){
+            split_value = $('.'+cssclass+'').val().split("-");
+            reverse_value = split_value.reverse();
+            $('.'+cssclass+'').val(reverse_value.join("-"));
+        }
+    }
+
+    format_date(cssclass = 'date_of_birth_picker');    
+    format_date(cssclass = 'passport_expiry_date');
+    format_date(cssclass = 'return_date_picker');
+    format_date(cssclass = 'departure_date_picker');    
+
 </script>
 {% endblock %}

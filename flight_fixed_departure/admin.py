@@ -51,6 +51,10 @@ class SupplierDepartureSeatInfoAdmin(admin.ModelAdmin):
     fields = (('supplier', 'first_name', 'middle_name') , ('last_name', 'mobile_no', 'date_of_birth'), ('passport_no', 'passport_exp', 'rate_given'), ('booking_agent',),)
     inlines = [SupplierDepartureSeatRemarkAdminInline,]
 
+    # def save_model(self, request, obj, form, change):        
+    #     obj.date_of_birth= obj.date_of_birth.strftime("%d-%m-%Y")        
+    #     super(SupplierDepartureSeatInfoAdmin, self).save_model(request, obj, form, change)        
+
 admin.site.register(SupplierDepartureSeatInfo, SupplierDepartureSeatInfoAdmin)
 
 class SupplierReturnSeatRemarkAdminInline(admin.StackedInline):
