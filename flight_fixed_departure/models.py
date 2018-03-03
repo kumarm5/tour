@@ -1,8 +1,16 @@
 from django.db import models
 # Create your models here.
 
-class Sector(models.Model):    
-    sector_name = models.CharField(max_length=150, unique=True, verbose_name="Sector")
+class TripType(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Name')
+    status = models.BooleanField(verbose_name='Status', default=True)
+
+    def __str__(self):
+        return self.name
+
+class Sector(models.Model):
+    sector_name = models.CharField(max_length=150, unique=True, verbose_name="Sector")    
+    triptype = models.ForeignKey('TripType', on_delete=models.DO_NOTHING, verbose_name='Type of Trip')
     status = models.BooleanField(verbose_name="Status", default=True)
     
     def __str__(self):
@@ -15,22 +23,30 @@ class Sector(models.Model):
 
 class SupplierDetails(models.Model):
     supplier_name = models.CharField(max_length=150, verbose_name='Supplier Name')
+    triptype = models.ForeignKey('TripType', on_delete=models.DO_NOTHING, verbose_name='Type of Trip')
     sectors = models.ForeignKey('Sector', on_delete=models.CASCADE, related_name='supplier_sector')
-    departure_time = models.TimeField(blank=True, verbose_name='Departure Time')
-    departure_flt_no = models.CharField(max_length=20, verbose_name='Dep. Flight No.')
+    departure_time = models.TimeField(blank=True, null=True, verbose_name='Departure Time')
+    departure_flt_no = models.CharField(max_length=20, blank=True, null=True, verbose_name='Dep. Flight No.')
     return_time = models.TimeField(blank=True, null=True, verbose_name='Return Time')
     return_flt_no = models.CharField(max_length=20, blank=True, null=True, verbose_name='Ret. Flight No.')
-    departure_date = models.DateField(blank=True, verbose_name='Departure Date')
+    departure_date = models.DateField(blank=True, null=True, verbose_name='Departure Date')
     return_date = models.DateField(blank=True, null=True, verbose_name='Return Date')
-    departure_seat_availability = models.IntegerField(default=0, verbose_name='Departure Seat Availability')
-    return_seat_availability = models.IntegerField(default=0, verbose_name='Return Seat Availability')
-    total_departure_seats = models.IntegerField(default=0, verbose_name='Total Dep. Seats')
-    total_return_seats = models.IntegerField(default=0, verbose_name='Total Ret. Seats')
-    dep_rate_flash = models.IntegerField(default=0, verbose_name='Dep. Rate Flash')
-    ret_rate_flash = models.IntegerField(default=0, verbose_name='Ret. Rate Flash')
+    departure_seat_availability = models.IntegerField(blank=True, null=True, verbose_name='Departure Seat Availability')
+    return_seat_availability = models.IntegerField(blank=True, null=True, verbose_name='Return Seat Availability')
+    total_departure_seats = models.IntegerField(blank=True, null=True, verbose_name='Total Dep. Seats')
+    total_return_seats = models.IntegerField(blank=True, null=True, verbose_name='Total Ret. Seats')
+    dep_rate_flash = models.IntegerField(blank=True, null=True, verbose_name='Dep. Rate Flash')
+    ret_rate_flash = models.IntegerField(blank=True, null=True, verbose_name='Ret. Rate Flash')
     other_details = models.TextField(blank=True, null=True, verbose_name='Other Details')
-    dep_rate_supplier = models.IntegerField(default=0)
-    ret_rate_supplier = models.IntegerField(default=0)
+    dep_rate_supplier = models.IntegerField(blank=True, null=True)
+    ret_rate_supplier = models.IntegerField(blank=True, null=True)
+    oneway_time = models.TimeField(blank=True, null=True, verbose_name='One Way Time')
+    oneway_date = models.DateField(blank=True, null=True, verbose_name='One Way Date')
+    oneway_rate_supplier = models.IntegerField(blank=True, null=True, verbose_name='One Way Rate Supplier')
+    oneway_seat_availability = models.IntegerField(blank=True, null=True, verbose_name='One Way Seat Availability')
+    oneway_rate_flash = models.IntegerField(blank=True, null=True, verbose_name='One Way Rate Flash')
+    oneway_flt_no = models.CharField(max_length=20, blank=True, null=True, verbose_name='One Way Flight No.')
+    total_one_way_seats = models.IntegerField(blank=True, null=True, verbose_name='Total One Way Seats')
 
     def __str__(self):
         return self.supplier_name
@@ -71,7 +87,6 @@ class SupplierDepartureSeatInfo(models.Model):
         db_table = 'supplier_departure_seat_info'
         verbose_name = 'Passenger Departure Seat'
         verbose_name_plural = 'Passenger Departure Seats'
-
 
 class SupplierDepartureSeatRemarkInline(models.Model):
     supplier_seat = models.ForeignKey('SupplierDepartureSeatInfo', on_delete=models.CASCADE, related_name='seat_supplier_departure_detail')
@@ -116,3 +131,35 @@ class SupplierReturnSeatRemarkInline(models.Model):
         db_table = 'seat_return_remark'
         verbose_name = 'Seat Return Remark'
         verbose_name_plural = 'Seat Return Remarks'
+
+class OneWaySeat(models.Model):
+    supplier = models.ForeignKey('SupplierDetails', on_delete=models.CASCADE, related_name='oneway_supplierdetails')
+    first_name = models.CharField(max_length=30, verbose_name='First Name')
+    middle_name = models.CharField(max_length=30, verbose_name='Middle Name')
+    last_name = models.CharField(max_length=30, verbose_name='Last Name')
+    mobile_no = models.CharField(max_length=30, verbose_name='Mobile Number')
+    date_of_birth = models.IntegerField(default=0, blank=True, null=True, verbose_name='Date of Birth')
+    passport_no = models.CharField(max_length=100, blank=True, null=True, verbose_name='Passport Number')
+    passport_exp = models.DateField(blank=True, null=True, verbose_name='Passport Expiry')
+    booking_agent = models.CharField(max_length=100, blank=True, null=True, verbose_name='Booking Agent')
+    rate_given = models.IntegerField(default=0, verbose_name='Given Rate')
+
+    def __str__(self):
+        return self.first_name
+
+    class Meta:
+        db_table = 'one_way_seat'
+        verbose_name = 'One Way Seat'
+        verbose_name_plural = 'One Way Seats'
+
+class OneWaySeatRemarkInline(models.Model):
+    supplier_seat = models.ForeignKey('OneWaySeat', on_delete=models.CASCADE, related_name='oneway_seat_detail')
+    seat_remark = models.TextField(blank=True, null=True, verbose_name='Remarks')
+
+    def __str__(self):
+        return self.seat_remark
+
+    class Meta:
+        db_table = 'oneway_seat_remark'
+        verbose_name = 'One Way Seat Remark'
+        verbose_name_plural = 'One Way Seat Remarks'

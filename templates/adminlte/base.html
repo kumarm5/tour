@@ -118,11 +118,15 @@
         });
 
         // Apply the filter
-        $("#result_list thead input").on( 'keyup change', function () {
+        $("#result_list thead input[type=text]").on( 'keyup change', function () {
             table
                 .column( $(this).parent().index()+':visible' )
                 .search( this.value )
                 .draw();
+        });
+
+        $('#action-toggle').on('change', function(){                        
+            $(':input[type=checkbox]').prop('checked', $(this).prop('checked'));            
         });
 
     });
