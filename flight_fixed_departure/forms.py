@@ -426,7 +426,7 @@ class OneWaySeatForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(OneWaySeatForm, self).__init__(*args, **kwargs)
-        self.fields['supplier'].queryset = SupplierDetails.objects.filter(sectors__id = 2)
+        self.fields['supplier'].queryset = SupplierDetails.objects.filter(triptype__id = 2)
 
     def clean(self):
         supplier = self.cleaned_data.get('supplier')        

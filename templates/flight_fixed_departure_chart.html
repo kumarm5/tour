@@ -54,14 +54,61 @@
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td>{{ supplier_detail.sectors.sector_name }}</td>
-                            <td>{{ supplier_detail.departure_time}} / {{ supplier_detail.departure_flt_no }}</td>
-                            <td>{{ supplier_detail.return_time}} / {{ supplier_detail.return_flt_no }}</td>
-                            <td>{{ supplier_detail.departure_date }}</td>
-                            <td>{{ supplier_detail.return_date }}</td>
-                            <td>{{ supplier_detail.departure_seat_availability }} / {{ supplier_detail.return_seat_availability }}</td>
-                            <td>{{ supplier_detail.total_departure_seats }}/ {{ supplier_detail.total_return_seats }}</td>                            
-                            <td>{{ supplier_detail.dep_rate_flash }}</td>
-                            <td>{{ supplier_detail.ret_rate_flash }}</td>
+                            <td>
+                                {% if supplier_detail.departure_time %}
+                                    {{ supplier_detail.departure_time}} / {{ supplier_detail.departure_flt_no }}
+                                {% else %}
+                                    {{ supplier_detail.oneway_time}}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if supplier_detail.return_time %}
+                                    {{ supplier_detail.return_time}} / {{ supplier_detail.return_flt_no }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if supplier_detail.departure_date %}
+                                    {{ supplier_detail.departure_date }}
+                                {% else %}
+                                    {{ supplier_detail.oneway_date }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if supplier_detail.return_date %}
+                                    {{ supplier_detail.return_date }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if supplier_detail.departure_seat_availability %}
+                                    {{ supplier_detail.departure_seat_availability }} / {{ supplier_detail.return_seat_availability }}
+                                {% else %}
+                                    {{ supplier_detail.oneway_seat_availability }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if supplier_detail.total_departure_seats %}
+                                    {{ supplier_detail.total_departure_seats }}/ {{ supplier_detail.total_return_seats }}</td>
+                                {% else %}
+                                    {{ supplier_detail.total_one_way_seats }}
+                                {% endif %}
+                            <td>
+                                {% if supplier_detail.dep_rate_flash %}
+                                    {{ supplier_detail.dep_rate_flash }}
+                                {% else %}
+                                    {{ supplier_detail.oneway_rate_flash }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if supplier_detail.ret_rate_flash %}
+                                    {{ supplier_detail.ret_rate_flash }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
