@@ -55,6 +55,9 @@ class SupplierDepartureSeatInfoForm(forms.ModelForm):
         super(SupplierDepartureSeatInfoForm, self).__init__(*args, **kwargs)
         self.fields['supplier'].queryset = SupplierDetails.objects.filter(triptype__id = 1)
         self.fields['passport_exp'].required = False
+        self.fields['supplier'].empty_label = 'Select Supplier'
+        self.fields['sector'].queryset = Sector.objects.filter(triptype__id = 1)
+        self.fields['sector'].empty_label = 'Select Sector'
 
     def clean(self):
         supplier = self.cleaned_data.get('supplier')
@@ -163,6 +166,9 @@ class SupplierReturnSeatInfoForm(forms.ModelForm):
         super(SupplierReturnSeatInfoForm, self).__init__(*args, **kwargs)
         self.fields['passport_exp'].required = False
         self.fields['supplier'].queryset = SupplierDetails.objects.filter(triptype__id = 1)
+        self.fields['supplier'].empty_label = 'Select Supplier'
+        self.fields['sector'].queryset = Sector.objects.filter(triptype__id = 1)
+        self.fields['sector'].empty_label = 'Select Sector'
 
     def clean(self):
         supplier = self.cleaned_data.get('supplier')
@@ -186,6 +192,11 @@ class SupplierReturnSeatInfoForm(forms.ModelForm):
 
         widgets = {
             'supplier':  forms.Select(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'sector': forms.Select(
                 attrs = {
                     'class': 'form-control'
                 }
@@ -429,9 +440,12 @@ class OneWaySeatForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(OneWaySeatForm, self).__init__(*args, **kwargs)
+        self.fields['supplier'].empty_label = 'Select Supplier'
         self.fields['supplier'].queryset = SupplierDetails.objects.filter(triptype__id = 2)
         self.fields['date_of_birth'].required = False
         self.fields['passport_exp'].required = False
+        self.fields['sector'].empty_label = 'Select Sector'
+        self.fields['sector'].queryset = Sector.objects.filter(triptype__id = 2)
 
     def clean(self):
         supplier = self.cleaned_data.get('supplier')        
@@ -456,6 +470,11 @@ class OneWaySeatForm(forms.ModelForm):
 
         widgets = {
             'supplier':  forms.Select(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'sector': forms.Select(
                 attrs = {
                     'class': 'form-control'
                 }

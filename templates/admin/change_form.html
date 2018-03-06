@@ -132,7 +132,8 @@
     format_date(cssclass = 'date_of_birth_picker');    
     format_date(cssclass = 'passport_expiry_date');
     format_date(cssclass = 'return_date_picker');
-    format_date(cssclass = 'departure_date_picker');    
+    format_date(cssclass = 'departure_date_picker');
+    format_date(cssclass = 'oneway_date_picker')    
 
     trip_type_content = function(){
         trip_type = $('#id_triptype option:selected').text();
@@ -167,6 +168,9 @@
         }
     }
     
+    // on load event of trip id
+    trip_type_content();
+
     // change event of id trip type
     $('#id_triptype').on('change', function(){
         trip_type_content();        

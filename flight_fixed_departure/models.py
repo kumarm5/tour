@@ -70,6 +70,7 @@ class SupplierPaymentInline(models.Model):
 
 class SupplierDepartureSeatInfo(models.Model):
     supplier = models.ForeignKey('SupplierDetails', on_delete=models.CASCADE, related_name='supplier_detail')
+    sector = models.ForeignKey('Sector', on_delete=models.CASCADE, related_name='departure_seat_sector')
     first_name = models.CharField(max_length=30, verbose_name='First Name')
     middle_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='Middle Name')
     last_name = models.CharField(max_length=30, verbose_name='Last Name')
@@ -102,6 +103,7 @@ class SupplierDepartureSeatRemarkInline(models.Model):
 
 class SupplierReturnSeatInfo(models.Model):
     supplier = models.ForeignKey('SupplierDetails', on_delete=models.CASCADE, related_name='supplier_details')
+    sector = models.ForeignKey('Sector', on_delete=models.CASCADE, related_name='return_seat_sector')
     first_name = models.CharField(max_length=30, verbose_name='First Name')
     middle_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='Middle Name')
     last_name = models.CharField(max_length=30, verbose_name='Last Name')
@@ -134,6 +136,7 @@ class SupplierReturnSeatRemarkInline(models.Model):
 
 class OneWaySeat(models.Model):
     supplier = models.ForeignKey('SupplierDetails', on_delete=models.CASCADE, related_name='oneway_supplierdetails')
+    sector = models.ForeignKey('Sector', on_delete=models.CASCADE, related_name='oneway_seat_sector')
     first_name = models.CharField(max_length=30, verbose_name='First Name')
     middle_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='Middle Name')
     last_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='Last Name')

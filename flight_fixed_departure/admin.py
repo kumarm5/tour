@@ -87,7 +87,7 @@ class SupplierDepartureSeatRemarkAdminInline(admin.StackedInline):
 class SupplierDepartureSeatInfoAdmin(admin.ModelAdmin):
     list_display = ('supplier', 'first_name', 'last_name', 'sector_name', 'departure_date')
     form = SupplierDepartureSeatInfoForm   
-    fields = (('supplier', 'first_name', 'middle_name') , ('last_name', 'mobile_no', 'date_of_birth'), ('passport_no', 'passport_exp', 'rate_given'), ('booking_agent',),)
+    fields = (('supplier', 'sector'), ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
     inlines = [SupplierDepartureSeatRemarkAdminInline,]
 
     def sector_name(self, obj):        
@@ -122,7 +122,7 @@ class SupplierReturnSeatRemarkAdminInline(admin.StackedInline):
 class SupplierReturnSeatInfoAdmin(admin.ModelAdmin):
     list_display = ('supplier', 'first_name', 'last_name', 'sector_name', 'return_date')
     form = SupplierReturnSeatInfoForm
-    fields = (('supplier', 'first_name', 'middle_name') , ('last_name', 'mobile_no', 'date_of_birth'), ('passport_no', 'passport_exp', 'rate_given'), ('booking_agent',),)
+    fields = (('supplier', 'sector') , ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
     inlines = [SupplierReturnSeatRemarkAdminInline,]
     
     def sector_name(self, obj):        
@@ -161,7 +161,7 @@ class OneWaySeatRemarkInlineAdmin(admin.StackedInline):
 class OneWaySeatAdmin(admin.ModelAdmin):
     list_display = ('supplier', 'first_name', 'last_name')
     form = OneWaySeatForm
-    fields = (('supplier', 'first_name', 'middle_name') , ('last_name', 'mobile_no', 'date_of_birth'), ('passport_no', 'passport_exp', 'rate_given'), ('booking_agent',),)
+    fields = (('supplier', 'sector') , ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
     inlines = [OneWaySeatRemarkInlineAdmin,]
 
     def save_model(self, request, obj, form, change):
