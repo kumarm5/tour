@@ -54,7 +54,8 @@ class SupplierDepartureSeatInfoForm(forms.ModelForm):
         self.request = kwargs.pop('request', None)
         super(SupplierDepartureSeatInfoForm, self).__init__(*args, **kwargs)
         self.fields['supplier'].queryset = SupplierDetails.objects.filter(triptype__id = 1)
-
+        self.fields['passport_exp'].required = False
+        
     def clean(self):
         supplier = self.cleaned_data.get('supplier')
         # pdb.set_trace()        
@@ -160,6 +161,7 @@ class SupplierReturnSeatInfoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(SupplierReturnSeatInfoForm, self).__init__(*args, **kwargs)
+        self.fields['passport_exp'].required = False
 
     def clean(self):
         supplier = self.cleaned_data.get('supplier')
@@ -427,6 +429,8 @@ class OneWaySeatForm(forms.ModelForm):
         self.request = kwargs.pop('request', None)
         super(OneWaySeatForm, self).__init__(*args, **kwargs)
         self.fields['supplier'].queryset = SupplierDetails.objects.filter(triptype__id = 2)
+        self.fields['date_of_birth'].required = False
+        self.fields['passport_exp'].required = False
 
     def clean(self):
         supplier = self.cleaned_data.get('supplier')        

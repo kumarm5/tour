@@ -135,14 +135,14 @@ class SupplierReturnSeatRemarkInline(models.Model):
 class OneWaySeat(models.Model):
     supplier = models.ForeignKey('SupplierDetails', on_delete=models.CASCADE, related_name='oneway_supplierdetails')
     first_name = models.CharField(max_length=30, verbose_name='First Name')
-    middle_name = models.CharField(max_length=30, verbose_name='Middle Name')
-    last_name = models.CharField(max_length=30, verbose_name='Last Name')
-    mobile_no = models.CharField(max_length=30, verbose_name='Mobile Number')
-    date_of_birth = models.IntegerField(default=0, blank=True, null=True, verbose_name='Date of Birth')
+    middle_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='Middle Name')
+    last_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='Last Name')
+    mobile_no = models.CharField(max_length=30, blank=True, null=True, verbose_name='Mobile Number')
+    date_of_birth = models.DateField(blank=True, null=True, verbose_name='Date of Birth')
     passport_no = models.CharField(max_length=100, blank=True, null=True, verbose_name='Passport Number')
     passport_exp = models.DateField(blank=True, null=True, verbose_name='Passport Expiry')
     booking_agent = models.CharField(max_length=100, blank=True, null=True, verbose_name='Booking Agent')
-    rate_given = models.IntegerField(default=0, verbose_name='Given Rate')
+    rate_given = models.IntegerField(default=0, blank=True, null=True, verbose_name='Given Rate')
 
     def __str__(self):
         return self.first_name

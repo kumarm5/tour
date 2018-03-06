@@ -6,7 +6,11 @@
 {% endblock %}
 
 {% block content %}
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <div class="news-section">
+        <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">Lorem ipsum dolor sit amet, conse ctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolorealiqua.</marquee>
+    </div>
+
+    <div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -49,4 +53,140 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="title style1 mb-50 mt-50">
+                    <div class="title-wrapper">
+                        <h1>
+                            Services <span class="theme-color">we offer</span>
+                        </h1>
+                        <p class="sub-title">
+                            <span>make us different</span> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-4 col-xs-12">
+                <div class="service-item style1">
+                    <!-- <img src="images/icon-1.png" alt="Icon">   -->
+                    <i class="fa fa-4x fa-cc-visa" aria-hidden="true"></i>
+                    <h2>Visa Application</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, conse
+                        ctetur adipiscing elit, sed do eiusmod tempor 
+                        incididunt ut labore et dolorealiqua.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="service-item style1">
+                    <i class="fa fa-4x fa-taxi" aria-hidden="true"></i>  
+                    <h2>Cab Registeration</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, conse
+                        ctetur adipiscing elit, sed do eiusmod tempor 
+                        incididunt ut labore et dolorealiqua.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="service-item style1">
+                    <i class="fa fa-4x fa-inr" aria-hidden="true"></i>  
+                    <h2>Foreign Cur. Exchange</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, conse
+                        ctetur adipiscing elit, sed do eiusmod tempor 
+                        incididunt ut labore et dolorealiqua.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="service-item style1">
+                    <i class="fa fa-4x fa-university" aria-hidden="true"></i>  
+                    <h2>Insurance chart</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, conse
+                        ctetur adipiscing elit, sed do eiusmod tempor 
+                        incididunt ut labore et dolorealiqua.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="service-item style1">
+                    <i class="fa fa-4x fa-bed" aria-hidden="true"></i>
+                    <h2>Hotel Deals</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, conse
+                        ctetur adipiscing elit, sed do eiusmod tempor 
+                        incididunt ut labore et dolorealiqua.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container testimonial">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="title style1 text-center mb-50">
+                    <div class="title-wrapper">
+                        <h1>
+                            Our Clients  <span class="theme-color">Say</span>
+                        </h1>
+                        <p class="sub-title">
+                            <span>we are always best</span> 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="text-carousel" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6 col-md-offset-2 col-md-8">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="carousel-content">
+                            <div>
+                                <p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="carousel-content">
+                            <div>
+                                <p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="carousel-content">
+                            <div>                          
+                                <p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>        
+    </div>
+
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script src="{% static 'js/jquery.backstretch.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#text-carousel').backstretch("/static/images/image_6.jpeg");
+        });
+    </script>
 {% endblock %}
