@@ -91,7 +91,7 @@ class SupplierDepartureSeatInfoAdmin(admin.ModelAdmin):
     inlines = [SupplierDepartureSeatRemarkAdminInline,]
 
     def sector_name(self, obj):        
-        return obj.supplier.sectors.sector_name
+        return obj.sector.sector_name
     sector_name.short_description = 'Sector'
 
     def departure_date(self, obj):
@@ -126,7 +126,7 @@ class SupplierReturnSeatInfoAdmin(admin.ModelAdmin):
     inlines = [SupplierReturnSeatRemarkAdminInline,]
     
     def sector_name(self, obj):        
-        return obj.supplier.sectors.sector_name
+        return obj.sector.sector_name
     sector_name.short_description = 'Sector'
 
     def return_date(self, obj):
@@ -159,10 +159,18 @@ class OneWaySeatRemarkInlineAdmin(admin.StackedInline):
             return 1
 
 class OneWaySeatAdmin(admin.ModelAdmin):
-    list_display = ('supplier', 'first_name', 'last_name')
+    list_display = ('supplier', 'first_name', 'last_name', 'sector_name', 'one_way_date')
     form = OneWaySeatForm
     fields = (('supplier', 'sector') , ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
     inlines = [OneWaySeatRemarkInlineAdmin,]
+
+    def sector_name(self, obj):        
+        return obj.sector.sector_name
+    sector_name.short_description = 'Sector'
+
+    def one_way_date(self, obj):
+        return obj.supplier.oneway_date
+    one_way_date.short_description = 'One Way Date'
 
     def save_model(self, request, obj, form, change):
         if change is False:
