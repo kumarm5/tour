@@ -50,7 +50,7 @@ class SupplierPaymentInlineAdmin(admin.StackedInline):
 class SupplierDetailsAdmin(admin.ModelAdmin, ExportCsvMixin):
     list_display = ('supplier_name','sectors','departure_date','return_date','oneway_date')
     form = SupplierDetailsForm
-    fields = (('existing_supplier', 'triptype', 'sectors'), ('supplier_name'), ('departure_time', 'departure_flt_no', 'return_time'), ('return_flt_no', 'departure_date', 'return_date'), ('total_departure_seats', 'total_return_seats', 'departure_seat_availability'), ('return_seat_availability', 'dep_rate_flash', 'ret_rate_flash'), ('dep_rate_supplier', 'ret_rate_supplier'), ('oneway_date','oneway_rate_supplier', 'oneway_flt_no'), ('oneway_seat_availability','oneway_rate_flash', 'total_one_way_seats'), ('oneway_time'), ('other_details'))
+    fields = (('triptype', 'sectors'), ('supplier_name'), ('departure_time', 'departure_flt_no', 'return_time'), ('return_flt_no', 'departure_date', 'return_date'), ('total_departure_seats', 'total_return_seats', 'departure_seat_availability'), ('return_seat_availability', 'dep_rate_flash', 'ret_rate_flash'), ('dep_rate_supplier', 'ret_rate_supplier'), ('oneway_date','oneway_rate_supplier', 'oneway_flt_no'), ('oneway_seat_availability','oneway_rate_flash', 'total_one_way_seats'), ('oneway_time'), ('other_details'))
     inlines = [SupplierPaymentInlineAdmin,]
 
     # def get_actions(self, request):

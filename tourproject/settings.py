@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'tourapp',
     'flight_fixed_departure',
+    'news',
     'rest_framework',
 )
 

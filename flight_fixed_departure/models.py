@@ -152,8 +152,8 @@ class OneWaySeat(models.Model):
 
     class Meta:
         db_table = 'one_way_seat'
-        verbose_name = ' One Way Seat'
-        verbose_name_plural = ' One Way Seats'
+        verbose_name = '   One Way Seat'
+        verbose_name_plural = '   One Way Seats'
 
 class OneWaySeatRemarkInline(models.Model):
     supplier_seat = models.ForeignKey('OneWaySeat', on_delete=models.CASCADE, related_name='oneway_seat_detail')

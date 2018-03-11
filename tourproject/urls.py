@@ -19,7 +19,8 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^logout/$', logout, {'next_page': '/admin/login/'}),
     url(r'^$', include('tourapp.urls')),
-    url(r'^departurechart/', include('flight_fixed_departure.urls'))    
+    url(r'^departurechart/', include('flight_fixed_departure.urls')),
+    url(r'^news/', include('news.urls')),
 ]
 
 admin.site.site_header = 'Administration'

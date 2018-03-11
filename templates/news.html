@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>News Details</title>
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">News From Tanish Travel Hut</h1>
+                <br><br>
+                {% for news_detail in news_details %}
+                    <div class="jumbotron">
+                        <h3 class="text-success"><u>{{ news_detail.title }}</u></h3>
+                        <p>{{ news_detail.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+{% endblock %}
