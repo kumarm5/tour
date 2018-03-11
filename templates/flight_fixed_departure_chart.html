@@ -18,8 +18,8 @@
                 <form class="form-horizontal" action="/departurechart/" id="sector_form" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="sector" class="col-md-2 control-label">Search By Sector</label>
-                        <div class="col-md-6">
+                        <label for="sector" class="col-md-2 col-md-offset-2 control-label">Search By Sector</label>
+                        <div class="col-md-4">
                             <select class="form-control" name="sector_id">
                                 <option value="0">Select Sector</option>
                                 {% for sector_detail in sector_details %}
@@ -34,7 +34,7 @@
                     </div>
                 </form>
                 <br><br>
-                <table id="sectorTable" class="table-bordered">
+                <table id="sectorTable" class="table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>SR NO.</th>

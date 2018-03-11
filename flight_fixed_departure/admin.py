@@ -1,26 +1,31 @@
 from django.contrib import admin
 from django.contrib.admin.actions import delete_selected
-from django.db.models.signals import pre_delete
+from django.db.models.signals import pre_delete, post_delete
 from django.dispatch import receiver
 from .models import *
 from .forms import *
+from .export_mixin import ExportCsvMixin
 import logging
 import pdb
 
 # Register your models here.
 
-@receiver(pre_delete, sender=SupplierDepartureSeatInfo)
-def seat_delete(sender, instance, **kwargs):
-    seat_avail = int(instance.supplier.departure_seat_availability) + 1
-    SupplierDetails.objects.filter(pk=instance.supplier.pk).update(departure_seat_availability=seat_avail)
-    
 @receiver(pre_delete, sender=SupplierReturnSeatInfo)
-def seat_delete(sender, instance, **kwargs):
+def return_seat_delete(sender, instance, **kwargs):    
     seat_avail = int(instance.supplier.return_seat_availability) + 1
     SupplierDetails.objects.filter(pk=instance.supplier.pk).update(return_seat_availability=seat_avail)	
 
+@receiver(pre_delete, sender=SupplierDepartureSeatInfo)
+def departure_seat_delete(sender, instance, **kwargs):
+    seat_avail = int(instance.supplier.departure_seat_availability) + 1
+    SupplierDetails.objects.filter(pk=instance.supplier.pk).update(departure_seat_availability=seat_avail)
+        
+# @receiver(post_delete)
+# def comment_post_delete(sender, instance, *args, **kwargs):
+#     pdb.set_trace()
+
 @receiver(pre_delete, sender=OneWaySeat)
-def seat_delete(sender, instance, **kwargs):
+def oneway_seat_delete(sender, instance, **kwargs):
     seat_avail = int(instance.supplier.oneway_seat_availability) + 1
     SupplierDetails.objects.filter(pk=instance.supplier.pk).update(oneway_seat_availability=seat_avail)	
 
@@ -42,10 +47,10 @@ class SupplierPaymentInlineAdmin(admin.StackedInline):
         else:
             return 1
 
-class SupplierDetailsAdmin(admin.ModelAdmin):
+class SupplierDetailsAdmin(admin.ModelAdmin, ExportCsvMixin):
     list_display = ('supplier_name','sectors','departure_date','return_date','oneway_date')
     form = SupplierDetailsForm
-    fields = (('triptype', 'sectors'), ('supplier_name'), ('departure_time', 'departure_flt_no', 'return_time'), ('return_flt_no', 'departure_date', 'return_date'), ('total_departure_seats', 'total_return_seats', 'departure_seat_availability'), ('return_seat_availability', 'dep_rate_flash', 'ret_rate_flash'), ('dep_rate_supplier', 'ret_rate_supplier'), ('oneway_date','oneway_rate_supplier', 'oneway_flt_no'), ('oneway_seat_availability','oneway_rate_flash', 'total_one_way_seats'), ('oneway_time'), ('other_details'))
+    fields = (('existing_supplier', 'triptype', 'sectors'), ('supplier_name'), ('departure_time', 'departure_flt_no', 'return_time'), ('return_flt_no', 'departure_date', 'return_date'), ('total_departure_seats', 'total_return_seats', 'departure_seat_availability'), ('return_seat_availability', 'dep_rate_flash', 'ret_rate_flash'), ('dep_rate_supplier', 'ret_rate_supplier'), ('oneway_date','oneway_rate_supplier', 'oneway_flt_no'), ('oneway_seat_availability','oneway_rate_flash', 'total_one_way_seats'), ('oneway_time'), ('other_details'))
     inlines = [SupplierPaymentInlineAdmin,]
 
     # def get_actions(self, request):
@@ -69,7 +74,7 @@ class SupplierDetailsAdmin(admin.ModelAdmin):
             # o.delete()
 
     # delete_selected.short_description = 'Delete'
-
+    actions = ["export_as_csv"]
 admin.site.register(SupplierDetails, SupplierDetailsAdmin)
 
 class SupplierDepartureSeatRemarkAdminInline(admin.StackedInline):
@@ -84,8 +89,8 @@ class SupplierDepartureSeatRemarkAdminInline(admin.StackedInline):
         else:
             return 1
 
-class SupplierDepartureSeatInfoAdmin(admin.ModelAdmin):
-    list_display = ('supplier', 'first_name', 'last_name', 'sector_name', 'departure_date')
+class SupplierDepartureSeatInfoAdmin(admin.ModelAdmin, ExportCsvMixin):
+    list_display = ('supplier', 'first_name', 'middle_name', 'last_name', 'sector_name', 'departure_date')
     form = SupplierDepartureSeatInfoForm   
     fields = (('supplier', 'sector'), ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
     inlines = [SupplierDepartureSeatRemarkAdminInline,]
@@ -95,7 +100,7 @@ class SupplierDepartureSeatInfoAdmin(admin.ModelAdmin):
     sector_name.short_description = 'Sector'
 
     def departure_date(self, obj):
-        return obj.supplier.departure_date
+        return obj.supplier.departure_date.strftime('%d-%b-%Y')
     departure_date.short_description = 'Departure Date'
 
     def save_model(self, request, obj, form, change):
@@ -105,6 +110,7 @@ class SupplierDepartureSeatInfoAdmin(admin.ModelAdmin):
 
         super(SupplierDepartureSeatInfoAdmin, self).save_model(request, obj, form, change)
 
+    actions = ["export_as_csv"]
 admin.site.register(SupplierDepartureSeatInfo, SupplierDepartureSeatInfoAdmin)
 
 class SupplierReturnSeatRemarkAdminInline(admin.StackedInline):
@@ -119,8 +125,8 @@ class SupplierReturnSeatRemarkAdminInline(admin.StackedInline):
         else:
             return 1
 
-class SupplierReturnSeatInfoAdmin(admin.ModelAdmin):
-    list_display = ('supplier', 'first_name', 'last_name', 'sector_name', 'return_date')
+class SupplierReturnSeatInfoAdmin(admin.ModelAdmin, ExportCsvMixin):
+    list_display = ('supplier', 'first_name', 'middle_name', 'last_name', 'sector_name', 'return_date')
     form = SupplierReturnSeatInfoForm
     fields = (('supplier', 'sector') , ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
     inlines = [SupplierReturnSeatRemarkAdminInline,]
@@ -130,16 +136,18 @@ class SupplierReturnSeatInfoAdmin(admin.ModelAdmin):
     sector_name.short_description = 'Sector'
 
     def return_date(self, obj):
-        return obj.supplier.return_date
+        return obj.supplier.return_date.strftime('%d-%b-%Y')
     return_date.short_description = 'Return Date'
         
-    def save_model(self, request, obj, form, change):
+    def save_model(self, request, obj, form, change):        
         if change is False:
             seat_avail = int(obj.supplier.return_seat_availability) - 1
             SupplierDetails.objects.filter(pk=obj.supplier.pk).update(return_seat_availability=seat_avail)
 
         super(SupplierReturnSeatInfoAdmin, self).save_model(request, obj, form, change)        
     
+    actions = ["export_as_csv"]
+
 admin.site.register(SupplierReturnSeatInfo, SupplierReturnSeatInfoAdmin)
 
 # class TripTypeAdmin(admin.ModelAdmin):
@@ -158,18 +166,18 @@ class OneWaySeatRemarkInlineAdmin(admin.StackedInline):
         else:
             return 1
 
-class OneWaySeatAdmin(admin.ModelAdmin):
-    list_display = ('supplier', 'first_name', 'last_name', 'sector_name', 'one_way_date')
+class OneWaySeatAdmin(admin.ModelAdmin, ExportCsvMixin):
+    list_display = ('supplier', 'first_name', 'middle_name', 'last_name', 'sector_name', 'one_way_date')
     form = OneWaySeatForm
     fields = (('supplier', 'sector') , ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
     inlines = [OneWaySeatRemarkInlineAdmin,]
 
-    def sector_name(self, obj):        
+    def sector_name(self, obj):
         return obj.sector.sector_name
     sector_name.short_description = 'Sector'
 
     def one_way_date(self, obj):
-        return obj.supplier.oneway_date
+        return obj.supplier.oneway_date.strftime('%d-%b-%Y')
     one_way_date.short_description = 'One Way Date'
 
     def save_model(self, request, obj, form, change):
@@ -178,6 +186,8 @@ class OneWaySeatAdmin(admin.ModelAdmin):
             SupplierDetails.objects.filter(pk=obj.supplier.pk).update(oneway_seat_availability=seat_avail)
 
         super(OneWaySeatAdmin, self).save_model(request, obj, form, change)
+
+    actions = ["export_as_csv"]
 
 admin.site.register(OneWaySeat, OneWaySeatAdmin)
 

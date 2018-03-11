@@ -194,3 +194,7 @@ body{
     height: 250px;
     padding: 50px;    
 }
+
+#sectorTable th{
+    background-color: #ffd525;
+}

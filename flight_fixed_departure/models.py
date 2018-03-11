@@ -18,8 +18,8 @@ class Sector(models.Model):
 
     class Meta:        
         db_table = 'sectors'
-        verbose_name = 'Sector'
-        verbose_name_plural = 'Sectors'
+        verbose_name = '     Sector'
+        verbose_name_plural = '     Sectors'
 
 class SupplierDetails(models.Model):
     supplier_name = models.CharField(max_length=150, verbose_name='Supplier Name')
@@ -53,8 +53,8 @@ class SupplierDetails(models.Model):
 
     class Meta:
         db_table = 'supplier_details'
-        verbose_name = 'Supplier Detail'
-        verbose_name_plural = 'Supplier Details'
+        verbose_name = '    Supplier Detail'
+        verbose_name_plural = '    Supplier Details'
 
 class SupplierPaymentInline(models.Model):
     supplier_details = models.ForeignKey('SupplierDetails', on_delete=models.CASCADE, related_name='payment_remarks')
@@ -86,8 +86,8 @@ class SupplierDepartureSeatInfo(models.Model):
     
     class Meta:
         db_table = 'supplier_departure_seat_info'
-        verbose_name = 'Round Trip Departure Seat'
-        verbose_name_plural = 'Round Trip Departure Seats'
+        verbose_name = '   Round Trip Departure Seat'
+        verbose_name_plural = '   Round Trip Departure Seats'
 
 class SupplierDepartureSeatRemarkInline(models.Model):
     supplier_seat = models.ForeignKey('SupplierDepartureSeatInfo', on_delete=models.CASCADE, related_name='seat_supplier_departure_detail')
@@ -119,8 +119,8 @@ class SupplierReturnSeatInfo(models.Model):
 
     class Meta:
         db_table = 'supplier_return_seat_info'
-        verbose_name = 'Round Trip Return Seat'
-        verbose_name_plural = 'Round Trip Return Seats'
+        verbose_name = '  Round Trip Return Seat'
+        verbose_name_plural = '  Round Trip Return Seats'
 
 class SupplierReturnSeatRemarkInline(models.Model):
     supplier_seat = models.ForeignKey('SupplierReturnSeatInfo', on_delete=models.CASCADE, related_name='seat_supplier_return_detail')
@@ -152,8 +152,8 @@ class OneWaySeat(models.Model):
 
     class Meta:
         db_table = 'one_way_seat'
-        verbose_name = 'One Way Seat'
-        verbose_name_plural = 'One Way Seats'
+        verbose_name = ' One Way Seat'
+        verbose_name_plural = ' One Way Seats'
 
 class OneWaySeatRemarkInline(models.Model):
     supplier_seat = models.ForeignKey('OneWaySeat', on_delete=models.CASCADE, related_name='oneway_seat_detail')
