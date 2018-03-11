@@ -198,3 +198,7 @@ body{
 #sectorTable th{
     background-color: #ffd525;
 }
+
+.thumbnail{
+    border: none;
+}
