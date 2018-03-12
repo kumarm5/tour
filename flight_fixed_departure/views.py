@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from .models import Sector, SupplierDetails
+from .models import Sector, SupplierDetails, TermsAndConditions
 import pdb
 # Create your views here.
 
@@ -12,7 +12,9 @@ class FlightFixedDepartureChart(TemplateView):
 
         supplier_details = SupplierDetails.objects.all()
 
-        return render(request, self.template_name, {'sector_details': sector_details, 'supplier_details': supplier_details})
+        terms_and_conditions = TermsAndConditions.objects.filter(status = True)
+
+        return render(request, self.template_name, {'sector_details': sector_details, 'supplier_details': supplier_details, 'terms_and_conditions': terms_and_conditions})
 
     def post(self, request, *args):
         

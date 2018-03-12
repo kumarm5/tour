@@ -191,3 +191,9 @@ class OneWaySeatAdmin(admin.ModelAdmin, ExportCsvMixin):
 
 admin.site.register(OneWaySeat, OneWaySeatAdmin)
 
+class TermsAndConditionsAdmin(admin.ModelAdmin):
+    list_display = ('terms', 'status')
+    form = TermsAndConditionsForm
+    fields = (('terms'), ('status'))
+
+admin.site.register(TermsAndConditions, TermsAndConditionsAdmin)

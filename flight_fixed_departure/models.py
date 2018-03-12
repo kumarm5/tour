@@ -166,3 +166,16 @@ class OneWaySeatRemarkInline(models.Model):
         db_table = 'oneway_seat_remark'
         verbose_name = 'One Way Seat Remark'
         verbose_name_plural = 'One Way Seat Remarks'
+
+class TermsAndConditions(models.Model):
+    terms = models.CharField(max_length=700, verbose_name='Terms And Conditions')
+    status = models.BooleanField(default=True, verbose_name='Status')
+
+    def __str__(self):
+        return self.terms
+
+    class Meta:
+        db_table = 'terms_and_conditions'
+        verbose_name = 'Term and Condition'
+        verbose_name_plural = 'Terms and Conditions'
+        

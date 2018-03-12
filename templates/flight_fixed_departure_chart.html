@@ -114,6 +114,10 @@
                     </tbody>
                 </table>
 
+                <h4>Terms and Conditions</h4>
+                {% for terms_and_condition in terms_and_conditions %}
+                    <p>{{ forloop.counter }}. {{ terms_and_condition.terms }}</p>
+                {% endfor %}
             </div>
         </div>
     </div>

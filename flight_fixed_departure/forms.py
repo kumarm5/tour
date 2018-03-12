@@ -46,6 +46,33 @@ class SectorForm(forms.ModelForm):
             }
         }
 
+class TermsAndConditionsForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(TermsAndConditionsForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = TermsAndConditions
+        CHOICES = ((True, 'Active'), (False, 'Inactive'))
+        exclude = ()
+
+        widgets = {
+            'terms': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter Terms and Condition'
+                }
+            ),
+            'status': widgets.Select(
+                attrs = {
+                    'class': 'form-control'                    
+                },
+                choices = CHOICES
+            )
+        }
+
+
 class SupplierDepartureSeatInfoForm(forms.ModelForm):
     date_of_birth = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'class':'form-control date_of_birth_picker', 'placeholder': 'dd-mm-yyyy', 'readonly': 'true'}))
     passport_exp = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'class':'form-control passport_expiry_date', 'placeholder': 'dd-mm-yyyy', 'readonly': 'true'}))
