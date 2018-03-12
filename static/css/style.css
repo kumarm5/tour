@@ -17,9 +17,9 @@ body{
 }
 
 .menu-payubiz{
+    background: url('/static/images/PayUbiz.png') left center no-repeat;
     width: 80px;
-    height: 37px;
-    background: url('/static/images/PayUbiz.jpg') left center no-repeat;
+    height: 37px;    
 }
 
 .menu-ul li{
