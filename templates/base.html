@@ -72,13 +72,13 @@
                                 </li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TOUR PACKAGES <span class="caret"></span></a>
+                                    {% if tour_packages %}
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">INTERNATIONAL TOUR PACKAGES</a></li>
-                                        <li><a href="#">DOMESTIC TOUR PACKAGES</a></li>
-                                        <li><a href="#">WEEKEND TOUR PACKAGES</a></li>
-                                        <li><a href="#">HONEYMOON TOUR PACKAGES</a></li>
-                                        <li><a href="#">RELIGIOUS/PILGRIM TOUR PACKAGES</a></li>
+                                        {% for tour_package in tour_packages %}
+                                            <li><a href="{% url 'tour' id=tour_package.id %}">{{ tour_package.topic }}</a></li>
+                                        {% endfor %}
                                     </ul>
+                                    {% endif %}
                                 </li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CAB BOOKING <span class="caret"></span></a>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Tour and Tourism</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <div class="row text-center">
+            <div class="col-md-12">
+                {% for tour_detail in tour_details %}
+                <div class="col-xs-6 col-md-3">
+                    <a href="#" class="thumbnail">
+                        <img src="{{ tour_detail.tour_images.url }}" class="img-responsive">
+                    </a>
+                    <h3>{{ tour_detail.title }}</h3>
+                </div>                    
+                {% endfor %}              
+            </div>
+        </div>
+    </div>
+{% endblock %}

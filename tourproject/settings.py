@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'tourapp',
     'flight_fixed_departure',
+    'tour_packages',
     'news',
     'rest_framework',
 )
@@ -120,3 +121,6 @@ STATICFILES_DIRS = [
 ]
 
 DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

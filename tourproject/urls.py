@@ -15,12 +15,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth.views import logout
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^logout/$', logout, {'next_page': '/admin/login/'}),
     url(r'^$', include('tourapp.urls')),
     url(r'^departurechart/', include('flight_fixed_departure.urls')),
     url(r'^news/', include('news.urls')),
-]
+    url(r'^tour/', include('tour_packages.urls')),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'Administration'
