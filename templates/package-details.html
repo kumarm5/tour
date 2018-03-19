@@ -32,9 +32,14 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-
                 
-                <br><br>
+                <br>
+                <div class="pull-right">
+                    <a href="mailto:tanishtravels24@yahoo.co.in" class="btn btn-email"><i class="fa fa-envelope"></i> Mail</a>
+                    <a href="javascript:void(0);" class="btn btn-email" ><i class="fa fa-print"></i>Print</a>
+                    <a href="javascript:void(0);" class="btn btn-email" ><i class="fa fa-download"></i>Download</a>
+                </div>
+                <br>
             </div>
             
             <ul class="nav nav-tabs">
@@ -44,12 +49,13 @@
                 <li role="presentation"><a data-toggle="tab" href="#book">How to Book</a></li>
                 <li role="presentation"><a data-toggle="tab" href="#tour">Tour Info</a></li>
             </ul>
+            <br>
             <div class="tab-content">
                 <div id="overview" class="tab-pane fade in active">
                     <p>{{ package_details.overview }}</p>
                 </div>
                 <div id="map" class="tab-pane fade">
-                    <img src="/media/{{ package_details.map_image }}" width="150" height="90"/>
+                    <img src="/media/{{ package_details.map_image }}" width="450" height="300"/>
                 </div>
                 <div id="inclusion" class="tab-pane fade">
                     <p>{{ package_details.inclusion }}</p>
