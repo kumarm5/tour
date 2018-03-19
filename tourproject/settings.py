@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'flight_fixed_departure',
     'tour_packages',
     'news',
+    'gallery',
     'rest_framework',
 )
 
