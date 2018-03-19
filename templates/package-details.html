@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Package Details</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                
+                <div id="carousel-example-generic2" class="carousel slide carousel-fade" data-ride="carousel">
+                    
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        {% for package_image in package_details.package_images.all %}
+                            <div class="item {% if forloop.counter == 1%} active{% endif %}">
+                                <img src="/media/{{ package_image.package_images }}" />
+                            </div>
+                        {% endfor %}
+                    </div>
+                
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic2" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic2" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+                
+                <br><br>
+            </div>
+            
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="active"><a data-toggle="tab" href="#overview">Overview</a></li>
+                <li role="presentation"><a data-toggle="tab" href="#map">Map</a></li>
+                <li role="presentation"><a data-toggle="tab" href="#inclusion">Inclusion</a></li>
+                <li role="presentation"><a data-toggle="tab" href="#book">How to Book</a></li>
+                <li role="presentation"><a data-toggle="tab" href="#tour">Tour Info</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="overview" class="tab-pane fade in active">
+                    <p>{{ package_details.overview }}</p>
+                </div>
+                <div id="map" class="tab-pane fade">
+                    <img src="/media/{{ package_details.map_image }}" width="150" height="90"/>
+                </div>
+                <div id="inclusion" class="tab-pane fade">
+                    <p>{{ package_details.inclusion }}</p>
+                </div>
+                <div id="book" class="tab-pane fade">
+                    <p>{{ package_details.how_to_book }}</p>
+                </div>
+                <div id="tour" class="tab-pane fade">
+                    <p>{{ package_details.tour_info }}</p>
+                </div>
+              </div>
+        </div>
+        <br><br>
+    </div>
+{% endblock %}

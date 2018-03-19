@@ -54,16 +54,136 @@ class TourForm(forms.ModelForm):
             'title': forms.TextInput(
                 attrs = {
                     'class': 'form-control',
-                    'placeholder': 'Enter topic'
+                    'placeholder': 'Enter title'
                 }
             ),
             'tour_topic': widgets.Select(
                 attrs = {
                     'class': 'form-control',
-                    'placeholder': 'Enter title'
                 }
             ),
             'tour_images': forms.FileInput(
+                attrs = {
+                    'class': 'form-control'
+                }
+            )
+        }
+
+
+class PackageForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(PackageForm, self).__init__(*args, **kwargs)
+        self.fields['tour'].empty_label = 'Select Tour'
+
+    class Meta:
+        model = TourPackages
+        exclude = ()
+
+        widgets = {
+            'tour': widgets.Select(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'title': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter title'
+                }
+            ),
+            'package_images': forms.FileInput(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'description': forms.Textarea(
+                attrs={
+                    'class': 'form-control'
+                }
+            )
+        }
+
+class PackageImagesForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(PackageImagesForm, self).__init__(*args, **kwargs)
+        self.fields['package'].empty_label = 'Select Package'
+
+    class Meta:
+        model = PackageImages
+        exclude = ()
+
+        widgets = {
+            'package': widgets.Select(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'title': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter title',
+                }
+            ),
+            'package_images': forms.FileInput(
+                attrs = {
+                    'class': 'form-control',
+                }
+            )
+        }
+
+class PackageDetailsForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(PackageDetailsForm, self).__init__(*args, **kwargs)
+        self.fields['package'].empty_label = 'Select Package'
+
+    class Meta:
+        model = PackageDetails
+        exclude = ()
+
+        widgets = {
+            'package': widgets.Select(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'title': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter title'
+                }
+            ),
+            'overview': forms.Textarea(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'inclusion': forms.Textarea(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'exclusion': forms.Textarea(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'how_to_book': forms.Textarea(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'tour_info': forms.Textarea(
+                attrs = {
+                    'class': 'form-control'
+                }
+            ),
+            'map_image': forms.FileInput(
                 attrs = {
                     'class': 'form-control'
                 }

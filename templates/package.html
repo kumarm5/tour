@@ -10,14 +10,15 @@
         <br><br>
         <div class="row text-center">
             <div class="col-md-12">
-                {% for tour_detail in tour_details %}
+                {% for tour_package_detail in tour_package_details %}
                 <div class="col-xs-6 col-md-3">
                     <a href="#" class="thumbnail">
-                        <img src="{{ tour_detail.tour_images.url }}" class="img-responsive">
+                        <img src="{{ tour_package_detail.package_images.url }}" class="img-responsive">
                     </a>
-                    <h3><a href="{% url 'package' id=tour_detail.id %}">{{ tour_detail.title }}</a></h3>
-                </div>                    
-                {% endfor %}              
+                    <h3><a href="{% url 'packagedetails' id=tour_package_detail.id %}">{{ tour_package_detail.title }}</a></h3>
+                    <p>{{ tour_package_detail.description }}</p>
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

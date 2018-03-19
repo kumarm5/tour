@@ -202,3 +202,10 @@ body{
 .thumbnail{
     border: none;
 }
+
+/* @media screen and (min-width: 768px){
+    .jumbotron {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+} */
