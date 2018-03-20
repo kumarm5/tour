@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'tour_packages',
     'news',
     'gallery',
+    'testimonial',
     'rest_framework',
 )
 
