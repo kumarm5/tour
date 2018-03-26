@@ -289,13 +289,13 @@ class SupplierDetailsForm(forms.ModelForm):
     return_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'class':'form-control return_date_picker', 'placeholder': 'dd-mm-yyyy', 'readonly': 'true'}))
     oneway_date = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS, widget=forms.DateInput(attrs={'class':'form-control oneway_date_picker', 'placeholder': 'dd-mm-yyyy', 'readonly': 'true'}))
 
-    # existing_supplier = forms.ModelChoiceField(
-    #     queryset = SupplierDetails.objects.all(),
-    #     label='Suppliers:',
-    #     widget=forms.Select(
-    #         attrs={'class':'form-control'}
-    #     )
-    # )
+    existing_supplier = forms.ModelChoiceField(
+        queryset = SupplierDetails.objects.all(),
+        label='Suppliers:',
+        widget=forms.Select(
+            attrs={'class':'form-control'}
+        )
+    )
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
@@ -308,7 +308,7 @@ class SupplierDetailsForm(forms.ModelForm):
         self.fields['return_date'].required = False
         self.fields['oneway_date'].required = False
         self.fields['oneway_date'].label = 'One Way Date'
-        # self.fields['existing_supplier'].empty_label = 'Select Supplier'
+        self.fields['existing_supplier'].empty_label = 'Select Supplier'
 
     # class Media:
     #     js = {

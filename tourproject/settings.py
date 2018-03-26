@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'news',
     'gallery',
     'testimonial',
+    'insurance',
     'rest_framework',
 )
 

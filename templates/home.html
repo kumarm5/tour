@@ -200,39 +200,33 @@
             </div>
         </div>
     </div>
-
-    <div id="text-carousel" class="carousel slide" data-ride="carousel">
-        <!-- Wrapper for slides -->
-        <div class="row">
-            <div class="col-xs-offset-3 col-xs-6 col-md-offset-2 col-md-8">
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="carousel-content">
-                            <div>
-                                <p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p>
+    <div class="testimonial-carousel">
+        <div id="text-carousel" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="row">
+                <div class="col-xs-offset-3 col-xs-6 col-md-offset-2 col-md-8">
+                    <div class="carousel-inner">
+                        {% for testimonial_detail in testimonial_details %}
+                        <div class="item {% if forloop.counter == 1 %} active {% endif %}">
+                            <div class="carousel-content">
+                                <div>
+                                    <p class="testimonial_description">{{ testimonial_detail.description }}</p>
+                                    <p><i>{{ testimonial_detail.first_name }}, {{ testimonial_detail.address }}</i></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="carousel-content">
-                            <div>
-                                <p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p>
-                            </div>
+                        {% endfor %}
+                        <br>
+                        <div class="text-center">
+                            <a href="#" class="btn btn-primary">View All Testimonial</a>
                         </div>
+                        <br>
                     </div>
-                    <div class="item">
-                        <div class="carousel-content">
-                            <div>                          
-                                <p>Sapiente, ducimus, voluptas, mollitia voluptatibus nemo explicabo sit blanditiis laborum dolore illum fuga veniam quae expedita libero accusamus quas harum ex numquam necessitatibus provident deleniti tenetur iusto officiis recusandae corporis culpa quaerat?</p>
-                            </div>
-                        </div>
-                    </div>
-                    
                 </div>
-            </div>
-        </div>        
+            </div>        
+        </div>
     </div>
-
+    <br><br>
 {% endblock %}
 
 {% block footer %}
@@ -240,7 +234,7 @@
     <script src="{% static 'js/jquery.backstretch.min.js' %}"></script>
     <script>
         $(document).ready(function(){
-            $('#text-carousel').backstretch("/static/images/image_6.jpeg");
+            $('.testimonial-carousel').backstretch("/static/images/image_4.jpg");
         });
     </script>
 {% endblock %}

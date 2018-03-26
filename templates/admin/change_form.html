@@ -176,20 +176,20 @@
         trip_type_content();        
     }); 
 
-    // $('#id_existing_supplier').on('change', function(){
-    //     existing_supplier = $(this).val();
+    $('#id_existing_supplier').on('change', function(){
+        existing_supplier = $(this).val();
         
-    //     if(existing_supplier != ''){
-    //         existing_supplier_name = $('#id_existing_supplier option:selected').text();            
-    //         $('#id_supplier_name').val(existing_supplier_name);
-    //         $('#id_supplier_name').parent().parent().hide();
-    //     }
-    //     else {
-    //         $('#id_supplier_name').parent().parent().show();
-    //         $('#id_supplier_name').val('');
-    //     }
+        if(existing_supplier != ''){
+            existing_supplier_name = $('#id_existing_supplier option:selected').text();            
+            $('#id_supplier_name').val(existing_supplier_name);
+            $('#id_supplier_name').parent().parent().hide();
+        }
+        else {
+            $('#id_supplier_name').parent().parent().show();
+            $('#id_supplier_name').val('');
+        }
         
-    // });
+    });
 
 </script>
 {% endblock %}

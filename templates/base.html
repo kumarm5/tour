@@ -28,84 +28,179 @@
 			<![endif]-->
         </head>
         <body>
-            
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <a href="{% url 'home' %}"><img src="{% static 'images/logo.jpg' %}"></a>
+            <div class="header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="{% url 'home' %}"><img src="{% static 'images/logo.jpg' %}"></a>
 
-                        <div class="pull-right hidden-xs hidden-sm">
-                            <ul class="menu-ul">
-                                <li><a href="mailto:tanishtravels24@yahoo.co.in" class="btn btn-email"><i class="fa fa-envelope"></i> tanishtravels24@yahoo.co.in</a></li>
-                                <li><a href="#" class="btn btn-phone"><i class="fa fa-phone"></i> 09890176353</a></li>
-                                <li class="menu-payubiz"><a href="#"></a></li>
-                            </ul>
+                            <div class="pull-right hidden-xs hidden-sm">
+                                <ul class="menu-ul">
+                                    <li><a href="mailto:tanishtravels24@yahoo.co.in" class="btn btn-email"><i class="fa fa-envelope"></i> tanishtravels24@yahoo.co.in</a></li>
+                                    <li><a href="#" class="btn btn-phone"><i class="fa fa-phone"></i> 09890176353</a></li>
+                                    <li class="menu-payubiz"><a href="#"></a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand hidden-lg hidden-md" href="#">Brand</a>
-                    </div>
-                
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <div class="container">
-                            <ul class="nav navbar-nav">
-                                <li><a href="{% url 'home' %}">HOME</a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">AIR TICKETS <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">BOOK ONLINE</a></li>
-                                        <li><a href="{% url 'fixed_departure_chart' %}">FLIGHT FIXED DEPARTURE CHART</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TOUR PACKAGES <span class="caret"></span></a>
-                                    {% if tour_packages %}
-                                    <ul class="dropdown-menu">
-                                        {% for tour_package in tour_packages %}
-                                            <li><a href="{% url 'tour' id=tour_package.id %}">{{ tour_package.topic }}</a></li>
-                                        {% endfor %}
-                                    </ul>
-                                    {% endif %}
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CAB BOOKING <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">CAR RENTAL TARIFF</a></li>
-                                        <li><a href="#">CAB PICK UP DROP LIVE</a></li>
-                                        <li><a href="#">CAR OUTSTATION ROUNDTRIP</a></li>                                        
-                                    </ul>
-                                </li>
-                                <li><a href="#">VISA (JUNCTION)</a></li>
-                                <li><a href="#">SERVICES</a></li>
-                                <li><a href="#">FEEDBACK</a></li>
-                                <li><a href="#">GALLERY</a></li>
-                                <li><a href="#">CONTACT</a></li>
-                            </ul>
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand hidden-lg hidden-md" href="#">Brand</a>
                         </div>
-                    </div><!-- /.navbar-collapse -->
-                </div><!-- /.container-fluid -->
-            </nav>
-            
-            {% block content %}
+                    
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <div class="container">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="{% url 'home' %}">HOME</a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">AIR TICKETS <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">BOOK ONLINE</a></li>
+                                            <li><a href="{% url 'fixed_departure_chart' %}">FLIGHT FIXED DEPARTURE CHART</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TOUR PACKAGES <span class="caret"></span></a>
+                                        {% if tour_packages %}
+                                        <ul class="dropdown-menu">
+                                            {% for tour_package in tour_packages %}
+                                                <li><a href="{% url 'tour' id=tour_package.id %}">{{ tour_package.topic }}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                        {% endif %}
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CAB BOOKING <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">CAR RENTAL TARIFF</a></li>
+                                            <li><a href="#">CAB PICK UP DROP LIVE</a></li>
+                                            <li><a href="#">CAR OUTSTATION ROUNDTRIP</a></li>                                        
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">VISA (JUNCTION)</a></li>
+                                    <li><a href="#">SERVICES</a></li>
+                                    <li><a href="#">FEEDBACK</a></li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">GALLERY <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            {% for gallery_menu in gallery_menus %}
+                                                <li><a href="{% url 'gallery' id=gallery_menu.id %}">{{ gallery_menu.title }}</a></li>
+                                            {% endfor %}                                     
+                                        </ul>
+                                    </li>
+                                    <li><a href="{% url 'contact' %}">CONTACT</a></li>
+                                </ul>
+                            </div>
+                        </div><!-- /.navbar-collapse -->
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </div>
+            <div class="content">
+                {% block content %}
 
-            {% endblock %}
-            
+                {% endblock %}
+            </div>
             {% block footer %}
+                <div class="footer">
+                    <div class="top-footer">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 clearfix">
+                                    <h3>TANISH TRAVEL HUT</h3>
+                                    <br>
+                                    <div class="small-border"></div>
+                                    <h4>Travel Agency - booking center</h4>
+                                    <p>we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment.</p>
+                                    <ul>
+                                        <li><i class="fa fa-2x fa-facebook-official" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-2x fa-google-plus-square" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-2x fa-youtube-square" aria-hidden="true"></i></li>
+                                    </ul>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 clearfix">
+                                    <h3>LATEST NEWS</h3>
+                                    <br>
+                                    <div class="small-border"></div>
+                                    <p>It is a long established fact that a reader will be distracted of a page when looking at its layout.</p>
+                                    <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose.</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 clearfix">
+                                    <h3>GALLERY</h3>
+                                    <br>
+                                    <div class="small-border"></div>
+                                    <div class="col-xs-6 col-md-6 thumbnail-container">
+                                        <a href="#" class="thumbnail">
+                                            <img src="{% static 'images/image_3.jpeg' %}" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6 col-md-6 thumbnail-container">
+                                        <a href="#" class="thumbnail">
+                                            <img src="{% static 'images/image_3.jpeg' %}" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6 col-md-6 thumbnail-container">
+                                        <a href="#" class="thumbnail">
+                                            <img src="{% static 'images/image_3.jpeg' %}" alt="...">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6 col-md-6 thumbnail-container">
+                                        <a href="#" class="thumbnail">
+                                            <img src="{% static 'images/image_3.jpeg' %}" alt="...">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 clearfix">
+                                    <h3>USER LINKS</h3>
+                                    <br>
+                                    <div class="small-border"></div>
+                                    <p>Air Tickets</p>
+                                    <p>Tour Packages</p>
+                                    <p>Car Rental Tariff</p>
+                                    <p>Visa Assistance</p>
+                                    <p>Hotel Reservation</p>
+                                    <p>Travel Insurance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-footer">
+                        <nav class="navbar navbar-inverse">
+                            <div class="container">
+                                <p class="copyright text-center">Copyright &copy; 2018 - Tanish Travel Hut. All rights reserved.</p>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
                 <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
                 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+                <!-- <script>
+                    $(document).ready(function(){                        
+                        var windows_height = $(window).height();
+                        var header_height = $('.header').height();
+                        var content_height = $('.content').height();
+                        var footer_height = $('.footer').height();
+                        var total_content = header_height + content_height + footer_height;
+                        
+                        if(windows_height > total_content){
+                            remaining_height = windows_height - total_content;
+                            assign_height = content_height + remaining_height;
+                            $('.content').height(assign_height+'px');
+                        }
+                    
+                    });
+                </script> -->
             {% endblock %}
 
         </body>

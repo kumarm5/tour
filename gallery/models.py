@@ -24,7 +24,7 @@ class GallerySubCat(models.Model):
         verbose_name = 'Sub Category'
         verbose_name_plural = 'Sub Category'
 
-class GallerySubCatImage(models.Model):
+class GalleryImages(models.Model):
     sub_category = models.ForeignKey('GallerySubCat', on_delete=models.CASCADE, verbose_name='Sub Category')
     title = models.CharField(max_length=300, verbose_name='Title')
     images = models.FileField(upload_to='documents/', verbose_name='Images')

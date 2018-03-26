@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <br><br>
+    <div class="row text-center">
+        <div class="col-md-12">
+            {% for gallery_sub_cat_image in gallery_sub_cat_images %}
+            <div class="col-xs-6 col-md-3">
+                <a href="#" class="thumbnail">
+                    <img src="{{ gallery_sub_cat_image.images.url }}" class="img-responsive">
+                </a>
+                <h3>{{ gallery_sub_cat_image.title }}</h3>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

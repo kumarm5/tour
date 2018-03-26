@@ -209,3 +209,70 @@ body{
         padding-bottom: 30px;
     }
 } */
+
+.bottom-footer .navbar-inverse{
+    color: #ffffff;    
+}
+
+.bottom-footer .copyright{
+    margin-top: 10px;
+}
+
+.top-footer {
+    background: #111;
+    color: #ffffff;
+    padding: 30px 0px 30px;
+}
+
+.top-footer ul{
+    margin: 0px;
+    padding: 0px;
+}
+
+.top-footer li{
+    list-style-type: none;
+    display: inline;
+    padding: 5px;
+}
+
+.top-footer .thumbnail{
+    border-radius: 0px;
+    padding: 0px;    
+}
+
+.top-footer .thumbnail-container{
+    padding-left: 0px;    
+}
+
+.small-border {
+    height: 3px;
+    width: 70px;
+    margin: -12px 0 30px;
+    background: #FF6600;
+    display: block;
+}
+/* 
+.footer{
+    position: fixed;
+    bottom: 0;
+    width:100%;
+} */
+
+.btn{
+    border-radius: 0px;
+}
+
+.form-control{
+    border-radius: 0px;
+}
+
+.testimonial-carousel{
+    padding-bottom: 60px;
+}
+
+.testimonial_description{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}

@@ -24,4 +24,4 @@ class GallerySubCatImageAdmin(admin.ModelAdmin):
     form = GallerySubCatImageForm
     fields = (('sub_category'), ('title', 'images'))
 
-admin.site.register(GallerySubCatImage, GallerySubCatImageAdmin)
+admin.site.register(GalleryImages, GallerySubCatImageAdmin)

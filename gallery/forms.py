@@ -68,7 +68,7 @@ class GallerySubCatImageForm(forms.ModelForm):
         self.fields['sub_category'].empty_label = 'Select Category'
 
     class Meta:
-        model = GallerySubCatImage
+        model = GalleryImages
         exclude = ()
 
         widgets = {
