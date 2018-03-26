@@ -276,3 +276,7 @@ body{
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
+
+.home-services-tag{
+    vertical-align: super;
+}
