@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content%}
+    <div class="container">
+        <h1 class="text-center">Foreign Exchange</h1>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Currency Name</th>
+                    <th>Last Updated</th>
+                    <th>Buy</th>
+                    <th>Sale</th>
+                    <th>Make Enquiry</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for foreign_exchange in foreign_exchanges %}
+                <tr>
+                    <td>{{ foreign_exchange.currency_name }}</td>
+                    <td>{{ foreign_exchange.updated_at| date:'d-m-Y' }}</td>
+                    <td>{{ foreign_exchange.buy }}</td>
+                    <td>{{ foreign_exchange.sale }}</td>
+                    <td width="14%">
+                        <a href="{% url 'sendenquiry' id=foreign_exchange.id %}" class="btn btn-xs btn-info">Buying</a>
+                        <a href="{% url 'sendenquiry' id=foreign_exchange.id %}" class="btn btn-xs btn-success">Selling</a>
+                    </td>
+                </tr>
+                {% endfor %}                
+            </tbody>
+        </table>
+        <br>
+    </div>
+{% endblock %}

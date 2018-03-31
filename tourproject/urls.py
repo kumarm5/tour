@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^news/', include('news.urls')),
     url(r'^tour/', include('tour_packages.urls')),
     url(r'^gallery/', include('gallery.urls')),
+    url(r'^foreignexchange/', include('foreign_exchange.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'Administration'

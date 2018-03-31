@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'gallery',
     'testimonial',
     'insurance',
+    'foreign_exchange',
     'rest_framework',
 )
 
