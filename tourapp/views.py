@@ -11,7 +11,11 @@ class HomeView(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         testimonial_details = Testimonial.objects.all()
-        insurance_details = Insurance.objects.latest('id')
+        try:
+            insurance_details = Insurance.objects.latest('id')
+        except:
+            insurance_details = None
+            
         return render(request, 'home.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'testimonial_details': testimonial_details, 'insurance_details': insurance_details })
 
 class Contact(TemplateView):
