@@ -7,7 +7,12 @@
 
 {% block content %}
     <div class="news-section">
-        <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">Lorem ipsum dolor sit amet, conse ctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolorealiqua.</marquee>
+        <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+            {% for new_info in new_infos %}
+                <strong><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> {{ new_info.title }}:</strong> {{ new_info.description }}
+            {% endfor %}
+            <a href="{% url 'news' %}" class="btn btn-xs btn-info" style="margin: 5px;">All News</a>
+        </marquee>
     </div>
 
     <div class="container-fluid">
