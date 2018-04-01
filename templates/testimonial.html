@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Customer Testimonial for Tanish Travel Hut</h1>
+                <br><br>
+                {% for testimonial in testimonials %}
+                    <div class="jumbotron">
+                        <p>{{ testimonial.description }}</p>
+                        <strong>{{ testimonial.first_name }}, {{ testimonial.address }}</strong>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
