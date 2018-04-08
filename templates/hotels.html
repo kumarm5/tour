@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Hotels</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <br><br>
+        <div class="row text-center">
+            <div class="col-md-12">
+                {% for hotel_detail in hotel_details %}
+                <div class="col-xs-6 col-md-3">
+                    <a href="#" class="thumbnail">
+                        <img src="{{ hotel_detail.hotel_images.url }}" class="img-responsive">
+                    </a>
+                    <h3><a href="{% url 'hoteldetails' id=hotel_detail.id %}">{{ hotel_detail.name }}</a></h3>
+                    <p>{{ hotel_detail.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

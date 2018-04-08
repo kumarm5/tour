@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from .models import Sector, SupplierDetails, TermsAndConditions
 from tour_packages.models import Topics
+from gallery.models import GalleryMenu
 import pdb
 # Create your views here.
 
@@ -12,8 +13,9 @@ class FlightFixedDepartureChart(TemplateView):
         supplier_details = SupplierDetails.objects.all()
         terms_and_conditions = TermsAndConditions.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
+        gallery_menus = GalleryMenu.objects.filter(status = True)
 
-        return render(request, self.template_name, {'sector_details': sector_details, 'supplier_details': supplier_details, 'terms_and_conditions': terms_and_conditions, 'tour_packages': tour_packages})
+        return render(request, self.template_name, {'sector_details': sector_details, 'supplier_details': supplier_details, 'terms_and_conditions': terms_and_conditions, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus })
 
     def post(self, request, *args):
         

@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^gallery/', include('gallery.urls')),
     url(r'^testimonials/', include('testimonial.urls')),
     url(r'^foreignexchange/', include('foreign_exchange.urls')),
+    url(r'^hoteldeals/', include('hotel_deals.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'Administration'
