@@ -20,9 +20,9 @@ class HomeView(TemplateView):
             
         return render(request, 'home.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'testimonial_details': testimonial_details, 'insurance_details': insurance_details, 'new_infos': new_infos })
 
-class Contact(TemplateView):
-    def get(self, request, **kwargs):
-        tour_packages = Topics.objects.filter(status = True)
-        gallery_menus = GalleryMenu.objects.filter(status = True)
-        return render(request, 'contact.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus })
+# class Contact(TemplateView):
+#     def get(self, request, **kwargs):
+#         tour_packages = Topics.objects.filter(status = True)
+#         gallery_menus = GalleryMenu.objects.filter(status = True)
+#         return render(request, 'contact.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus })
  

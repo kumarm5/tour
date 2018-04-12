@@ -37,7 +37,7 @@
                 <div class="pull-right">
                     <a href="mailto:tanishtravels24@yahoo.co.in" class="btn btn-email"><i class="fa fa-envelope"></i> Mail</a>
                     <a href="javascript:void(0);" class="btn btn-email" ><i class="fa fa-print"></i>Print</a>
-                    <a href="javascript:void(0);" class="btn btn-email" ><i class="fa fa-download"></i>Download</a>
+                    <a href="javascript:void(0);" class="btn btn-email" ><i class="fa fa-download"></i>Download</a>                    
                 </div>
                 <br>
             </div>
@@ -46,25 +46,29 @@
                 <li role="presentation" class="active"><a data-toggle="tab" href="#overview">Overview</a></li>
                 <li role="presentation"><a data-toggle="tab" href="#map">Map</a></li>
                 <li role="presentation"><a data-toggle="tab" href="#inclusion">Inclusion</a></li>
+                <li role="presentation"><a data-toggle="tab" href="#exclusion">Exclusion</a></li>
                 <li role="presentation"><a data-toggle="tab" href="#book">How to Book</a></li>
                 <li role="presentation"><a data-toggle="tab" href="#tour">Tour Info</a></li>
             </ul>
             <br>
             <div class="tab-content">
                 <div id="overview" class="tab-pane fade in active">
-                    <p>{{ package_details.overview }}</p>
+                    <p>{{ package_details.overview | linebreaksbr }}</p>
                 </div>
                 <div id="map" class="tab-pane fade">
                     <img src="/media/{{ package_details.map_image }}" width="450" height="300"/>
                 </div>
                 <div id="inclusion" class="tab-pane fade">
-                    <p>{{ package_details.inclusion }}</p>
+                    <p>{{ package_details.inclusion | linebreaksbr }}</p>
+                </div>
+                <div id="exclusion" class="tab-pane fade">
+                    <p>{{ package_details.exclusion | linebreaksbr }}</p>
                 </div>
                 <div id="book" class="tab-pane fade">
-                    <p>{{ package_details.how_to_book }}</p>
+                    <p>{{ package_details.how_to_book | linebreaksbr }}</p>
                 </div>
                 <div id="tour" class="tab-pane fade">
-                    <p>{{ package_details.tour_info }}</p>
+                    <p>{{ package_details.tour_info | linebreaksbr }}</p>
                 </div>
               </div>
         </div>

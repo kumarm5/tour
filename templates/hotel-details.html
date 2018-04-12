@@ -52,19 +52,19 @@
             <br>
             <div class="tab-content">
                 <div id="overview" class="tab-pane fade in active">
-                    <p>{{ hotel_details.overview }}</p>
+                    {{ hotel_details.overview  | linebreaksbr }}                    
                 </div>
                 <div id="map" class="tab-pane fade">
                     <img src="/media/{{ hotel_details.map_image }}" width="450" height="300"/>
                 </div>
                 <div id="inclusion" class="tab-pane fade">
-                    <p>{{ hotel_details.inclusion }}</p>
+                    <p>{{ hotel_details.inclusion | linebreaksbr }}</p>
                 </div>
                 <div id="book" class="tab-pane fade">
-                    <p>{{ hotel_details.how_to_book }}</p>
+                    <p>{{ hotel_details.how_to_book | linebreaksbr }}</p>
                 </div>
                 <div id="hotel" class="tab-pane fade">
-                    <p>{{ hotel_details.tour_info }}</p>
+                    <p>{{ hotel_details.tour_info | linebreaksbr }}</p>
                 </div>
               </div>
         </div>

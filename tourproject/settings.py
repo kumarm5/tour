@@ -48,6 +48,8 @@ INSTALLED_APPS = (
     'insurance',
     'foreign_exchange',
     'hotel_deals',
+    'feedback',
+    'contact',
     'rest_framework',
 )
 

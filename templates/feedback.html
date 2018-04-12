@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    {{ block.super }}
+    <link href="{% static 'css/jquery.rateyo.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <h1 class="text-center">Client Feedback</h1>
+                <br>
+                <form method="POST" id="frmfeedback">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        <label>Your Name</label>
+                        <input type="text" class="form-control" name="username" placeholder="Enter your name">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Mobile</label>
+                        <input type="text" class="form-control" name="mobile" placeholder="Enter your mobile number">
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <br>
+                        <label>Message</label>
+                        <textarea class="form-control" rows="8" name="message" placeholder="Enter your message"></textarea>
+                        <br>
+                    </div>
+                    
+                    <center>
+                        <label for="Rate_Tanish_Travel_Hut_Service">Rate Tanish Travel Hut Service</label>
+                        <input type="hidden" name="rating" value="" id="rate" />
+                        <div class="tacenter" data-rating="3" data-readonly="false" id="getRate2"></div>
+                    </center>
+
+                    <div class="col-md-12">
+                        <br>
+                            <input type="submit" class="btn btn-success" value="Send Feedback">
+                        <br><br>
+                    </div>
+                    <div class="col-md-12">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <h3 class="text-success text-center">{{ message }}</h3>
+                                {% endfor %}
+                            {% endif %}
+                        <br>
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script src="{% static 'js/jquery.rateyo.min.js' %}"></script>
+    <script>
+        $(function () {
+            $("#getRate2").rateYo({
+                starWidth: "36px"
+            });
+
+            $('#frmfeedback').submit(function (e) {
+                var d = $("#getRate2").rateYo('option', 'rating');
+                $("#rate").val(d);                
+            });
+
+        });
+
+    </script>
+{% endblock %}
+

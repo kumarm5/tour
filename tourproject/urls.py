@@ -29,6 +29,8 @@ urlpatterns = [
     url(r'^testimonials/', include('testimonial.urls')),
     url(r'^foreignexchange/', include('foreign_exchange.urls')),
     url(r'^hoteldeals/', include('hotel_deals.urls')),
+    url(r'^feedback/', include('feedback.urls')),
+    url(r'^contact/', include('contact.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'Administration'

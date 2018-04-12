@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    {{ block.super }}
+    <style>
+        .panel-body{
+            min-height: 180px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1>Preferred Sales Agents</h1>
+            </div>
+        </div>
+        <div class="row">
+                {% for preferredsalesagent in preferredsalesagents %}
+                    <div class="col-md-6">
+                        <br>
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">{{ preferredsalesagent.company_name }}</h3>
+                            </div>
+                            <div class="panel-body">
+                                <p> <i class="fa fa-location-arrow"></i> &nbsp;&nbsp;{{ preferredsalesagent.location }}</p>
+                                <p> <i class="fa fa-user"></i> &nbsp;&nbsp;{{ preferredsalesagent.person_name }}</p>
+                                <p> <i class="fa fa-mobile"></i> &nbsp;&nbsp; {{ preferredsalesagent.contact_number }}</p>
+                                <p> <i class="fa fa-envelope-o"></i> &nbsp;{{ preferredsalesagent.email_id }}</p>
+                                <!-- <p> <i class="fa fa-map-marker"></i> &nbsp;&nbsp;&nbsp;{{ preferredsalesagent.address }}</p> -->
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                {% endfor %}
+            <br>
+        </div>
+    </div>
+{% endblock %}
+
