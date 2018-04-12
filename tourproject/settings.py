@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     'hotel_deals',
     'feedback',
     'contact',
+    'visa',
     'rest_framework',
 )
 

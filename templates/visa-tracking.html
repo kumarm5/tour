@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Track Visa Application</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center">Track Visa Application</h1>
+                <br>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <form method="POST" class="form-inline">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="passport_num" class="form-control" placeholder="Enter passport number">
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Track">
+                </form>
+                <br>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th width="40%">TRACK DETAILS</th>
+                            <th width="40%">ADDITIONAL DETAILS</th>
+                            <th width="20%">DATE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if passport_tracks %}
+                            {% for passport_track in passport_tracks %}
+                                <td>{{ passport_track.track_type.track_type }}</td>
+                                <td>{{ passport_track.additional_details }}</td>
+                                <td>{{ passport_track.added_date | date:'d-m-Y H:i' }}</td>
+                            {% endfor %}
+                        {% else %}
+                            <td colspan="3" class="text-center">No record found</td>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Its Easy to track your visa application with Tanish Travel Hut</h3>
+                <p>Over the years we have developed specialization in offering reliable Travel Services to our esteemed clients. The dedicated taskforce working with us remains committed to bring some of the best and the most affordable deals for the clients. Moreover, we have tie-ups with all the major low cost and full service operators, who facilitate us in providing complete travelling solutions.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Correct Information</h3>
+                <p>We give clients advice and information not from the sales perspective but what is right for them and what will make them business trip hassle-free. We believe our true reward is when our vast experience in the field of business travel makes your business trip a true success.</p>
+                <br>
+            </div>            
+        </div>
+
+    </div>
+{% endblock %}
