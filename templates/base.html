@@ -88,7 +88,7 @@
                                             <li><a href="#">CAR OUTSTATION ROUNDTRIP</a></li>                                        
                                         </ul>
                                     </li>
-                                    <li><a href="#">VISA (JUNCTION)</a></li>
+                                    <li><a href="{% url 'visalogin' %}">VISA (JUNCTION)</a></li>
                                     <li><a href="#">SERVICES</a></li>
                                     <li><a href="{% url 'feedback' %}">FEEDBACK</a></li>
                                     <li class="dropdown">
@@ -96,7 +96,7 @@
                                         <ul class="dropdown-menu">
                                             {% for gallery_menu in gallery_menus %}
                                                 <li><a href="{% url 'gallery' id=gallery_menu.id %}">{{ gallery_menu.title }}</a></li>
-                                            {% endfor %}                                     
+                                            {% endfor %}
                                         </ul>
                                     </li>
                                     <li><a href="{% url 'news' %}">NEWS</a></li>

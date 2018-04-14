@@ -29,3 +29,32 @@ class PassportTrackTypeForm(forms.ModelForm):
             )
         }
     
+class PassportTrackForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(PassportTrackForm, self).__init__(*args, **kwargs)
+        self.fields['track_type'].empty_label = 'Select Type'
+        self.fields['track_type'].queryset = PassportTrackType.objects.filter(status = True)
+
+        class Meta:
+            model = PassportTrack
+            exclude = ()
+
+            widgets={
+                'passport_number': forms.TextInput(
+                    attrs={
+                        'class': 'form-control'
+                    }
+                ),
+                'track_type': forms.Select(
+                    attrs={
+                        'class': 'form-control'
+                    }
+                ),
+                'additional_details': forms.Textarea(
+                    attrs={
+                        'class': 'form-control'
+                    }
+                )
+            }

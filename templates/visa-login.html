@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <h1 class="text-center">VISA LOGIN</h1>
+                <hr>
+                <br>
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+                <h3 class="text-center"><u>Sign In Form</u></h3>
+                <br>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="userpasswd">Password</label>
+                        <input type="password" class="form-control" name="userpasswd" placeholder="Enter password">
+                    </div>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button class="btn btn-info">Clear</button>
+                </form>
+                <br>
+            </div>
+            <div class="col-md-5 col-md-offset-1 registerdiv">
+                <h3 class="text-center"><u>Register Form</u></h3>
+                <br>
+                <form method="POST" class="col-md-offset-2">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" placeholder="Enter Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Mobile Number</label>
+                        <input type="text" class="form-control" name="phone" placeholder="Enter Mobile Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Id</label>
+                        <input type="email" class="form-control" name="email" placeholder="Enter Email Id">
+                    </div>
+                    <div class="form-group">
+                        <label for="userpasswd">Password</label>
+                        <input type="password" class="form-control" name="userpasswd" placeholder="Enter password">
+                    </div>
+                    <button class="btn btn-success">Register</button>
+                </form>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <br><br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
