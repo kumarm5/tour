@@ -1,4 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    {{ block.super }}
+    <style>
+        .error{
+            color: #ff0000;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -9,31 +19,50 @@
                 <hr>
                 <br>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <br>
+                        {% if messages %}
+                            {% for message in messages %}
+                                <p class="text-center text-danger"><strong>{{ message }}</strong></p>
+                            {% endfor %}
+                        {% endif %}
+                    <br>
+                </div>
+            </div>
             <div class="col-md-4 col-md-offset-1">
                 <h3 class="text-center"><u>Sign In Form</u></h3>
                 <br>
-                <form method="POST">
+                <form method="POST" id="loginform">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" name="username" placeholder="Enter username">
+                        <input type="text" class="form-control login-username" name="username" placeholder="Enter username">
                     </div>
+
+                    <input type="hidden" name="formname" value="login" class="form-control">
+
                     <div class="form-group">
                         <label for="userpasswd">Password</label>
-                        <input type="password" class="form-control" name="userpasswd" placeholder="Enter password">
+                        <input type="password" class="form-control login-userpasswd" name="userpasswd" placeholder="Enter password">
                     </div>
                     <button type="submit" class="btn btn-success">Submit</button>
-                    <button class="btn btn-info">Clear</button>
+                    <input type="button" class="btn btn-info" id="clr-btn" value="Clear">
                 </form>
                 <br>
             </div>
             <div class="col-md-5 col-md-offset-1 registerdiv">
                 <h3 class="text-center"><u>Register Form</u></h3>
                 <br>
-                <form method="POST" class="col-md-offset-2">
+                <form method="POST" class="col-md-offset-2" id="registerform">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" name="username" placeholder="Enter Username">
                     </div>
+                    
+                    <input type="hidden" name="formname" value="register" class="form-control">
+
                     <div class="form-group">
                         <label for="phone">Mobile Number</label>
                         <input type="text" class="form-control" name="phone" placeholder="Enter Mobile Number">
@@ -45,7 +74,7 @@
                     <div class="form-group">
                         <label for="userpasswd">Password</label>
                         <input type="password" class="form-control" name="userpasswd" placeholder="Enter password">
-                    </div>
+                    </div>                    
                     <button class="btn btn-success">Register</button>
                 </form>
                 <br>
@@ -59,3 +88,47 @@
     </div>
 {% endblock %}
 
+{% block footer %}
+    {{ block.super }}
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script>
+        $('#registerform').validate({
+            rules: {
+                username: {
+                    required: true
+                },
+                phone: {
+                    required: true,
+                    number: true,
+                    minlength: 10
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                userpasswd: {
+                    required: true
+                }
+            },
+            messages: {
+                phone: {
+                    minlength: 'Please enter at least 10 digits.'
+                }
+            }
+        });
+        $('#loginform').validate({
+            rules: {
+                username: {
+                    required: true
+                },
+                userpasswd: {
+                    required: true
+                }
+            }
+        });
+        $('#clr-btn').on('click', function(){
+            $('.login-username').val('');
+            $('.login-userpasswd').val('');
+        });
+    </script>
+{% endblock %}

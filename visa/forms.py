@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import widgets
 from .models import *
+from ckeditor.widgets import CKEditorWidget
 
 class PassportTrackTypeForm(forms.ModelForm):
 
@@ -58,3 +59,191 @@ class PassportTrackForm(forms.ModelForm):
                     }
                 )
             }
+
+class VisaProfileForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(VisaProfileForm, self).__init__(*args, **kwargs)
+        self.fields['user'].empty_label = 'Select User'
+
+    class Meta:
+        model = VisaProfile
+        exclude = ()
+
+        widgets = {
+            'user': forms.Select(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'mobile_num': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter the mobile number'
+                }
+            )
+        }
+
+
+class VisaCountryForm(forms.ModelForm):
+    
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(VisaCountryForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = VisaCountry
+        exclude = ()
+
+        widgets = {
+            'name': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter country name'
+                }
+            ),
+            'image': forms.FileInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'details': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter details'
+                }
+            )
+        }
+
+class VisaInfoForm(forms.ModelForm):
+    visa_details = forms.CharField(widget=CKEditorWidget())
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(VisaInfoForm, self).__init__(*args, **kwargs)
+        self.fields['visa_country'].empty_label = 'Select Country'
+
+    class Meta:
+        model = VisaInfo
+        exclude = ()
+
+        widgets = {
+            'visa_country': forms.Select(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            # 'visa_details': forms.Textarea(
+            #     attrs={
+            #         'class': 'form-control'
+            #     }
+            # )
+        }
+
+class VisaDownloadsForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(VisaDownloadsForm, self).__init__(*args, **kwargs)
+        self.fields['visa_country'].empty_label = 'Select Country'
+
+    class Meta:
+        model = VisaDownloads
+        exclude = ()
+
+        widgets={
+            'visa_country': forms.Select(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'image': forms.FileInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            )
+        }
+
+class VisaEnquiryForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(VisaEnquiryForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = VisaEnquiry
+        exclude = ()
+
+        widgets = {
+            'username': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter username'
+                }
+            ),
+            'mobile_num': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter mobile number'
+                }
+            ),
+            'email_id': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter email id'
+                }
+            ),
+            'subject': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter subject'
+                }
+            ),
+            'message': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter message'
+                }
+            )
+        }
+
+class VisaHistoryForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(VisaHistoryForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = VisaHistory
+        exclude = ()
+    
+        widgets={
+            'username': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter username'
+                }
+            ),
+            'mobile_num': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'mobile number'
+                }
+            ),
+            'email_id': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter email id'
+                }
+            ),
+            'activity': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter activity'
+                }
+            )
+        }

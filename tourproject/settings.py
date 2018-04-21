@@ -51,7 +51,9 @@ INSTALLED_APPS = (
     'feedback',
     'contact',
     'visa',
+    'cabbooking',
     'rest_framework',
+    'ckeditor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -132,3 +134,11 @@ DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',        
+    },
+}

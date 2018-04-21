@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Visa Details</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <br>
+                <h1>{{ country.name }}</h1>                
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <p><strong>{{ country.details }}</strong></p>
+                <a href="{% url 'Visa:visaenquiry' id=country.id %}" class="btn btn-info">Send Enquiry</a>
+                <br><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {% autoescape off %}
+                <p>{{ visa_info.visa_details }}</p>
+                {% endautoescape %}
+            </div>
+        </div>
+        
+        <form method="POST" id="downloadform" action="{% url 'Visa:visadetails' id=country_id %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" value="{{ country_id }}" name="id">
+        </form>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Important Downloads</h3>
+                {% for visa_download in visa_downloads %}
+                    <a href="{{ visa_download.image.url }}" class="btn btn-success downloads">{{ visa_download.title }}</a>
+                {% endfor %}
+                <br><br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script>
+        $(document).ready(function(){
+            $('.downloads').on('click', function(){
+                download_text = $(this).text();
+                country_id = $("input[name='id']").val();
+                csrfmiddlewaretoken = $("input[name='csrfmiddlewaretoken']").val();
+
+                $.ajax({
+                    url: '/visa/visadetails/'+country_id,
+                    type: 'POST',
+                    data: {'download_text': download_text, 'csrfmiddlewaretoken': csrfmiddlewaretoken }
+                });
+
+            });
+        });
+    </script>
+{% endblock %}

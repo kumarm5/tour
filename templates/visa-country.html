@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Country</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <h1 class="text-center">Countries</h1>
+                <br>
+            </div>
+        </div>
+        
+        <div class="row text-center">
+                <div class="col-md-12">
+                    {% for visacountry in visacountries %}
+                    <div class="col-xs-6 col-md-3">
+                        <a href="#" class="thumbnail">
+                            <img src="{{ visacountry.image.url }}" class="img-responsive">
+                        </a>
+                        <h3><a href="{% url 'Visa:visadetails' id=visacountry.id %}">{{ visacountry.name }}</a></h3>
+                        <p>{{ visacountry.details }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
