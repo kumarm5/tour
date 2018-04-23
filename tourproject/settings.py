@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'feedback',
     'contact',
     'visa',
+    'services',
     'cabbooking',
     'rest_framework',
     'ckeditor',

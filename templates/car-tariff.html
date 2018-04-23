@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>CAB TARIFF</title>
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <style>
+        caption{
+            border: 1px solid #ddd;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1>{{ city_detail.title }}</h1>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <a href="#" class="btn btn-sm btn-success"> <i class="fa fa-download" aria-hidden="true"></i> Download</a>
+                <a href="mailto:tanishtravels24@yahoo.co.in" class="btn btn-sm btn-success"><i class="fa fa-envelope" aria-hidden="true"></i> Email</a>
+                <br><br>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <caption><strong>TARIFF CARD VALID UPTO 31ST MARCH - 2019 FOR {{ city_detail.title }}</strong></caption>
+                    <thead>
+                        <tr>
+                            <th>VEHICLE</th>
+                            <th>CATEGORY</th>
+                            <th>04 HOURS</th>
+                            <th>08 HOURS</th>
+                            <th>12 HOURS</th>
+                            <th>EXTRA PER KM</th>
+                            <th>EXTRA PER HOURS</th>
+                            <th>OUTSTATION PER KM</th>
+                            <th>OUTSTATION PER HOURS</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tariff_detail in tariff_details %}
+                            <tr>
+                                <td>{{ tariff_detail.vehicle_master.vehicle_name }}</td>
+                                <td>{{ tariff_detail.vehicle_master.category }}</td>
+                                <td>{{ tariff_detail.four_hour }}</td>
+                                <td>{{ tariff_detail.eight_hour }}</td>
+                                <td>{{ tariff_detail.twelve_hour }}</td>
+                                <td>{{ tariff_detail.extra_per_km }}</td>
+                                <td>{{ tariff_detail.extra_per_hour }}</td>
+                                <td>{{ tariff_detail.outstation_per_km }}</td>
+                                <td>{{ tariff_detail.outstation_per_hour }}</td>
+                                <td><a href="{% url 'tariffenquiry' id=tariff_detail.pk %}" class="btn btn-sm btn-info">Send Enquiry</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Terms &amp; Conditions:</h3>
+                {% autoescape off %}
+                    {{ term_and_cond.details }}
+                {% endautoescape %}
+                <br><br>
+            </div>            
+        </div>
+    </div>
+{% endblock %}

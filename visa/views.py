@@ -7,6 +7,7 @@ from gallery.models import GalleryMenu
 from django.contrib import messages
 from .models import *
 import http.client
+# import httplib
 from django.db.models import Q
 
 # Create your views here.
@@ -51,6 +52,7 @@ class VisaLogin(TemplateView):
             else:
                 # code for sending sms
                 conn = http.client.HTTPConnection("api.msg91.com")
+                # conn = httplib.HTTPConnection("api.msg91.com")
 
                 conn.request("GET", "/api/sendhttp.php?sender=TANISH&route=4&mobiles="+phone+"&authkey=91178Ahf3JuOcJ41W581c6f41&country=91&message=Your registration is complete to use our visa application")
 

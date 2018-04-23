@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^contact/', include('contact.urls')),
     url(r'^visa/', include('visa.urls', namespace="Visa")),
     url(r'^cabbooking/', include('cabbooking.urls')),
+    url(r'^services/', include('services.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 admin.site.site_header = 'Administration'
