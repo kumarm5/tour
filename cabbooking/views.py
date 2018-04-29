@@ -69,3 +69,36 @@ class TariffDetailEnquiry(TemplateView):
 
         return render(request, 'tariff-enquiry.html', context={ 'tariff_detail': tariff_detail })
 
+class CabRegisteration(TemplateView):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'cab-registeration.html', context={})
+        
+    def post(self, request, *args, **kwargs):
+        
+        agency_name = request.POST.get('agency_name')
+        full_name = request.POST.get('full_name')
+        mobile_no = request.POST.get('mobile_no')
+        email_id = request.POST.get('email_id')
+        bank_name = request.POST.get('bank_name')
+        account_no = request.POST.get('account_no')
+        name_in_account = request.POST.get('name_in_account')
+        ifsc_code = request.POST.get('ifsc_code')
+        branch = request.POST.get('branch')
+        address = request.POST.get('address')
+
+        register = CabRegister.objects.create(agency_name=agency_name, full_name=full_name, mobile_no=mobile_no, email_id=email_id, bank_name=bank_name, account_no=account_no, name_in_account=name_in_account, ifsc_code=ifsc_code, branch=branch, address=address)
+
+        cabreg = CabRegister.objects.last()
+        type_veh = request.POST.getlist('type_veh')
+        purchase_date = request.POST.getlist('purchase_date')
+        cab_no = request.POST.getlist('cab_no')
+
+        for i in range(len(cab_no)):
+            RegisterVehicle.objects.create(cabregister=cabreg, type_vehicle=type_veh[i], purchase_date=purchase_date[i], cab_no=cab_no[i])
+
+        if register:
+            messages.success(request, 'Cab registeration successful')
+        else:
+            messages.error(request, 'Cab registeration failed')
+
+        return render(request, 'cab-registeration.html', context={})

@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Cab Registeration</title>
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <style>
+        .add-btn, .delete-btn{
+            margin-top: 6.5px;
+        }
+        .error{
+            color: #ff0000;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <br>
+                <h1>Cab Registeration</h1>
+                <br>
+            </div>            
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12">
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-info"><strong>{{ message }}</strong></p><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <form method="POST" id="cab-registeration-form">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">Travel Agency Name:</label>
+                            <input type="text" class="form-control" name="agency_name" placeholder="Enter your agency name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">Full Name:</label>
+                            <input type="text" class="form-control" name="full_name" placeholder="Enter your full name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">Mobile number:</label>
+                            <input type="text" class="form-control" name="mobile_no" placeholder="Enter your mobile number">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">Email Address:</label>
+                            <input type="email" class="form-control" name="email_id" placeholder="Enter your email address">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">Bank Name:</label>
+                            <input type="text" class="form-control" name="bank_name" placeholder="Enter bank name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">Account No:</label>
+                            <input type="text" class="form-control" name="account_no" placeholder="Enter your account number">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">Account in Name:</label>
+                            <input type="text" class="form-control" name="name_in_account" placeholder="Enter your name in account">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">IFSC Code:</label>
+                            <input type="text" class="form-control" name="ifsc_code" placeholder="Enter your bank IFSC code">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">Branch:</label>
+                            <input type="text" class="form-control" name="branch" placeholder="Enter your branch name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="label-control">Detail Address:</label>
+                            <textarea class="form-control" placeholder="Enter your Address" name="address"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <p><strong>Which vehicles you have:</strong></p>
+                    </div>
+                    <div class="cabinfo">
+                    </div>
+                    <div class="col-md-12">
+                        <br>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="label-control">Type of Vehicle</label>
+                            <input type="text" class="form-control" name="type_vehicle" placeholder="Ex: Innova">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="label-control">No. of Vehicles</label>
+                            <input type="text" class="form-control" name="no_vehicles" placeholder="Enter no. of vehicles">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <br>
+                            <a href="javascript:void(0);" class="btn btn-info btn-sm add-btn">Add <i class="fa fa-plus" aria-hidden="true"></i></a>
+                        </div>
+                        <br>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <input type="submit" class="btn btn-success">
+                        <br><br>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            
+            $('#cab-registeration-form').validate({
+                rules:{
+                    agency_name: {
+                        required: true
+                    },
+                    full_name: {
+                        required: true
+                    },
+                    mobile_no: {
+                        required: true,
+                        number: true
+                    },
+                    email_id: {
+                        required: true,
+                        email: true
+                    },
+                    bank_name: {
+                        required: true
+                    },
+                    account_no: {
+                        required: true
+                    },
+                    name_in_account: {
+                        required: true
+                    },
+                    ifsc_code: {
+                        required: true
+                    },
+                    branch: {
+                        required: true
+                    },
+                    address: {
+                        required: true
+                    }
+                }
+            });
+
+            $('.add-btn').on('click', function(){
+
+                var cabinfo = $('.cabinfo').html();
+                
+                var no_vehicles = parseInt($("input[name='no_vehicles']").val());
+                
+                var type_vehicle = $("input[name='type_vehicle']").val();
+
+                if((!Number.isNaN(no_vehicles)) && (no_vehicles != undefined)){
+                    if(cabinfo.trim() == ""){
+                        $(this).after('\
+                            <a href="javascript:void(0);" class="btn btn-danger btn-sm delete-btn">Delete</a>\
+                        ');
+                    }
+                }
+                
+                for(i=0;i<no_vehicles;i++){
+                    $('.cabinfo').append('\
+                    <div class="newrow">\
+                        <div class="col-md-5">\
+                            <div class="form-group">\
+                                <label class="label-control">Purchase Date:</label>\
+                                <input type="text" class="form-control" name="purchase_date" placeholder="Enter purchase date">\
+                            </div>\
+                        </div>\
+                        <input type="hidden" name="type_veh" value="'+type_vehicle+'">\
+                        <div class="col-md-5">\
+                            <div class="form-group">\
+                                <label class="label-control">Cab No:</label>\
+                                <input type="text" class="form-control" name="cab_no" placeholder="Enter Cab No.">\
+                            </div>\
+                        </div>\
+                    </div>\
+                ');
+                }
+            });
+
+            $('body').on('click', '.delete-btn', function () {
+                $('.cabinfo .newrow:last').remove();
+                
+                var cabinfo = $('.cabinfo').html();
+                
+                if(cabinfo.trim() == ""){
+                    $('.delete-btn').remove();
+                }
+                
+            });
+
+        });
+    </script>
+{% endblock %}

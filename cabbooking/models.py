@@ -10,8 +10,8 @@ class Cities(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = 'City'
-        verbose_name_plural = 'Cities'
+        verbose_name = '   City'
+        verbose_name_plural = '   Cities'
         
 
 class VehicleMaster(models.Model):
@@ -22,8 +22,8 @@ class VehicleMaster(models.Model):
         return self.vehicle_name
 
     class Meta:
-        verbose_name = ' Vehicle'
-        verbose_name_plural = ' Vehicles'
+        verbose_name = '  Vehicle'
+        verbose_name_plural = '  Vehicles'
 
 class TermsAndCondition(models.Model):
     city = models.ForeignKey(Cities, on_delete=models.CASCADE, related_name='CityTerms')
@@ -51,8 +51,8 @@ class TariffDetails(models.Model):
         return self.city.title
 
     class Meta:
-        verbose_name = 'Tariff Detail'
-        verbose_name_plural = 'Tariff Details'
+        verbose_name = ' Tariff Detail'
+        verbose_name_plural = ' Tariff Details'
 
 
 class TariffEnquiry(models.Model):
@@ -66,5 +66,37 @@ class TariffEnquiry(models.Model):
         return self.username
 
     class Meta:
-        verbose_name = 'Tariff Enquiry'
-        verbose_name_plural = 'Tariff Enquiries'
+        verbose_name = ' Tariff Enquiry'
+        verbose_name_plural = ' Tariff Enquiries'
+
+class CabRegister(models.Model):
+    agency_name = models.CharField(max_length=200, verbose_name='Agency Name')
+    full_name = models.CharField(max_length=200, verbose_name='Full Name')
+    mobile_no = models.CharField(max_length=200, verbose_name='Mobile No')
+    email_id = models.CharField(max_length=200, verbose_name='Email Id')
+    bank_name = models.CharField(max_length=200, verbose_name='Bank Name')
+    account_no = models.CharField(max_length=200, verbose_name='Account No')
+    name_in_account = models.CharField(max_length=200, verbose_name='Account Name')
+    ifsc_code = models.CharField(max_length=200, verbose_name='IFSC Code')
+    branch = models.CharField(max_length=200, verbose_name='Branch')
+    address = models.TextField(verbose_name='Address')
+    
+    def __str__(self):
+        return self.agency_name
+
+    class Meta:
+        verbose_name = 'Cab Registeration'
+        verbose_name_plural = 'Cab Registerations'
+
+class RegisterVehicle(models.Model):
+    cabregister = models.ForeignKey(CabRegister, on_delete=models.DO_NOTHING)
+    type_vehicle = models.CharField(max_length=200, verbose_name='Vehicle Type')
+    purchase_date = models.CharField(max_length=200, verbose_name='Purchase Date')
+    cab_no = models.CharField(max_length=200, verbose_name='Cab Number')
+
+    def __str__(self):
+        return self.type_vehicle
+
+    class Meta:
+        verbose_name = 'Registered Vehicle'
+        verbose_name_plural = 'Registered Vehicles'
