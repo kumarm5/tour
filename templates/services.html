@@ -1,11 +1,37 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Services</title>
+{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row text-center">
             <div class="col-md-12">
-                <h1>Services</h1>    
+                <br>
+                <h1>Services</h1>
+                <br>    
             </div>
+        </div>
+
+        <div class="row">
+            {% for service_detail in service_details %}
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <img src="{{ service_detail.image.url }}">
+                        <div class="caption">
+                            <h3 class="text-center">{{ service_detail.title }} {{ forloop.counter }}</h3>
+                            <p>{{ service_detail.description | linebreaksbr }}</p>
+                            <p class="text-center"><a href="{{ service_detail.url }}" class="btn btn-primary" role="button">{{ service_detail.url_text }}</a> </p>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:"2" %}
+                    <div class="clearfix"></div>
+                {% endif %}
+            {% endfor %}
+
         </div>
     </div>
 {% endblock %}

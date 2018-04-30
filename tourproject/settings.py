@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'services',
     'cabbooking',
     'rest_framework',
-    'ckeditor',
+    'ckeditor',    
 )
 
 MIDDLEWARE_CLASSES = (
