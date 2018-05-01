@@ -72,27 +72,19 @@
     
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="{% static 'images/image_6.jpeg' %}" alt="...">
-                <div class="carousel-caption">
-                    <h3>Cab owners, Registered your Cabs</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla</p>
+            {% for homeimageslider in homeimagesliders %}
+                {% if forloop.counter == 1 %}
+                    <div class="item active">
+                {% else %}
+                    <div class="item">
+                {% endif %}
+                    <img src="{{ homeimageslider.image.url }}" alt="...">
+                    <div class="carousel-caption">
+                        <h3>{{ homeimageslider.title }}</h3>
+                        <p>{{ homeimageslider.description }}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="item">
-                <img src="{% static 'images/image_5.jpeg' %}" alt="...">
-                <div class="carousel-caption">                    
-                    <h3>Hotel Deals</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla</p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="{% static 'images/image_1.jpeg' %}" alt="...">
-                <div class="carousel-caption">
-                    <h3>Foreign Currency Exchange</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ulla</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     
         <!-- Controls -->

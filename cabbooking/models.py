@@ -39,13 +39,14 @@ class TermsAndCondition(models.Model):
 class TariffDetails(models.Model):
     city = models.ForeignKey(Cities, on_delete=models.CASCADE, related_name='CityTariff', verbose_name='City')
     vehicle_master = models.ForeignKey(VehicleMaster, on_delete=models.CASCADE, related_name='TariffVehicle', verbose_name='Vehicle')
-    four_hour = models.CharField(max_length=10, verbose_name='04 HRS')
-    eight_hour = models.CharField(max_length=10, verbose_name='08 HRS')
-    twelve_hour = models.CharField(max_length=10, verbose_name='12 HRS')
+    four_hour = models.CharField(max_length=10, verbose_name='4 Hrs/40 Kms')
+    eight_hour = models.CharField(max_length=10, verbose_name='8 Hrs/80 Kms')
+    ten_hour = models.CharField(max_length=10, default='0', verbose_name='10 Hrs/100 Kms')
+    twelve_hour = models.CharField(max_length=10, verbose_name='12 Hrs/120 Kms')
     extra_per_km = models.CharField(max_length=10, verbose_name='Extra Per KM')
     extra_per_hour = models.CharField(max_length=10, verbose_name='Extra Per Hour')
     outstation_per_km = models.CharField(max_length=10, verbose_name='Outstation Per KM')
-    outstation_per_hour = models.CharField(max_length=10, verbose_name='Outstation Per Hour')
+    outstation_per_hour = models.CharField(max_length=10, verbose_name='Outstation Per Day')
 
     def __str__(self):
         return self.city.title

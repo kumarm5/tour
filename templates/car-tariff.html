@@ -40,13 +40,14 @@
                         <tr>
                             <th>VEHICLE</th>
                             <th>CATEGORY</th>
-                            <th>04 HOURS</th>
-                            <th>08 HOURS</th>
-                            <th>12 HOURS</th>
+                            <th>4 HRS/40 KMS</th>
+                            <th>8 HRS/80 KMS</th>
+                            <th>10 HRS/100 KMS</th>
+                            <th>12 HRS/120 KMS</th>
                             <th>EXTRA PER KM</th>
                             <th>EXTRA PER HOURS</th>
-                            <th>OUTSTATION PER KM</th>
-                            <th>OUTSTATION PER HOURS</th>
+                            <th>OUT STATION PER KM</th>
+                            <th>OUTSTATION ALLOWANCE PER DAY</th>
                             <th>ACTION</th>
                         </tr>
                     </thead>
@@ -57,6 +58,7 @@
                                 <td>{{ tariff_detail.vehicle_master.category }}</td>
                                 <td>{{ tariff_detail.four_hour }}</td>
                                 <td>{{ tariff_detail.eight_hour }}</td>
+                                <td>{{ tariff_detail.ten_hour }}</td>
                                 <td>{{ tariff_detail.twelve_hour }}</td>
                                 <td>{{ tariff_detail.extra_per_km }}</td>
                                 <td>{{ tariff_detail.extra_per_hour }}</td>
