@@ -9,3 +9,12 @@ class PreferredSalesAgentAdmin(admin.ModelAdmin):
     fields = (('company_name', 'location', 'person_name'),('email_id','contact_number'),('address',))
 admin.site.register(PreferredSalesAgent, PreferredSalesAgentAdmin)
 
+class ContactInformationAdmin(admin.ModelAdmin):
+    form = ContactInformationForm
+    list_display = ('addressdetails',)
+    fields = (('address'),('banking'),('companies',))
+
+    def addressdetails(self, object):
+        return 'Address {}'.format(object.pk)
+        
+admin.site.register(ContactInformation, ContactInformationAdmin)

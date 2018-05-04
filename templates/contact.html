@@ -10,21 +10,9 @@
         </div>
         <div class="col-md-3">
             <u><h4>Address</h4></u>
-            <strong>Head Office</strong>
-            <p>Sr No:33,Ceratec City Ph-2, No: 702 ,<br>
-            D wing , Katraj Kondhwa Road,<br>
-            Yewalewadi, Pune-411048.</p>
-            <br>
-            <strong>Branch Office</strong>
-            <p>691, Raviwar Peth,<br>
-            D S House, Pune -411002.</p>
-            <br>
-            <p>Call:- 09890176353, 09420177963<br>
-            Email:- <a href="mailto:tanishtravels24@yahoo.co.in">tanishtravels24@yahoo.co.in</a><br>
-            Only For Acc.Use:-<br>
-            <a href="mailto:accounts.tanishtravels@yahoo.com">accounts.tanishtravels@yahoo.com</a><br>
-            Skype ID:- <a href="skype:jaisolanki2012">jaisolanki2012</a>
-            </p>
+            {% autoescape off %}
+                {{ contact_information.address }}
+            {% endautoescape %}
         </div>
         <div class="col-md-9">
             <form>
@@ -84,22 +72,18 @@
     <div class="row">
         <div class="col-md-6">
             <h3><u>Banking Details</u></h3>
-            <p>INDUSIND BANK LIMITED</p>
-            <p>A/C Name : TANISH TRAVEL HUT</p>
-            <p>Current A/C No. 200999517897</p>
-            <p>IFS Code: INDB0000002</p>
-            <p>Branch: GEN.THIMMAYYA RD, (Cantonment) PUNE</p>
+            {% autoescape off %}
+                {{ contact_information.banking }}
+            {% endautoescape %}
             <br>
         </div>
         <div class="col-md-6">
             <h3><u>Partner Group of Companies</u></h3>
-            <p>TANISH PROPERTY HUT & CONSULTANT PVT LTD</p>
-            <p>JAI ENTERPRISES</p>
-            <p>TULSI COLLECTION</p>
-            <p>OPTION FITNESS EQUIPMENT'S</p>
-            <p>KUNAL TIMBERS</p>
+            {% autoescape off %}
+                {{ contact_information.companies }}
+            {% endautoescape %}
             <br>
-        </div>        
+        </div>
     </div>    
 </div>
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d121116.01157778567!2d73.83187896340404!3d18.443967353704508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9fca538a4e519c51!2sTanish+Travel+Hut!5e0!3m2!1sen!2sin!4v1479126686480" width="100%" height="400" class="map" frameborder="0" style="border:0" allowfullscreen></iframe>

@@ -17,3 +17,11 @@ class PreferredSalesAgent(models.Model):
         verbose_name = 'Perferred Sales Agent'
         verbose_name_plural = 'Preferred Sales Agents'
 
+class ContactInformation(models.Model):
+    address = models.TextField(verbose_name='Address')
+    banking = models.TextField(verbose_name='Banking')
+    companies = models.TextField(verbose_name='Partner Group of Companies')
+
+    class Meta:
+        verbose_name = 'Contact Information'
+        verbose_name_plural = 'Contact Informations'

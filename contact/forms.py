@@ -1,8 +1,8 @@
 from django import forms
 from .models import *
+from ckeditor.widgets import CKEditorWidget
 
-class PreferredSalesAgentForm(forms.ModelForm):
-    
+class PreferredSalesAgentForm(forms.ModelForm):    
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         return super(PreferredSalesAgentForm, self).__init__(*args, **kwargs)
@@ -49,3 +49,16 @@ class PreferredSalesAgentForm(forms.ModelForm):
                 }
             )
         }
+
+class ContactInformationForm(forms.ModelForm):
+    address = forms.CharField(widget=CKEditorWidget())
+    banking = forms.CharField(widget=CKEditorWidget())
+    companies = forms.CharField(widget=CKEditorWidget())
+
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        return super(ContactInformationForm, self).__init__(*args, **kwargs)
+    
+    class Meta:
+        model = ContactInformation
+        exclude = ()
