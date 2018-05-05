@@ -35,3 +35,15 @@ class GalleryImages(models.Model):
     class Meta:
         verbose_name = 'Sub Category Images'
         verbose_name_plural = 'Sub Category Images'
+
+class GalleryVideos(models.Model):
+    sub_category = models.ForeignKey('GallerySubCat', on_delete=models.CASCADE, verbose_name='Sub Category')
+    title = models.CharField(max_length=300, verbose_name='Title')
+    video_url = models.CharField(max_length=900, verbose_name='Video Url')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Sub Category Video'
+        verbose_name_plural = 'Sub Category Videos'

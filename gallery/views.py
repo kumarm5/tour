@@ -15,7 +15,8 @@ class Gallery(TemplateView):
 class GallerySubCatImage(TemplateView):
     def get(self, request, *args, **kwargs):
         cat_gallery_id = int(self.kwargs['id'])
+        gallery_videos = GalleryVideos.objects.all()
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
-        gallery_sub_cat_images = GalleryImages.objects.filter(sub_category = cat_gallery_id)        
-        return render(request, self.template_name, { 'gallery_menus': gallery_menus, 'gallery_sub_cat_images': gallery_sub_cat_images, 'tour_packages': tour_packages})
+        gallery_sub_cat_images = GalleryImages.objects.filter(sub_category = cat_gallery_id)
+        return render(request, self.template_name, { 'gallery_menus': gallery_menus, 'gallery_sub_cat_images': gallery_sub_cat_images, 'tour_packages': tour_packages, 'gallery_videos': gallery_videos })

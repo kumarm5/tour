@@ -10,6 +10,7 @@ import http.client
 # import httplib
 from django.db.models import Q
 
+
 # Create your views here.
 class VisaTrack(TemplateView):
     def get(self, request, *args, **kwargs):

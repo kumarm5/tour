@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    <title>Gallery</title>
+{% endblock %}
+
 {% block content %}
 <div class="container">
-    <br><br>
     <div class="row text-center">
+        <h1 class="text-center">Gallery</h1>
+        <br><br>
         <div class="col-md-12">
             {% for gallery_sub_cat in gallery_sub_cats %}
-            <div class="col-xs-6 col-md-3">
+            <div class="col-md-3">
                 <a href="#" class="thumbnail">
                     <img src="{{ gallery_sub_cat.sub_category_images.url }}" class="img-responsive">
                 </a>
                 <h3><a href="{% url 'category' id=gallery_sub_cat.id %}">{{ gallery_sub_cat.title }}</a></h3>
-            </div>                    
-            {% endfor %}              
+            </div>
+                {% if forloop.counter|divisibleby:"2" %}
+                    <div class="clearfix"></div>
+                {% endif %}
+            {% endfor %}
         </div>
-    </div>
+    </div>    
 </div>
 {% endblock %}
