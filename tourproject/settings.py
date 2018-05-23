@@ -53,6 +53,8 @@ INSTALLED_APPS = (
     'visa',
     'services',
     'cabbooking',
+    'supplierdir',
+    'passport',
     'rest_framework',
     'ckeditor',    
 )

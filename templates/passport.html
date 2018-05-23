@@ -1,0 +1,652 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Passport</title>
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <style>
+        .error{
+            color: #ff0000;
+        }
+        .required-label:after {
+            content:" *";
+            color:red;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1>Passport Form</h1>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="text-info"><u>Passport Type</u></h4>
+                <p>Please read the Passport Instruction Booklet carefully before filling the application form. Furnishing of incorrect information/suppression of information would lead to rejection of application and would attract penal provisions as prescribed under the Passports Act, 1967. Please produce your original documents at the time of submission of the form.</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <br><br>
+            <div class="col-md-12">
+                <form method="POST" id="passport-form">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label class="required-label">Applying for</label>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="radio-inline"><input type="radio" name="application" value="Fresh Passport" checked>Fresh Passport</label>
+                            <label class="radio-inline"><input type="radio" name="application" value="Re-issue of Passport">Re-issue of Passport</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label class="required-label">Type of Application</label>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="radio-inline"><input type="radio" name="application_type" value="Normal" checked>Normal</label>
+                            <label class="radio-inline"><input type="radio" name="application_type" value="Tatkaal">Tatkaal</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label class="required-label">Type of Passport Booklet</label>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="radio-inline"><input type="radio" name="pass_booklet" value="36 Pages" checked>36 Pages</label>
+                            <label class="radio-inline"><input type="radio" name="pass_booklet" value="60 Pages">60 Pages</label>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h4 class="text-info"><u>Applicant Details</u></h4>
+                    <br>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Given Name </label><small> (Max 45 Character)</small>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="given_name" placeholder="Enter your name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4">Surname </label><small> (Max 45 Character)</small>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="given_name_surname" placeholder="Enter your surname">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Gender</label>                        
+                        <div class="col-md-8">
+                            <div class="radio">
+                                <label><input type="radio" name="gender" value="male" checked>Male</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="gender" value="female">Female</label>
+                            </div>
+                            <div class="radio disabled">
+                                <label><input type="radio" name="gender" value="transgender" disabled>Transgender</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Have you ever been known by other names?</label>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="other_known_name" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="other_known_name" value="No" checked>No</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Have you ever changed your name?</label>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="name_change" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="name_change" value="No" checked>No</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Date of Birth</label><small> (DD/MM/YYYY)</small>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="date_of_birth" placeholder="Enter your date of birth">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Is your Place of Birth out of India?</label>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="is_place_of_birth" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="is_place_of_birth" value="No" checked>No</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Place of Birth</label><small> (Village/Town/City)</small>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="place_of_birth" placeholder="Enter your place of birth">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">State/UT</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="applicant_state" placeholder="Enter your state name">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">District</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="applicant_district" placeholder="Enter your district name">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Marital Status</label>
+                        <div class="col-md-6">
+                            <select name="applicant_marital_status" class="form-control">
+                                <option value="">---Select---</option>
+                                <option value="Widow/ Widower">Widow/ Widower</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Married">Married</option>
+                                <option value="Single">Single</option>
+                                <option value="Separated">Separated</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Citizenship of India by</label>
+                        <div class="col-md-8">
+                            <div class="radio">
+                                <label><input type="radio" name="applicant_citizenship" value="Birth" checked>Birth</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="applicant_citizenship" value="Registeration/Naturalization" >Registeration/Naturalization</label>
+                            </div>
+                            <div class="radio disabled">
+                                <label><input type="radio" name="applicant_citizenship" value="Descent" disabled>Descent</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4">PAN</label><small> (if available)</small>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="applicant_pan_no" placeholder="Enter your pan number">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Voter Id</label><small> (if available)</small>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="applicant_voter_id" placeholder="Enter your voter id">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Employment Type</label>
+                        <div class="col-md-6">
+                            <select name="emp_type" class="form-control">
+                                <option value="">---Select---</option>
+                                <option value="Government">Government</option>
+                                <option value="PSU">PSU</option>
+                                <option value="Statutory Body">Statutory Body</option>
+                                <option value="Retired Government Servant">Retired Government Servant</option>
+                                <option value="Private">Private</option>
+                                <option value="Homemaker">Homemaker</option>
+                                <option value="Not Employed">Not Employed</option>
+                                <option value="Student">Student</option>
+                                <option value="Self Employed">Self Employed</option>
+                                <option value="Retired - Private Service">Retired - Private Service</option>
+                                <option value="Owners Partners & Directors of Companies Which Are Members Of Cii Ficci & Assocham">Owners Partners & Directors of Companies Which Are Members Of Cii Ficci & Assocham</option>
+                                <option value="Others">Others</option>
+                                <option value="Retired">Retired</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Is either of your parent (in case of minor)/spouse, a government servant ?</label>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="govern_service" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="govern_service" value="No" checked>No</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Educational Qualification</label>
+                        <div class="col-md-6">
+                            <select name="educational_qualification" class="form-control">
+                                <option>---Select---</option>
+                                <option value="Graduate and Above">Graduate and Above</option>
+                                <option value="10th Pass and Above">10th Pass and Above</option>
+                                <option value="7th Pass Or Less">7th Pass Or Less</option>
+                                <option value="Between 8th and 9th Standard">Between 8th and 9th Standard</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Is applicant eligible for Non-ECR category?</label> <small>Documents Required for Non-ECR</small>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="non_ncr" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="non_ncr" value="No" checked>No</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4">Visible distinguishing Mark</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="visible_mark" placeholder="Enter your visible distinguishing mark">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Aadhaar Number</label><small> (if available)</small>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="applicant_aadhaar_num" placeholder="Enter your aadhaar number">
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <h4 class="text-info"><u>Family Details</u></h4>
+                    <br>
+                    <p><strong><u>Please enter Father, Mother or Legal Guardian Names as applicable (specify at least one of these is mandatory).</u></strong></p>
+                    <br>
+                    <div class="form-group row">
+                        <label class="col-md-4">Father's Given Name</label><small> (First Name + Middle Name)</small>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="family_father_name" placeholder="Enter your father's name">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Surname</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="family_father_surname" placeholder="Enter your father's surname">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4">Mother's Given Name</label><small> (First Name + Middle Name)</small>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="family_mother_name" placeholder="Enter your mother's name">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Surname</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="family_mother_surname" placeholder="Enter your mother's surname">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Legal Guardian's Given Name</label><small> (If applicable)</small>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="legal_guardian_given_name" placeholder="Enter your legal guardian's name">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Surname</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="legal_guardian_given_surname" placeholder="Enter your legal guardian's surname">
+                        </div>
+                    </div>
+                    
+                    <p><strong><u>Since applicant is minor, enter the following details.</u></strong></p>
+                    <br>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Father/Legal Guardian's File/Passport Number</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="father_or_legal_guardian_passport_number"  placeholder="Enter the passport number of father/legal guardian">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Father/Legal Guardian's Nationality, If not Indian</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="father_or_legal_guardian_nationality" placeholder="Enter the nationality of father/legal guardian">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Mother/Legal Guardian's File/Passport Number</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="mother_or_legal_guardian_passport_number"  placeholder="Enter the passport number of mother/legal guardian">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">Mother/Legal Guardian's Nationality, If not Indian</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="mother_or_legal_guardian_nationality" placeholder="Enter the nationality of mother/legal guardian">
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <h4 class="text-info"><u>Present Residential Address</u></h4>
+                    <br>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Is your present address out of India ?</label>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="present_address_out_of_india" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="present_address_out_of_india" value="No" checked>No</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Residing Since (Month-YYYY)</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="residing_since" placeholder="Enter the date">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">House No. and Street Name</label>
+                        <div class="col-md-6">
+                            <textarea class="form-control" name="house_no_and_street_name" placeholder="Enter house no. and street name"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Village/Town/City</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="present_city" placeholder="Enter the name of city">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">State/UT</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="present_state" placeholder="Enter the name of state">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">District</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="present_district" placeholder="Enter the name of district">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Police Station</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="present_police_station" placeholder="Enter the name of police station">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Pin Code</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="present_pin_code" placeholder="Enter the pin code">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Mobile Number</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="present_mob_num" placeholder="Enter your mobile number">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4">Telephone Number</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="present_tele_num" placeholder="Enter your telephone number">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4">E-Mail Id</label>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" name="present_email_id" placeholder="Enter your email address">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Is Permanent Address Available ?</label>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="present_permanent_add_available" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="present_permanent_add_available" value="No" checked>No</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Is your permanent address same as present address ?</label>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="present_permanent_add_same" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="present_permanent_add_same" value="No" checked>No</label>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <h4 class="text-info"><u>Emergency Contact</u></h4>
+                    <br>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Name and Address</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="emergency_name_and_address" placeholder="Enter your name and address">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Mobile Number</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="emergency_mobile_number" placeholder="Enter your mobile number">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4">Telephone Number</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="emergency_telephone_number" placeholder="Enter your telephone number">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4">E-Mail Id</label>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" name="emergency_email_id" placeholder="Enter your email address">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h4 class="text-info"><u>Identity Certificate/Passport Details</u></h4>
+                    <br>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Have you ever held/hold any Identity Certificate ?</label><small>Identity Certificate (IC) is normally issued to Tibetan/other stateless people residing in india</small>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="ever_hold_ic" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="ever_hold_ic" value="No" checked>No</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Details of Previous/Current Diplomatic/Official Passport.</label>
+                        <div class="col-md-6">
+                            <div class="radio">
+                                <label class="radio"><input type="radio" name="da_available" value="Details Available">Details Available</label>
+                            </div>
+                            <div class="radio">
+                                <label class="radio"><input type="radio" name="da_available" value="Details Not Available / Never Held Diplomatic / Official Passport" checked>Details Not Available / Never Held Diplomatic / Official Passport</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-4 required-label">Have you ever applied for passport, but not issued ?</label>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="applied_passport_not_issued" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="applied_passport_not_issued" value="No" checked>No</label>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h4 class="text-info"><u>Other Details</u></h4>
+                    <br>
+
+                    <div class="form-group row">
+                        <label class="col-md-12">Provide the following details if there are any criminal proceedings pending against the applicant.</label>
+                        <div class="col-md-4">
+                            <p class="required-label">Have you ever been charged with criminal proceedings or is any arrest warrant/summon pending before a court in India ?</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="criminal_state" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="criminal_state" value="No" checked>No</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-12">Provide the following details if the applicant has been convicted by a court in India.</label>
+                        <div class="col-md-4">
+                            <p class="required-label">Have you at any time during the period of 5 years immediately preceding the date of this application been convicted by a court in India for any criminal offence and sentenced to imprisonment for two years and more ?</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="convicted_court" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="convicted_court" value="No" checked>No</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-12">Provide the following details if the applicant has been refused/denied passport.</label>
+                        <div class="col-md-4">
+                            <p class="required-label">Have you ever been refused/denied passport ?</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="passport_deny" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="passport_deny" value="No" checked>No</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-12">Provide the following details if the applicant's passport has ever been impounded/revoked.</label>
+                        <div class="col-md-4">
+                            <p class="required-label">Has your passport ever been impounded or revoked ?</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="passport_impounded" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="passport_impounded" value="No" checked>No</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-12">Provide the following details if the applicant has applied for or been granted political asylum.</label>
+                        <div class="col-md-4">
+                            <p class="required-label">Have you ever applied for or been granted political asylum to/by any foreign country ?</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="political_asylum" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="political_asylum" value="No" checked>No</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-12">Provide the following details if the applicant has returned to India on Emergency Certificate.</label>
+                        <div class="col-md-4">
+                            <p class="required-label">Have you ever returned to India on Emergency Certificate (EC) or were ever deported or repatriated ?</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="radio-inline"><input type="radio" name="emergency_certificate" value="Yes">Yes</label>
+                            <label class="radio-inline"><input type="radio" name="emergency_certificate" value="No" checked>No</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row text-center">
+                        <br><br>
+                        <input type="submit" class="btn btn-success" value="Submit">
+                        <br><br>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $('#passport-form').validate({
+                rules: {
+                    given_name: {
+                        required: true
+                    },
+                    date_of_birth: {
+                        required: true
+                    },
+                    place_of_birth: {
+                        required: true
+                    },
+                    applicant_state: {
+                        required: true
+                    },
+                    applicant_district: {
+                        required: true
+                    },
+                    applicant_marital_status: {
+                        required: true
+                    },
+                    emp_type: {
+                        required: true
+                    },
+                    educational_qualification: {
+                        required: true
+                    },
+                    residing_since: {
+                        required: true
+                    },
+                    house_no_and_street_name: {
+                        required: true
+                    },
+                    present_city: {
+                        required: true
+                    },
+                    present_state: {
+                        required: true
+                    },
+                    present_district: {
+                        required: true
+                    },
+                    present_police_station: {
+                        required: true
+                    },
+                    present_pin_code: {
+                        required: true
+                    },
+                    present_mob_num: {
+                        required: true
+                    },
+                    emergency_name_and_address: {
+                        required: true
+                    },
+                    emergency_mobile_number: {
+                        required: true
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

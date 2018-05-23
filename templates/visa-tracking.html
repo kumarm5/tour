@@ -37,12 +37,16 @@
                     <tbody>
                         {% if passport_tracks %}
                             {% for passport_track in passport_tracks %}
-                                <td>{{ passport_track.track_type.track_type }}</td>
-                                <td>{{ passport_track.additional_details }}</td>
-                                <td>{{ passport_track.added_date | date:'d-m-Y H:i' }}</td>
+                                <tr>
+                                    <td>{{ passport_track.track_type.track_type }}</td>
+                                    <td>{{ passport_track.additional_details }}</td>
+                                    <td>{{ passport_track.added_date | date:'d-m-Y H:i' }}</td>
+                                </tr>
                             {% endfor %}
                         {% else %}
-                            <td colspan="3" class="text-center">No record found</td>
+                            <tr>
+                                <td colspan="3" class="text-center">No record found</td>                                
+                            </tr>
                         {% endif %}
                     </tbody>
                 </table>

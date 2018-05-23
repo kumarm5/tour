@@ -114,7 +114,7 @@ class VisaDetails(TemplateView):
             visa_info = None
 
         try:
-            visa_downloads = VisaDownloads.objects.filter(pk=country_id)
+            visa_downloads = VisaDownloads.objects.filter(visa_country=country_id)
         except:
             visa_downloads = None
 
