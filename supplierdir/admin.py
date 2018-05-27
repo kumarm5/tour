@@ -28,7 +28,7 @@ class SalesPersonInlineAdmin(admin.StackedInline):
 
 class SupplierDirectoryAdmin(admin.ModelAdmin, ExportCsvMixin):
     list_display = ('country', 'product', 'company_name', 'email_id', 'contact_name', 'contact_number')
-    fields = (('country','product'),('company_name','email_id') , ('contact_name', 'contact_number'), ('website', 'supplier_images'),)
+    fields = (('country','product'),('company_name','email_id') , ('contact_name', 'contact_number'), ('HO_Contact', 'HO_email'), ('bank_detail',), ('HO_address_and_branches',), ('website', 'supplier_images'), ('remark'),)
     inlines = [SalesPersonInlineAdmin,]
     
     actions = ["export_as_csv"]
