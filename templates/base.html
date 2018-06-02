@@ -18,6 +18,7 @@
                 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
                 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+                <link rel="stylesheet" href="{% static 'css/jquery-confirm.min.css' %}">
                 <link rel="stylesheet" href="{% static 'css/style.css' %}">
             {% endblock %}
 
@@ -66,7 +67,7 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">AIR TICKETS <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="#">BOOK ONLINE</a></li>
+                                            <li><a href="http://tthboutique.com/registerSubagent.aspx" class="book-online">BOOK ONLINE</a></li>
                                             <li><a href="{% url 'fixed_departure_chart' %}">FLIGHT FIXED DEPARTURE CHART</a></li>
                                         </ul>
                                     </li>
@@ -85,7 +86,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="{% url 'cabrentalcities' %}">CAB RENTAL TARIFF</a></li>
                                             <li><a href="#">CAB PICK UP DROP LIVE</a></li>
-                                            <li><a href="#">CAR OUTSTATION ROUNDTRIP</a></li>
+                                            <!-- <li><a href="#">CAR OUTSTATION ROUNDTRIP</a></li> -->
                                         </ul>
                                     </li>
                                     <li><a href="{% url 'Visa:visalogin' %}">VISA (JUNCTION)</a></li>
@@ -188,8 +189,30 @@
                 <!-- Go to www.addthis.com/dashboard to customize your tools --> 
                 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-569e06d52e96c66f"></script>
 
+                <script type="text/javascript">
+                    function add_chatinline(){
+                        var hccid=80521105;
+                        var nt=document.createElement("script");
+                        nt.async=true;
+                        nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;
+                        var ct=document.getElementsByTagName("script")[0];
+                        ct.parentNode.insertBefore(nt,ct);
+                    }
+                    add_chatinline(); 
+                </script>
+
                 <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
                 <script src="{% static 'js/bootstrap.min.js' %}"></script>
+                <script src="{% static 'js/jquery-confirm.min.js' %}"></script>
+                
+                <script>
+                    $(document).ready(function(){
+                        $('.book-online').confirm({
+                            title: 'Book Online',
+                            content: 'To book online, redirecting you to our online portal for registration',                            
+                        });
+                    });
+                </script>
                 <!-- <script>
                     $(document).ready(function(){                        
                         var windows_height = $(window).height();
