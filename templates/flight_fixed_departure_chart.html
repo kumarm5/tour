@@ -47,6 +47,7 @@
                             <th>TOTAL SEATS</th>
                             <th>DEP RATE</th>
                             <th>RET RATE</th>
+                            <th>ACTION</th>
                         </tr>
                     </thead>
                     <tbody>	
@@ -109,6 +110,7 @@
                                     -
                                 {% endif %}
                             </td>
+                            <td><a href="{% url 'fixed_departure_details' id=supplier_detail.id %}" class="btn btn-sm btn-info">Enquiry</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

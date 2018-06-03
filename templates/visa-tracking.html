@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
     <title>Track Visa Application</title>
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -17,9 +23,11 @@
                 <form method="POST" class="form-inline">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" name="passport_num" class="form-control" placeholder="Enter passport number">
+                        <input type="text" name="country" class="form-control track-input" placeholder="Enter Country">
+                        <input type="text" name="enquiry_date" id="datepicker" class="form-control track-input" placeholder="Enter date">
+                        <input type="text" name="passport_num" class="form-control track-input" placeholder="Enter passport number">
                     </div>
-                    <input type="submit" class="btn btn-success" value="Track">
+                    <input type="submit" class="btn btn-success track-input" value="Track">
                 </form>
                 <br>
             </div>            
@@ -40,7 +48,7 @@
                                 <tr>
                                     <td>{{ passport_track.track_type.track_type }}</td>
                                     <td>{{ passport_track.additional_details }}</td>
-                                    <td>{{ passport_track.added_date | date:'d-m-Y H:i' }}</td>
+                                    <td>{{ passport_track.added_date | date:'d-m-Y' }}</td>
                                 </tr>
                             {% endfor %}
                         {% else %}
@@ -69,4 +77,14 @@
         </div>
 
     </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script>
+        $(function() {
+            $("#datepicker").datepicker({ dateFormat: 'yy-mm-dd' });
+        });
+    </script>
 {% endblock %}

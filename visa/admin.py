@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import *
 from .forms import *
+from .export_mixin import ExportCsvMixin
 # Register your models here.
 
 class PassportTrackTypeAdmin(admin.ModelAdmin):
@@ -9,10 +10,11 @@ class PassportTrackTypeAdmin(admin.ModelAdmin):
     fields = (('track_type','status'),)
 admin.site.register(PassportTrackType, PassportTrackTypeAdmin)
 
-class PassportTrackAdmin(admin.ModelAdmin):
+class PassportTrackAdmin(admin.ModelAdmin, ExportCsvMixin):
     form = PassportTrackForm
-    list_display = ('passport_number', 'track_type', 'added_date')
-    fields = (('passport_number', 'track_type'),('additional_details'))    
+    list_display = ('passport_number', 'track_type', 'country', 'added_date', 'additional_details')
+    fields = (('passport_number', 'track_type'), ('country', 'added_date'),('additional_details'))  
+    actions = ["export_as_csv"]  
 admin.site.register(PassportTrack, PassportTrackAdmin)
 
 class VisaProfileAdmin(admin.ModelAdmin):

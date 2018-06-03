@@ -12,7 +12,7 @@
         <div class="col-md-12">
             {% for gallery_sub_cat in gallery_sub_cats %}
             <div class="col-md-3">
-                <a href="#" class="thumbnail">
+                <a href="{% url 'category' id=gallery_sub_cat.id %}" class="thumbnail">
                     <img src="{{ gallery_sub_cat.sub_category_images.url }}" class="img-responsive">
                 </a>
                 <h3><a href="{% url 'category' id=gallery_sub_cat.id %}">{{ gallery_sub_cat.title }}</a></h3>

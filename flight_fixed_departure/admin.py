@@ -92,11 +92,11 @@ class SupplierDepartureSeatRemarkAdminInline(admin.StackedInline):
 class SupplierDepartureSeatInfoAdmin(admin.ModelAdmin, ExportCsvMixin):
     list_display = ('supplier', 'first_name', 'middle_name', 'last_name', 'sector_name', 'departure_date')
     form = SupplierDepartureSeatInfoForm   
-    fields = (('supplier', 'sector'), ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
+    fields = (('supplier'), ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
     inlines = [SupplierDepartureSeatRemarkAdminInline,]
 
     def sector_name(self, obj):        
-        return obj.sector.sector_name
+        return obj.supplier.sectors.sector_name
     sector_name.short_description = 'Sector'
 
     def departure_date(self, obj):
@@ -128,11 +128,11 @@ class SupplierReturnSeatRemarkAdminInline(admin.StackedInline):
 class SupplierReturnSeatInfoAdmin(admin.ModelAdmin, ExportCsvMixin):
     list_display = ('supplier', 'first_name', 'middle_name', 'last_name', 'sector_name', 'return_date')
     form = SupplierReturnSeatInfoForm
-    fields = (('supplier', 'sector') , ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
+    fields = (('supplier') , ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
     inlines = [SupplierReturnSeatRemarkAdminInline,]
     
-    def sector_name(self, obj):        
-        return obj.sector.sector_name
+    def sector_name(self, obj):
+        return obj.supplier.sectors.sector_name
     sector_name.short_description = 'Sector'
 
     def return_date(self, obj):
@@ -150,9 +150,9 @@ class SupplierReturnSeatInfoAdmin(admin.ModelAdmin, ExportCsvMixin):
 
 admin.site.register(SupplierReturnSeatInfo, SupplierReturnSeatInfoAdmin)
 
-# class TripTypeAdmin(admin.ModelAdmin):
-#     list_display = ('name', 'status')
-# admin.site.register(TripType, TripTypeAdmin)
+class TripTypeAdmin(admin.ModelAdmin):
+    list_display = ('name', 'status')
+admin.site.register(TripType, TripTypeAdmin)
 
 class OneWaySeatRemarkInlineAdmin(admin.StackedInline):
     model = OneWaySeatRemarkInline
@@ -169,11 +169,11 @@ class OneWaySeatRemarkInlineAdmin(admin.StackedInline):
 class OneWaySeatAdmin(admin.ModelAdmin, ExportCsvMixin):
     list_display = ('supplier', 'first_name', 'middle_name', 'last_name', 'sector_name', 'one_way_date')
     form = OneWaySeatForm
-    fields = (('supplier', 'sector') , ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
+    fields = (('supplier') , ('first_name', 'middle_name', 'last_name'), ('mobile_no', 'date_of_birth', 'passport_no'), ('passport_exp', 'rate_given', 'booking_agent',),)
     inlines = [OneWaySeatRemarkInlineAdmin,]
 
     def sector_name(self, obj):
-        return obj.sector.sector_name
+        return obj.supplier.sectors.sector_name
     sector_name.short_description = 'Sector'
 
     def one_way_date(self, obj):
@@ -197,3 +197,7 @@ class TermsAndConditionsAdmin(admin.ModelAdmin):
     fields = (('terms'), ('status'))
 
 admin.site.register(TermsAndConditions, TermsAndConditionsAdmin)
+
+class EnquiryDetailsAdmin(admin.ModelAdmin):
+    list_display = ('username', 'supplier')
+admin.site.register(EnquiryDetails, EnquiryDetailsAdmin)    

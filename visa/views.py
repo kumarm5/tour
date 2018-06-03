@@ -10,7 +10,6 @@ import http.client
 # import httplib
 from django.db.models import Q
 
-
 # Create your views here.
 class VisaTrack(TemplateView):
     def get(self, request, *args, **kwargs):
@@ -20,7 +19,11 @@ class VisaTrack(TemplateView):
         
     def post(self, request, *args, **kwargs):
         passport_num = request.POST.get('passport_num')
-        passport_tracks = PassportTrack.objects.filter(passport_number = passport_num)
+        country = request.POST.get('country')
+        enquiry_date = request.POST.get('enquiry_date')
+
+        passport_tracks = PassportTrack.objects.filter(passport_number = passport_num, added_date__gte = enquiry_date, country__icontains = country)
+
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         return render(request, 'visa-tracking.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'passport_tracks': passport_tracks })

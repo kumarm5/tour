@@ -70,7 +70,7 @@ class SupplierPaymentInline(models.Model):
 
 class SupplierDepartureSeatInfo(models.Model):
     supplier = models.ForeignKey('SupplierDetails', on_delete=models.CASCADE, related_name='supplier_detail')
-    sector = models.ForeignKey('Sector', on_delete=models.CASCADE, related_name='departure_seat_sector')
+    # sector = models.ForeignKey('Sector', on_delete=models.CASCADE, related_name='departure_seat_sector')
     first_name = models.CharField(max_length=30, verbose_name='First Name')
     middle_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='Middle Name')
     last_name = models.CharField(max_length=30, verbose_name='Last Name')
@@ -103,7 +103,7 @@ class SupplierDepartureSeatRemarkInline(models.Model):
 
 class SupplierReturnSeatInfo(models.Model):
     supplier = models.ForeignKey('SupplierDetails', on_delete=models.CASCADE, related_name='supplier_details')
-    sector = models.ForeignKey('Sector', on_delete=models.CASCADE, related_name='return_seat_sector')
+    # sector = models.ForeignKey('Sector', on_delete=models.CASCADE, related_name='return_seat_sector')
     first_name = models.CharField(max_length=30, verbose_name='First Name')
     middle_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='Middle Name')
     last_name = models.CharField(max_length=30, verbose_name='Last Name')
@@ -136,7 +136,7 @@ class SupplierReturnSeatRemarkInline(models.Model):
 
 class OneWaySeat(models.Model):
     supplier = models.ForeignKey('SupplierDetails', on_delete=models.CASCADE, related_name='oneway_supplierdetails')
-    sector = models.ForeignKey('Sector', on_delete=models.CASCADE, related_name='oneway_seat_sector')
+    # sector = models.ForeignKey('Sector', on_delete=models.CASCADE, related_name='oneway_seat_sector')
     first_name = models.CharField(max_length=30, verbose_name='First Name')
     middle_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='Middle Name')
     last_name = models.CharField(max_length=30, blank=True, null=True, verbose_name='Last Name')
@@ -146,6 +146,10 @@ class OneWaySeat(models.Model):
     passport_exp = models.DateField(blank=True, null=True, verbose_name='Passport Expiry')
     booking_agent = models.CharField(max_length=100, blank=True, null=True, verbose_name='Booking Agent')
     rate_given = models.IntegerField(default=0, blank=True, null=True, verbose_name='Given Rate')
+
+    # @property
+    # def supplier_details(self):
+    #     return self.supplier.supplier_name+'-'+supplier.sectors.sector_name
 
     def __str__(self):
         return self.first_name
@@ -179,3 +183,17 @@ class TermsAndConditions(models.Model):
         verbose_name = 'Term and Condition'
         verbose_name_plural = 'Terms and Conditions'
         
+
+class EnquiryDetails(models.Model):
+    mobile_num = models.CharField(max_length=20, null=True, blank=True, verbose_name='Mobile Number')
+    email_id = models.CharField(max_length=200, null=True, blank=True, verbose_name='Email Id')
+    username = models.CharField(max_length=200, verbose_name='Username')
+    supplier = models.CharField(max_length=200, null=True, blank=True, verbose_name='Supplier')
+    message = models.TextField(verbose_name='Message')
+
+    def __str__(self):
+        return self.username
+
+    class Meta:
+        verbose_name = 'Enquiry Detail'
+        verbose_name_plural = 'Enquiry Details'

@@ -12,7 +12,7 @@
             <div class="col-md-12">
                 {% for tour_package_detail in tour_package_details %}
                 <div class="col-xs-6 col-md-3">
-                    <a href="#" class="thumbnail">
+                    <a href="{% url 'packagedetails' id=tour_package_detail.id %}" class="thumbnail">
                         <img src="{{ tour_package_detail.package_images.url }}" class="img-responsive">
                     </a>
                     <h3><a href="{% url 'packagedetails' id=tour_package_detail.id %}">{{ tour_package_detail.title }}</a></h3>

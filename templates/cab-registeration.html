@@ -7,6 +7,7 @@
 
 {% block style %}
     {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
     <style>
         .add-btn, .delete-btn{
             margin-top: 6.5px;
@@ -141,6 +142,7 @@
 
 {% block footer %}
     {{ block.super }}
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
     <script src="{% static 'js/jquery.validate.min.js' %}"></script>
     <script>
         $(document).ready(function(){
@@ -204,7 +206,7 @@
                         <div class="col-md-5">\
                             <div class="form-group">\
                                 <label class="label-control">Purchase Date:</label>\
-                                <input type="text" class="form-control" name="purchase_date" placeholder="Enter purchase date">\
+                                <input type="text" class="form-control datepicker" name="purchase_date" placeholder="Enter purchase date">\
                             </div>\
                         </div>\
                         <input type="hidden" name="type_veh" value="'+type_vehicle+'">\
@@ -217,6 +219,9 @@
                     </div>\
                 ');
                 }
+
+                $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+
             });
 
             $('body').on('click', '.delete-btn', function () {
