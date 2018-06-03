@@ -27,9 +27,9 @@ class Tariff(TemplateView):
             term_and_cond = TermsAndCondition.objects.get(city = city_id)
         except:
             term_and_cond = None
-            
+
         tariff_details = TariffDetails.objects.filter(pk=city_id)
-        
+
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
 

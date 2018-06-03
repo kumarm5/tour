@@ -29,6 +29,10 @@
                 {% endfor %}                
             </tbody>
         </table>
+        <h4>Terms and Conditions</h4>
+        {% autoescape off %}
+            {{ term_and_cond.details }}
+        {% endautoescape %}
         <br>
     </div>
 {% endblock %}

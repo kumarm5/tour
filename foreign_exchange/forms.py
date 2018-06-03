@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import widgets
 from .models import *
+from ckeditor.widgets import CKEditorWidget
 
 class ForeignExchangeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -36,5 +37,24 @@ class ForeignExchangeForm(forms.ModelForm):
                     'class': 'form-control'
                 },
                 choices = CHOICES
+            )
+        }
+
+
+class TermsAndConditionForm(forms.ModelForm):
+    details = forms.CharField(widget=CKEditorWidget())
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(TermsAndConditionForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = TermsAndCondition
+        exclude = ()
+
+        widgets={
+            'city': forms.Select(
+                attrs={
+                    'class': 'form-control'
+                }
             )
         }
