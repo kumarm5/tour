@@ -53,22 +53,32 @@
             <br>
             <div class="tab-content">
                 <div id="overview" class="tab-pane fade in active">
-                    <p>{{ package_details.overview | linebreaksbr }}</p>
+                    {% autoescape off %}
+                        <p>{{ package_details.overview }}</p>
+                    {% endautoescape %}
                 </div>
                 <div id="map" class="tab-pane fade">
                     <img src="/media/{{ package_details.map_image }}" width="450" height="300"/>
                 </div>
                 <div id="inclusion" class="tab-pane fade">
-                    <p>{{ package_details.inclusion | linebreaksbr }}</p>
+                    {% autoescape off %}
+                        {{ package_details.inclusion }}
+                    {% endautoescape %}
                 </div>
                 <div id="exclusion" class="tab-pane fade">
-                    <p>{{ package_details.exclusion | linebreaksbr }}</p>
+                    {% autoescape off %}
+                        {{ package_details.exclusion }}
+                    {% endautoescape %}
                 </div>
                 <div id="book" class="tab-pane fade">
-                    <p>{{ package_details.how_to_book | linebreaksbr }}</p>
+                    {% autoescape off %}
+                        {{ package_details.how_to_book }}
+                    {% endautoescape %}
                 </div>
                 <div id="tour" class="tab-pane fade">
-                    <p>{{ package_details.tour_info | linebreaksbr }}</p>
+                    {% autoescape off %}
+                        {{ package_details.tour_info }}
+                    {% endautoescape %}
                 </div>
               </div>
         </div>

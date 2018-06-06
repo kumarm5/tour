@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import widgets
 from .models import *
-import pdb
+from ckeditor.widgets import CKEditorWidget
 
 class TopicForm(forms.ModelForm):
     
@@ -136,7 +136,12 @@ class PackageImagesForm(forms.ModelForm):
         }
 
 class PackageDetailsForm(forms.ModelForm):
-
+    overview = forms.CharField(widget=CKEditorWidget())
+    inclusion = forms.CharField(widget=CKEditorWidget())
+    exclusion = forms.CharField(widget=CKEditorWidget())
+    how_to_book = forms.CharField(widget=CKEditorWidget())
+    tour_info = forms.CharField(widget=CKEditorWidget())
+    
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(PackageDetailsForm, self).__init__(*args, **kwargs)
@@ -158,11 +163,11 @@ class PackageDetailsForm(forms.ModelForm):
                     'placeholder': 'Enter title'
                 }
             ),
-            'overview': forms.Textarea(
-                attrs = {
-                    'class': 'form-control'
-                }
-            ),
+            # 'overview': forms.Textarea(
+            #     attrs = {
+            #         'class': 'form-control'
+            #     }
+            # ),
             'inclusion': forms.Textarea(
                 attrs = {
                     'class': 'form-control'
