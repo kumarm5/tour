@@ -39,7 +39,8 @@ class VisaLogin(TemplateView):
         return render(request, 'visa-login.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus })
         
     def post(self, request, *args, **kwargs):
-        username = request.POST.get('username')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
         userpasswd = request.POST.get('userpasswd')
@@ -47,10 +48,8 @@ class VisaLogin(TemplateView):
 
         if formname == 'register':            
             dup_visa_profile = VisaProfile.objects.filter(mobile_num=phone)
-            dup_user = User.objects.filter(
-                Q(username=username)|
-                Q(email=email)
-            )
+            dup_user = User.objects.filter(email=email)
+
             if dup_visa_profile or dup_user:
                 messages.error(request, 'Already registered')
             else:
@@ -66,13 +65,13 @@ class VisaLogin(TemplateView):
                 # print(data.decode("utf-8"))
 
                 if data:
-                    user = User.objects.create_user(username=username, email=email, password=userpasswd)
+                    user = User.objects.create_user(username=email, email=email, password=userpasswd, first_name=first_name, last_name=last_name)
                     VisaProfile.objects.create(user=user, mobile_num=phone)
 
                     messages.success(request, 'Registeration successful.')
 
         elif formname == 'login':
-            user = authenticate(username=username, password=userpasswd)
+            user = authenticate(username=email, password=userpasswd)
             if user is not None:
                 if user.is_active:
                     login(request, user)
@@ -130,7 +129,7 @@ class VisaDetails(TemplateView):
         mobile_num = visa_profile.mobile_num
         activity = "Visited "+country.name+" Details Page"
 
-        # VisaHistory.objects.create(username = username, mobile_num = mobile_num, email_id = email_id, activity = activity)
+        VisaHistory.objects.create(username = username, mobile_num = mobile_num, email_id = email_id, activity = activity)
 
         return render(request, 'visa-details.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'country': country, 'visa_info': visa_info, 'visa_downloads': visa_downloads, 'country_id': country_id })
 

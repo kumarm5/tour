@@ -94,6 +94,7 @@ class RegisterVehicle(models.Model):
     type_vehicle = models.CharField(max_length=200, verbose_name='Vehicle Type')
     purchase_date = models.CharField(max_length=200, verbose_name='Purchase Date')
     cab_no = models.CharField(max_length=200, verbose_name='Cab Number')
+    image = models.FileField(upload_to='documents/', null=True, blank=True, verbose_name='Vehicle Image')
 
     def __str__(self):
         return self.type_vehicle

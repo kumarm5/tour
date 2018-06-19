@@ -17,9 +17,9 @@ class PassportTrack(models.Model):
     passport_number = models.CharField(max_length=500, verbose_name='Passport Number')
     track_type = models.ForeignKey('PassportTrackType', on_delete=models.CASCADE, verbose_name='Track Type')
     additional_details = models.TextField(blank=True, null=True, verbose_name='Additional Details')
-    added_date = models.DateField(verbose_name='Date')
+    added_date = models.DateTimeField(verbose_name='Date Time')
     country = models.CharField(blank=True, null=True, max_length=500, verbose_name='Country')
-
+    
     def __str__(self):
         return self.passport_number
 

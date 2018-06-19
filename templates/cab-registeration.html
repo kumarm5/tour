@@ -23,7 +23,7 @@
         <div class="row text-center">
             <div class="col-md-12">
                 <br>
-                <h1>Cab Registeration</h1>
+                <h1>Cab Registration</h1>
                 <br>
             </div>            
         </div>
@@ -40,7 +40,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <form method="POST" id="cab-registeration-form">
+                <form method="POST" autocomplete="off" id="cab-registeration-form">
                     {% csrf_token %}
                     <div class="col-md-6">
                         <div class="form-group">
@@ -113,7 +113,7 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label class="label-control">Type of Vehicle</label>
-                            <input type="text" class="form-control" name="type_vehicle" placeholder="Ex: Innova">
+                            <input type="text" class="form-control" id="tags" name="type_vehicle" placeholder="Ex: Innova">
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -235,6 +235,25 @@
                 
             });
 
+            $('input[name="type_vehicle"]').keyup(function () {
+                var type_vehicle = $(this).val();
+                var type_vehicles = [];
+                $.ajax({
+                    url: '/cab/get-vehicles',
+                    data: {
+                        'type_vehicle': type_vehicle
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function( index, value ) {                            
+                            type_vehicles.push(data[index].vehicle_name);
+                        });
+                        $( "#tags" ).autocomplete({
+                            source: type_vehicles
+                        });
+                    }
+                });
+            });
         });
     </script>
 {% endblock %}

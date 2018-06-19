@@ -5,6 +5,13 @@
     <title>Tour and Tourism</title>
 {% endblock %}
 
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/testimonial-style.css' %}">
+{% endblock %}
+
 {% block content %}
     <div class="news-section">
         <marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
@@ -176,7 +183,7 @@
     <div class="container testimonial">
         <div class="row">
             <div class="col-md-12 text-center">
-                <div class="title style1 text-center mb-50">
+                <div class="title style1 text-center mb-5">
                     <div class="title-wrapper">
                         <h1>
                             Our Clients  <span class="theme-color">Say</span>
@@ -189,9 +196,34 @@
             </div>
         </div>
     </div>
-    <div class="testimonial-carousel">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div id="testimonial-slider" class="owl-carousel">
+                    {% if testimonial_details %}
+                        {% for testimonial_detail in testimonial_details %}
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    <div class="testimonial-icon">
+                                        <i class="fa fa-quote-left"></i>
+                                    </div>
+                                    <p class="description">
+                                        {{ testimonial_detail.description }}
+                                    </p>
+                                    <h3 class="title">{{ testimonial_detail.first_name }}</h3>
+                                    <span class="post">{{ testimonial_detail.address }}</span>
+                                    <a href="{% url 'testimonial' %}" class="btn btn-xs btn-success pull-right">View All Testimonial</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="testimonial-carousel">
         <div id="text-carousel" class="carousel slide" data-ride="carousel">
-            <!-- Wrapper for slides -->
             <div class="row">
                 <div class="col-xs-offset-3 col-xs-6 col-md-offset-2 col-md-8">
                     <div class="carousel-inner">
@@ -214,16 +246,26 @@
                 </div>
             </div>        
         </div>
-    </div>
+    </div> -->
     <br><br>
 {% endblock %}
 
 {% block footer %}
     {{ block.super }}
-    <script src="{% static 'js/jquery.backstretch.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script>
         $(document).ready(function(){
-            $('.testimonial-carousel').backstretch("/static/images/image_4.jpg");
+            $("#testimonial-slider").owlCarousel({
+                items:1,
+                itemsDesktop:[1000,1],
+                itemsDesktopSmall:[980,1],
+                itemsTablet:[768,1],
+                itemsMobile:[650,1],
+                pagination:true,
+                navigation:false,
+                slideSpeed:1000,
+                autoPlay:true
+            });
         });
     </script>
 {% endblock %}

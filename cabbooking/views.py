@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from tour_packages.models import Topics
 from gallery.models import GalleryMenu
 from django.contrib import messages
+from django.http import JsonResponse
 from .models import *
 
 # Create your views here.
@@ -102,3 +103,8 @@ class CabRegisteration(TemplateView):
             messages.error(request, 'Cab registeration failed')
 
         return render(request, 'cab-registeration.html', context={})
+
+def get_vehicles(request):
+    vehiclemaster = VehicleMaster.objects.all().values('vehicle_name')
+    vehicles = list(vehiclemaster)
+    return JsonResponse(vehicles, safe=False)

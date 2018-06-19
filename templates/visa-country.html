@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     {% for visacountry in visacountries %}
                     <div class="col-xs-6 col-md-3">
-                        <a href="#" class="thumbnail">
+                        <a href="{% url 'Visa:visadetails' id=visacountry.id %}" class="thumbnail">
                             <img src="{{ visacountry.image.url }}" class="img-responsive">
                         </a>
                         <h3><a href="{% url 'Visa:visadetails' id=visacountry.id %}">{{ visacountry.name }}</a></h3>

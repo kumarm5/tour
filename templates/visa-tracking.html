@@ -39,7 +39,7 @@
                         <tr>
                             <th width="40%">TRACK DETAILS</th>
                             <th width="40%">ADDITIONAL DETAILS</th>
-                            <th width="20%">DATE</th>
+                            <th width="20%">DATE-TIME</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,7 +48,7 @@
                                 <tr>
                                     <td>{{ passport_track.track_type.track_type }}</td>
                                     <td>{{ passport_track.additional_details }}</td>
-                                    <td>{{ passport_track.added_date | date:'d-m-Y' }}</td>
+                                    <td>{{ passport_track.added_date | date:'d-m-Y h:i a' }}</td>
                                 </tr>
                             {% endfor %}
                         {% else %}

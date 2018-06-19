@@ -36,8 +36,8 @@
                 <form method="POST" id="loginform">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control login-username" name="username" placeholder="Enter username">
+                        <label for="email">Email Id</label>
+                        <input type="text" class="form-control login-username" name="email" placeholder="Enter Email Id">
                     </div>
 
                     <input type="hidden" name="formname" value="login" class="form-control">
@@ -56,25 +56,38 @@
                 <br>
                 <form method="POST" class="col-md-offset-2" id="registerform">
                     {% csrf_token %}
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" name="username" placeholder="Enter Username">
-                    </div>
+                    </div> -->
                     
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" class="form-control" name="first_name" placeholder="Enter First Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" placeholder="Enter Last Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Id</label>
+                        <input type="email" class="form-control" name="email" placeholder="Enter Email Id">
+                    </div>
+
                     <input type="hidden" name="formname" value="register" class="form-control">
 
                     <div class="form-group">
                         <label for="phone">Mobile Number</label>
                         <input type="text" class="form-control" name="phone" placeholder="Enter Mobile Number">
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email Id</label>
-                        <input type="email" class="form-control" name="email" placeholder="Enter Email Id">
-                    </div>
+                    
                     <div class="form-group">
                         <label for="userpasswd">Password</label>
                         <input type="password" class="form-control" name="userpasswd" placeholder="Enter password">
-                    </div>                    
+                    </div>
+
                     <button class="btn btn-success">Register</button>
                 </form>
                 <br>
@@ -94,7 +107,10 @@
     <script>
         $('#registerform').validate({
             rules: {
-                username: {
+                first_name: {
+                    required: true
+                },
+                last_name:{
                     required: true
                 },
                 phone: {
