@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Pick Up Drop Live</title>
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">    
+    <style>
+        .checkbox-inline{
+            padding-left: 0px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <h1 class="text-center">Pick Up Drop Live</h1>
+                <br>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <form class="form-horizontal" id="pick_drop_form" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="booking_type" class="col-md-3 col-md-offset-2 control-label">Please Select Booking type</label>
+                        <div class="col-md-4">
+                            <select class="form-control" name="booking_type">
+                                <option value="0">Select booking type</option>
+                                <option value="individual">INDIVIDUAL CAB TO AIRPORT</option>
+                                <option value="shared">SHARED CAB TO AIRPORT</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <br><hr><br>
+            </div>
+        </div>
+
+        <div class="row hidden" id="individual">
+            <div class="col-md-12">
+                <form>
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Airport</label>
+                            <p>
+                                <label class="radio-inline"><input type="radio" checked value="">Domestic</label>
+                                <label class="radio-inline"><input type="radio" value="">International</label>
+                            </p>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="formname" value="individualform">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Pickup Point</label>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Trip</label>
+                            <select class="form-control">
+                                <option value="">Pune to Mumbai Airport</option>
+                                <option value="">Mumbai Airport to Pune</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Total No. of Seat</label>
+                        <input type="text" class="form-control" placeholder="Enter total no of seat">
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+                        <label>Flight Date</label>
+                        <input type="text" class="form-control" name="flight_date" id="flight_date" placeholder="dd-mm-yyyy">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Flight time of departure</label>
+                        <br>
+                        <div class="col-md-6">
+                            <select class="form-control">
+                                <option>Select hour</option>
+                                <option>00</option>
+                                <option>01</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control">
+                                <option>Select minutes</option>
+                                <option>00</option>
+                            </select>
+                        </div>                        
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+                        <br>
+                        <label>Cab Date</label>
+                        <br>
+                        <input type="text" class="form-control" name="cab_date" id="cab_date" placeholder="dd-mm-yyyy">                        
+                    </div>
+
+                    <div class="col-md-6">
+                        <br>
+                        <label>Cab Departure Time</label>
+                        <br>
+                        <select class="form-control">
+                            <option>Please Select</option>
+                            <option>0:00</option>
+                        </select>                   
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+                        <br>
+                        <label>Cab Pickup Time</label>
+                        <br>                   
+                    </div>
+
+                    <div class="col-md-6">
+                        <br>
+                        <label>Vehicle Type</label>
+                        <br>
+                        <select class="form-control">
+                            <option>Please select</option>
+                            <option>INNOVA</option>
+                        </select>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+                        <br>
+                        <label>Immediate Return</label>
+                        <br>
+                        <input type="checkbox" value="">
+                    </div>
+                    
+                    <div class="col-md-12 text-center">
+                        <input type="submit" class="btn btn-success" value="Submit">
+                        <a href="#" class="btn btn-info">Cancel</a>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+
+        <div class="row hidden" id="shared">
+            <div class="col-md-12">
+                <form>
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Airport</label>
+                            <p>
+                                <label class="radio-inline"><input type="radio" checked value="">Domestic</label>
+                                <label class="radio-inline"><input type="radio" value="">International</label>
+                            </p>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="formname" value="sharedform">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Pickup Point</label>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Trip</label>
+                            <select class="form-control">
+                                <option value="">Pune to Mumbai Airport</option>
+                                <option value="">Mumbai Airport to Pune</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Total No. of Seat</label>
+                        <input type="text" class="form-control" placeholder="Enter total no of seat">
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+                        <label>Flight Date</label>
+                        <input type="text" class="form-control" placeholder="Enter flight date">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Flight time of departure</label>
+                        <br>
+                        <div class="col-md-6">
+                            <select class="form-control">
+                                <option>Select hour</option>
+                                <option>00</option>
+                                <option>01</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control">
+                                <option>Select minutes</option>
+                                <option>00</option>
+                            </select>
+                        </div>                        
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+                        <br>
+                        <label>Cab Date</label>
+                        <br>
+                        <input type="text" class="form-control" placeholder="Enter cab date">                        
+                    </div>
+
+                    <div class="col-md-6">
+                        <br>
+                        <label>Cab Departure Time</label>
+                        <br>
+                        <select class="form-control">
+                            <option>Please Select</option>
+                            <option>0:00</option>
+                        </select>                   
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+                        <br>
+                        <label>Cab Pickup Time</label>
+                        <br>                   
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <input type="submit" class="btn btn-success" value="Submit">
+                        <a href="#" class="btn btn-info">Cancel</a>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <br><br>
+                <ul>
+                    <li>( For International flights, 3 Hr reporting time to airport and 4 hr journey time so you need to select cab time before 7 hr)</li>
+                    <li>( For Domestic flights, 2 Hr reporting time to airport and 4 hr journey time so you need to select cab time before 6 hr)</li>
+                    <li>TELEVISIONS, BOXES, BICYCLES NOT ALLOWED IN SHARING CAB.</li>
+                </ul>
+                <br><br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $("#flight_date, #cab_date").datepicker({ dateFormat: 'dd-mm-yy' }); 
+
+            $('select[name="booking_type"]').on('change', function(){
+                booking_type = $(this).val();
+                if(booking_type == "individual"){
+                    $('#shared').addClass('hidden');
+                    $('#individual').removeClass('hidden');                    
+                } else {
+                    $('#individual').addClass('hidden');
+                    $('#shared').removeClass('hidden');
+                }
+            });
+        });
+    </script>
+{% endblock %}

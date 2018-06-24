@@ -102,3 +102,38 @@ class RegisterVehicle(models.Model):
     class Meta:
         verbose_name = 'Registered Vehicle'
         verbose_name_plural = 'Registered Vehicles'
+
+class ExtraPickUpDrop(models.Model):
+    routename = models.CharField(max_length=200, verbose_name='Route Name')
+    fromlocation = models.CharField(max_length=200, verbose_name='From Location')
+    tolocation = models.CharField(max_length=200, verbose_name='To Location')
+    vehiclename = models.CharField(max_length=200, verbose_name='Vehicle Name')    
+    vehicleimage = models.FileField(upload_to='documents/', verbose_name='Vehicle Image')
+    vehiclecategory = models.CharField(max_length=200, verbose_name='Vehicle Category')
+    vehicleprice = models.CharField(max_length=200, verbose_name='Vehicle Price')
+    status = models.BooleanField(verbose_name="Status", default=True)
+
+    def __str__(self):
+        return self.routename
+
+    class Meta:
+        verbose_name = 'Extra Pick Up Drop'
+        verbose_name_plural = 'Extra Pick Up Drops'
+
+class ExtraPickUpDropRequest(models.Model):
+    route_vehicle = models.ForeignKey(ExtraPickUpDrop, on_delete=models.DO_NOTHING)
+    mobile_num = models.CharField(max_length=200, verbose_name='Mobile Number')
+    email_id = models.CharField(max_length=200, verbose_name='Email Id')
+    first_name = models.CharField(max_length=200, verbose_name='First Name')
+    last_name = models.CharField(max_length=200, verbose_name='Last Name')
+    pick_up_date = models.CharField(max_length=200, verbose_name='Pick Up Date')
+    pick_up_time = models.CharField(max_length=200, verbose_name='Pick Up Time')
+    message = models.TextField(null=True, blank=True, verbose_name='Message')
+
+    def __str__(self):
+        return self.first_name
+
+    class Meta:
+        verbose_name = 'Extra Pick Up Drop Request'
+        verbose_name_plural = 'Extra Pick Up Drop Requests'
+

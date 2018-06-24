@@ -104,7 +104,59 @@ class CabRegisteration(TemplateView):
 
         return render(request, 'cab-registeration.html', context={})
 
+class PickDropLive(TemplateView):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'pick-drop-live.html', context={})
+
+class ExtraPickDrop(TemplateView):
+    def get(self, request, *args, **kwargs):
+        tour_packages = Topics.objects.filter(status = True)
+        gallery_menus = GalleryMenu.objects.filter(status = True)
+        return render(request, 'extra-pick-drop.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus})
+
+    def post(self, request, *args, **kwargs):
+        tour_packages = Topics.objects.filter(status = True)
+        gallery_menus = GalleryMenu.objects.filter(status = True)
+
+        vehicle_id = request.POST.get('vehicle_id')
+
+        route_vehicle = ExtraPickUpDrop.objects.get(pk=vehicle_id)
+        
+        mobile_num = request.POST.get('mobile_num')
+        email_id = request.POST.get('email_id')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        pick_up_date = request.POST.get('pick_up_date')
+        pick_up_time = request.POST.get('pick_up_time')
+        message = request.POST.get('message')
+
+        vehicle_request = ExtraPickUpDropRequest.objects.create(route_vehicle = route_vehicle, mobile_num = mobile_num,  email_id = email_id, first_name = first_name, last_name = last_name, pick_up_date = pick_up_date, pick_up_time = pick_up_time, message = message)
+
+        if vehicle_request:
+            messages.success(request, 'Request has been sent successfully.')
+        else:
+            messages.error(request, 'Request Failed.')
+
+        return render(request, 'extra-pick-drop.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus})
+
 def get_vehicles(request):
     vehiclemaster = VehicleMaster.objects.all().values('vehicle_name')
     vehicles = list(vehiclemaster)
     return JsonResponse(vehicles, safe=False)
+
+def get_from_location(request):
+    fromlocation = ExtraPickUpDrop.objects.all().values('fromlocation').distinct()
+    fromlocation = list(fromlocation)
+    return JsonResponse(fromlocation, safe=False)
+
+def get_to_location(request):
+    tolocation = ExtraPickUpDrop.objects.all().values('tolocation').distinct()
+    tolocation = list(tolocation)
+    return JsonResponse(tolocation, safe=False)
+
+def get_extra_vehicle(request, *args, **kwargs):
+    from_location = request.GET.get('from_location')
+    to_location = request.GET.get('to_location')
+    extra_vehicle = ExtraPickUpDrop.objects.filter(fromlocation = from_location, tolocation = to_location).values('id','vehicleimage','vehiclename','vehiclecategory','vehicleprice')
+    extra_vehicle = list(extra_vehicle)
+    return JsonResponse(extra_vehicle, safe=False)

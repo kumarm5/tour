@@ -33,3 +33,13 @@ admin.site.register(CabRegister, CabRegisterAdmin)
 class RegisterVehicleAdmin(admin.ModelAdmin):
     list_display = ('type_vehicle','cab_no')
 admin.site.register(RegisterVehicle, RegisterVehicleAdmin)
+
+class ExtraPickUpDropAdmin(admin.ModelAdmin):
+    form = ExtraPickUpDropForm
+    list_display = ('fromlocation', 'tolocation', 'vehiclename', 'status')
+    fields = (('routename','fromlocation', 'tolocation'),('vehiclename','vehicleprice','vehiclecategory'), ('vehicleimage','status'))
+admin.site.register(ExtraPickUpDrop, ExtraPickUpDropAdmin)
+
+class ExtraPickUpDropRequestAdmin(admin.ModelAdmin):
+    list_display = ('route_vehicle', 'first_name', 'pick_up_date')
+admin.site.register(ExtraPickUpDropRequest, ExtraPickUpDropRequestAdmin)

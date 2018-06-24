@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from ckeditor.widgets import CKEditorWidget
+from django.forms import widgets
 
 class CitiesForm(forms.ModelForm):
     
@@ -66,5 +67,67 @@ class TermsAndConditionForm(forms.ModelForm):
                 attrs={
                     'class': 'form-control'
                 }
+            )
+        }
+
+class ExtraPickUpDropForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(ExtraPickUpDropForm, self).__init__(*args, **kwargs)
+        self.fields['status'].empty_label = 'Select status'
+
+    class Meta:
+        model = ExtraPickUpDrop
+        CHOICES=((True,'Available'),(False,'Booked'))
+        exclude = ()
+
+        widgets = {
+            'routename': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter sector name'
+                }
+            ),
+            'fromlocation': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter Trip Type'
+                }
+            ),
+            'tolocation': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter Trip Type'
+                }
+            ),
+            'vehiclename': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter Trip Type'
+                }
+            ),
+            'vehicleimage': forms.FileInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter Trip Type'
+                }
+            ),
+            'vehiclecategory': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter Trip Type'
+                }
+            ),
+            'vehicleprice': forms.TextInput(
+                attrs = {
+                    'class': 'form-control',
+                    'placeholder': 'Enter Trip Type'
+                }
+            ),
+            'status': widgets.Select(
+                attrs = {
+                    'class': 'form-control'
+                },
+                choices = CHOICES
             )
         }

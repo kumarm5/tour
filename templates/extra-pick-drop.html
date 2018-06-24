@@ -1,0 +1,321 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Extra Pick Up Drop</title>
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.ui.timepicker.css' %}" type="text/css" />
+    <style>
+        #from_location-error, #to_location-error, #pick_up_date-error, #pick_up_time-error, .error{
+            color: #ff0000;
+        }
+
+        .inline-block{
+            display: inline-block;
+        }
+
+        .vehicle_details{
+            border: 1px solid #ededec;
+            border-bottom: 2px solid #ededec;
+        }
+        
+        .vehicle-price{
+            padding: 25px;
+        }
+
+        .vehicle-submit{
+            padding: 15px;
+        }
+
+        .vehicle-text{
+            margin-left: 15%;            
+        }
+
+        @media only screen and (min-width: 600px){
+            .vehicle-text{
+                position: absolute;
+            }
+        }
+
+        @media only screen and (max-width: 600px){
+            .car-images{
+                padding-left: 25%;
+            }
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <h1 class="text-center">Extra Pick Up Drop</h1>
+                <br>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12">
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-info"><strong>{{ message }}</strong></p><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <form id="extra-pick-up-drop-form" method="POST">
+                    {% csrf_token %}
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>From</label>
+                            <input type="text" class="form-control" name="from_location" id="from_location" placeholder="From Location" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>To</label>
+                            <input type="text" class="form-control" name="to_location" id="to_location" placeholder="To Location" required>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Pick Up Date</label>
+                            <input type="text" class="form-control" name="pick_up_date" id="pick_up_date" placeholder="dd-mm-yyyy" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Pick Up Time</label>
+                            <input type="text" class="form-control" name="pick_up_time" id="pick_up_time" placeholder="Pick Up Time" required>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="vehicle_id" value="">
+
+                    <div class="col-md-12">
+                        <a href="javascript:void(0);" class="btn btn-info" id="btn_select_car">Select Car</a><br><br>
+                    </div>
+                    <br>
+                    <!-- <div class="col-md-12">
+                        <br>
+                        <div class="vehicle_details">
+                            <div class="car-images inline-block">
+                                <img src="{% static 'images/Ertiga.jpg' %}" class="img-responsive car-img">
+                            </div>
+
+                            <div class="vehicle-text inline-block">
+                                <h3>Ertiga or Equivalent</h3>
+                                <p>AC SUV Large</p>
+                            </div>
+
+                            <div class="vehicle-submit inline-block pull-right">
+                                <input type="submit" class="btn btn-success" value="Select">
+                            </div>
+
+                            <div class="vehicle-price inline-block pull-right">
+                                <strong class="text-danger"><i class="fa fa-inr"></i> 2143</strong>
+                            </div>
+                            
+                        </div>
+                        <br><br>
+                    </div> -->
+
+                    <div class="vehicle-info"></div>
+
+                    <div class="user-section hidden">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Mobile Number</label>
+                                <input type="text" class="form-control" name="mobile_num" id="mobile_num" placeholder="Enter your mobile number">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email Id</label>
+                                <input type="email" class="form-control" name="email_id" id="email_id" placeholder="Enter your email id">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter your first name">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter your last name">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="label-control">Message</label>
+                                <textarea class="form-control" name="message" placeholder="Enter the message"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <br>
+                            <input type="Submit" class="btn btn-success">
+                            <br><br>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.ui.timepicker.js' %}"></script>
+    <script>
+        $(document).ready(function(){
+            $("#pick_up_date").datepicker({ dateFormat: 'dd-mm-yy' });
+            $('#pick_up_time').timepicker();
+
+            $('input[name="from_location"]').keyup(function () {
+                var from_location = $(this).val();
+                var from_location = [];
+                $.ajax({
+                    url: '/cab/fromlocation',
+                    data: {
+                        'from_location': from_location
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function( index, value ) {                            
+                            from_location.push(data[index].fromlocation);
+                        });
+                        $( "#from_location" ).autocomplete({
+                            source: from_location
+                        });
+                    }
+                });
+            });
+
+            $('input[name="to_location"]').keyup(function () {
+                var to_location = $(this).val();
+                var to_locations = [];
+                $.ajax({
+                    url: '/cab/tolocation',
+                    data: {
+                        'to_location': to_location
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $.each(data, function( index, value ) {
+                            to_locations.push(data[index].tolocation);
+                        });
+                        $( "#to_location" ).autocomplete({
+                            source: to_locations
+                        });
+                    }
+                });
+            });
+
+            $('#btn_select_car').on('click', function(){
+                var valid = $('#extra-pick-up-drop-form').valid();
+
+                if(valid == true){
+                    from_location = $('#from_location').val();
+                    to_location = $('#to_location').val();
+                    
+                    var extra_vehicle = [];
+                    $.ajax({
+                        url: '/cab/extravehicle',
+                        data: {
+                            'from_location': from_location,
+                            'to_location': to_location
+                        },
+                        type: "GET",
+                        dataType: 'json',
+                        success: function(data){
+                            $.each(data, function( index, value ) {
+                                $('.vehicle-info').append('\
+                                    <div class="col-md-12">\
+                                        <br>\
+                                        <div class="vehicles_details" style="border: 1px solid #ededec;border-bottom: 2px solid #ededec;">\
+                                            <div class="car-images inline-block">\
+                                                <img src="/media/'+data[index].vehicleimage+'" class="img-responsive car-img">\
+                                            </div>\
+                                            <div class="vehicle-text inline-block">\
+                                                <h3>'+data[index].vehiclename+'</h3>\
+                                                <p>'+data[index].vehiclecategory+'</p>\
+                                            </div>\
+                                            <div class="vehicle-submit inline-block pull-right">\
+                                                <a href="javascript:void(0);" class="btn btn-success vehicle-id" data-id="'+data[index].id+'">Select</a>\
+                                            </div>\
+                                            <div class="vehicle-price inline-block pull-right">\
+                                                <strong class="text-danger"><i class="fa fa-inr"></i> '+data[index].vehicleprice+'</strong>\
+                                            </div>\
+                                        </div>\
+                                        <br>\
+                                    </div>\
+                                ');
+                            });                        
+                        }
+                    });
+                }
+
+            });
+
+            $('body').on('click', '.vehicle-id', function(){
+                vehicle_id = $(this).data("id");
+                $('input[name="vehicle_id"]').val(vehicle_id);
+
+                $('.user-section').removeClass('hidden');
+            });
+
+            $('#extra-pick-up-drop-form').validate({
+                rules: {
+                    from_location: {
+                        required: true
+                    },
+                    to_location: {
+                        required: true
+                    },
+                    pick_up_date: {
+                        required: true
+                    },
+                    pick_up_time: {
+                        required: true
+                    },
+                    mobile_num: {
+                        required: true,
+                        number: true
+                    },
+                    email_id: {
+                        required: true,
+                        email: true
+                    },
+                    first_name: {
+                        required: true
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}
