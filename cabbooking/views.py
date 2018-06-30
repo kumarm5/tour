@@ -106,38 +106,85 @@ class CabRegisteration(TemplateView):
 
 class PickDropLive(TemplateView):
     def get(self, request, *args, **kwargs):
-        return render(request, 'pick-drop-live.html', context={})
+        term_and_cond = ExtraPickUpDropTerms.objects.last()
+        tour_packages = Topics.objects.filter(status = True)
+        gallery_menus = GalleryMenu.objects.filter(status = True)
+        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond })
+
+    def post(self, request, *args, **kwargs):
+        term_and_cond = ExtraPickUpDropTerms.objects.last()
+
+        booking_type = request.POST.get('formname')
+        airport = request.POST.get('airport')
+        pick_up_point = request.POST.get('pick_up_point')
+        trip_route = request.POST.get('trip_route')
+        num_of_seats = request.POST.get('num_of_seats') 
+        flight_date = request.POST.get('flight_date')
+
+        flight_hr = request.POST.get('flight_hr')
+        flight_min = request.POST.get('flight_min')
+
+        flight_time = flight_hr+':'+flight_min
+
+        cab_date = request.POST.get('cab_date')
+        cab_departure_time = request.POST.get('cab_departure_time')
+        cab_pickup_time = request.POST.get('cab_pickup_time')
+        mobile_num = request.POST.get('mobile_num')
+        email_id = request.POST.get('email_id')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        pick_up_address = request.POST.get('pick_up_address')
+        drop_address = request.POST.get('drop_address')
+        message = request.POST.get('message')
+
+        try:
+            pickupdroplive = PickUpDropLive.objects.create(booking_type = booking_type, airport = airport, pick_up_point = pick_up_point, trip_route = trip_route, num_of_seats = num_of_seats, flight_date = flight_date, flight_time = flight_time, cab_date = cab_date,  cab_departure_time = cab_departure_time, cab_pickup_time = cab_pickup_time, mobile_num = mobile_num, email_id = email_id, first_name = first_name, last_name = last_name, pick_up_address = pick_up_address, drop_address = drop_address, message = message)
+        except:
+            pickupdroplive = None
+
+        if pickupdroplive:
+            messages.success(request, 'Request has been sent successfully.')
+        else:
+            messages.error(request, 'Request Failed.')
+
+        tour_packages = Topics.objects.filter(status = True)
+        gallery_menus = GalleryMenu.objects.filter(status = True)
+        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond})
 
 class ExtraPickDrop(TemplateView):
     def get(self, request, *args, **kwargs):
+        term_and_cond = ExtraPickUpDropTerms.objects.last()
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
-        return render(request, 'extra-pick-drop.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus})
+        return render(request, 'extra-pick-drop.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond})
 
     def post(self, request, *args, **kwargs):
+        term_and_cond = TermsAndCondition.objects.last()
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         vehicle_id = request.POST.get('vehicle_id')
 
         route_vehicle = ExtraPickUpDrop.objects.get(pk=vehicle_id)
-        
+
         mobile_num = request.POST.get('mobile_num')
         email_id = request.POST.get('email_id')
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
         pick_up_date = request.POST.get('pick_up_date')
         pick_up_time = request.POST.get('pick_up_time')
+        pickup_address_with_landmark = request.POST.get('pickup_address_with_landmark')
+        drop_address_with_landmark = request.POST.get('drop_address_with_landmark')
         message = request.POST.get('message')
 
-        vehicle_request = ExtraPickUpDropRequest.objects.create(route_vehicle = route_vehicle, mobile_num = mobile_num,  email_id = email_id, first_name = first_name, last_name = last_name, pick_up_date = pick_up_date, pick_up_time = pick_up_time, message = message)
+        vehicle_request = ExtraPickUpDropRequest.objects.create(route_vehicle = route_vehicle, mobile_num = mobile_num,  email_id = email_id, first_name = first_name, last_name = last_name, pick_up_date = pick_up_date, pick_up_time = pick_up_time, pickup_address_with_landmark = pickup_address_with_landmark, drop_address_with_landmark = drop_address_with_landmark, message = message)
 
         if vehicle_request:
             messages.success(request, 'Request has been sent successfully.')
         else:
             messages.error(request, 'Request Failed.')
 
-        return render(request, 'extra-pick-drop.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus})
+        return render(request, 'extra-pick-drop.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond})
 
 def get_vehicles(request):
     vehiclemaster = VehicleMaster.objects.all().values('vehicle_name')
@@ -157,6 +204,6 @@ def get_to_location(request):
 def get_extra_vehicle(request, *args, **kwargs):
     from_location = request.GET.get('from_location')
     to_location = request.GET.get('to_location')
-    extra_vehicle = ExtraPickUpDrop.objects.filter(fromlocation = from_location, tolocation = to_location).values('id','vehicleimage','vehiclename','vehiclecategory','vehicleprice')
+    extra_vehicle = ExtraPickUpDrop.objects.filter(fromlocation = from_location, tolocation = to_location).values('id','vehicleimage','vehiclename','vehiclecategory','vehicleprice','status')
     extra_vehicle = list(extra_vehicle)
     return JsonResponse(extra_vehicle, safe=False)

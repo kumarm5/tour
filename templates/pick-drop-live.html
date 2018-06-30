@@ -7,11 +7,14 @@
 
 {% block style %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">    
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
     <style>
         .checkbox-inline{
             padding-left: 0px;
         }
+        .error{
+            color: #ff0000;
+        }        
     </style>
 {% endblock %}
 
@@ -25,15 +28,24 @@
             </div>
         </div>
         
+        <div class="row text-center">
+            <div class="col-md-12">
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-info"><strong>{{ message }}</strong></p><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
                 <br>
-                <form class="form-horizontal" id="pick_drop_form" method="POST">
-                    {% csrf_token %}
+                <form class="form-horizontal" id="pick_drop_form">
                     <div class="form-group">
                         <label for="booking_type" class="col-md-3 col-md-offset-2 control-label">Please Select Booking type</label>
                         <div class="col-md-4">
-                            <select class="form-control" name="booking_type">
+                            <select class="form-control" name="booking_type" id="booking_type">
                                 <option value="0">Select booking type</option>
                                 <option value="individual">INDIVIDUAL CAB TO AIRPORT</option>
                                 <option value="shared">SHARED CAB TO AIRPORT</option>
@@ -47,64 +59,151 @@
 
         <div class="row hidden" id="individual">
             <div class="col-md-12">
-                <form>
+                <form name="frm_cab_new" method="post" id="frm_cab_new">
                     {% csrf_token %}
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Airport</label>
                             <p>
-                                <label class="radio-inline"><input type="radio" checked value="">Domestic</label>
-                                <label class="radio-inline"><input type="radio" value="">International</label>
+                                <label class="radio-inline"><input type="radio" name="airport" value="domestic" checked>Domestic</label>
+                                <label class="radio-inline"><input type="radio" name="airport" value="international">International</label>
                             </p>
                         </div>
                     </div>
 
-                    <input type="hidden" name="formname" value="individualform">
+                    <input type="hidden" name="formname" value="">
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Pickup Point</label>
+                            <p id="pickup_point_div"></p>
                         </div>
                     </div>
+
+                    <input type="hidden" name="pick_up_point" value="" />
 
                     <div class="clearfix"></div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Trip</label>
-                            <select class="form-control">
-                                <option value="">Pune to Mumbai Airport</option>
-                                <option value="">Mumbai Airport to Pune</option>
+                            <select class="form-control" name="trip_route" id="trip_desc_id" required>
+                                <option value="">Please Select</option>
+                                <option value="1">PUNE To  MUMBAI AIRPORT</option>
+                                <option value="2">MUMBAI  AIRPORT To  PUNE</option>
+                                <option value="3">NASHIK To  MUMBAI AIRPORT</option>
+                                <option value="4">MUMBAI AIRPORT To  NASHIK</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <label>Total No. of Seat</label>
-                        <input type="text" class="form-control" placeholder="Enter total no of seat">
+                        <input type="text" class="form-control" name="num_of_seats" id="num_of_seats" placeholder="Enter total no of seat" required>
                     </div>
 
                     <div class="clearfix"></div>
 
                     <div class="col-md-6">
                         <label>Flight Date</label>
-                        <input type="text" class="form-control" name="flight_date" id="flight_date" placeholder="dd-mm-yyyy">
+                        <input type="text" class="form-control" name="flight_date" id="flight_date" placeholder="dd-mm-yyyy" required>
                     </div>
 
                     <div class="col-md-6">
-                        <label>Flight time of departure</label>
+                        <label for="hours" id="departure_label" >Flight Time</label>
                         <br>
                         <div class="col-md-6">
-                            <select class="form-control">
-                                <option>Select hour</option>
-                                <option>00</option>
-                                <option>01</option>
+                            <select name="flight_hr" class="form-control" id="flight_hr" required>
+                                <option value="">Select hour</option>
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <select class="form-control">
-                                <option>Select minutes</option>
-                                <option>00</option>
+                            <select name="flight_min" class="form-control" id="flight_min" required>
+                                <option value="">Select minutes</option>
+                                <option value="00">00</option>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                                <option value="32">32</option>
+                                <option value="33">33</option>
+                                <option value="34">34</option>
+                                <option value="35">35</option>
+                                <option value="36">36</option>
+                                <option value="37">37</option>
+                                <option value="38">38</option>
+                                <option value="39">39</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                                <option value="46">46</option>
+                                <option value="47">47</option>
+                                <option value="48">48</option>
+                                <option value="49">49</option>
+                                <option value="50">50</option>
+                                <option value="51">51</option>
+                                <option value="52">52</option>
+                                <option value="53">53</option>
+                                <option value="54">54</option>
+                                <option value="55">55</option>
+                                <option value="56">56</option>
+                                <option value="57">57</option>
+                                <option value="58">58</option>
+                                <option value="59">59</option>
                             </select>
                         </div>                        
                     </div>
@@ -115,17 +214,14 @@
                         <br>
                         <label>Cab Date</label>
                         <br>
-                        <input type="text" class="form-control" name="cab_date" id="cab_date" placeholder="dd-mm-yyyy">                        
+                        <input type="text" class="form-control" name="cab_date" id="cab_date" placeholder="dd-mm-yyyy">
                     </div>
 
                     <div class="col-md-6">
                         <br>
                         <label>Cab Departure Time</label>
                         <br>
-                        <select class="form-control">
-                            <option>Please Select</option>
-                            <option>0:00</option>
-                        </select>                   
+                        <input type="text" class="form-control" name="cab_departure_time" id="cab_departure_time" placeholder="Enter cab departure time">
                     </div>
 
                     <div class="clearfix"></div>
@@ -133,148 +229,95 @@
                     <div class="col-md-6">
                         <br>
                         <label>Cab Pickup Time</label>
-                        <br>                   
+                        <p id="cab_pickup_time"></p>
+                        <br>
                     </div>
 
-                    <div class="col-md-6">
-                        <br>
-                        <label>Vehicle Type</label>
-                        <br>
-                        <select class="form-control">
-                            <option>Please select</option>
-                            <option>INNOVA</option>
-                        </select>
-                    </div>
+                    <input type="hidden" name="cab_pickup_time" value="" />
 
                     <div class="clearfix"></div>
 
-                    <div class="col-md-6">
-                        <br>
-                        <label>Immediate Return</label>
-                        <br>
-                        <input type="checkbox" value="">
+                    <div class="col-md-12 text-center next-div">
+                        <!-- <input type="submit" class="btn btn-success" value="Submit"> -->
+                        <a href="javascript:void(0);" class="btn btn-info next-btn">Next</a>
                     </div>
                     
-                    <div class="col-md-12 text-center">
-                        <input type="submit" class="btn btn-success" value="Submit">
-                        <a href="#" class="btn btn-info">Cancel</a>
-                    </div>
-                    
-                </form>
-            </div>
-        </div>
-
-        <div class="row hidden" id="shared">
-            <div class="col-md-12">
-                <form>
-                    {% csrf_token %}
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Airport</label>
-                            <p>
-                                <label class="radio-inline"><input type="radio" checked value="">Domestic</label>
-                                <label class="radio-inline"><input type="radio" value="">International</label>
-                            </p>
-                        </div>
-                    </div>
-
-                    <input type="hidden" name="formname" value="sharedform">
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Pickup Point</label>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Trip</label>
-                            <select class="form-control">
-                                <option value="">Pune to Mumbai Airport</option>
-                                <option value="">Mumbai Airport to Pune</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label>Total No. of Seat</label>
-                        <input type="text" class="form-control" placeholder="Enter total no of seat">
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="col-md-6">
-                        <label>Flight Date</label>
-                        <input type="text" class="form-control" placeholder="Enter flight date">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label>Flight time of departure</label>
-                        <br>
+                    <div class="user-info hidden">
                         <div class="col-md-6">
-                            <select class="form-control">
-                                <option>Select hour</option>
-                                <option>00</option>
-                                <option>01</option>
-                            </select>
+                            <br>
+                            <label>Mobile Number</label>
+                            <br>
+                            <input type="text" class="form-control" name="mobile_num" id="mobile_num" placeholder="Enter mobile number">
                         </div>
+
                         <div class="col-md-6">
-                            <select class="form-control">
-                                <option>Select minutes</option>
-                                <option>00</option>
-                            </select>
-                        </div>                        
+                            <br>
+                            <label>Email Id</label>
+                            <br>
+                            <input type="text" class="form-control" name="email_id" id="email_id" placeholder="Enter email id">
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-md-6">
+                            <br>
+                            <label>First Name</label>
+                            <br>
+                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter first name">
+                        </div>
+
+                        <div class="col-md-6">
+                            <br>
+                            <label>Last Name</label>
+                            <br>
+                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter last name">
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-md-6 pick-up-address-div hidden">
+                            <br>
+                            <label>Pick Up Address</label>
+                            <br>
+                            <textarea class="form-control" name="pick_up_address" placeholder="Enter pick up address"></textarea>
+                        </div>
+
+                        <div class="col-md-6 drop-address-div hidden">
+                            <br>
+                            <label>Drop Address</label>
+                            <br>
+                            <textarea class="form-control" name="drop_address" placeholder="Enter drop address"></textarea>
+                        </div>
+
+                        <!-- <div class="clearfix"></div> -->
+
+                        <div class="col-md-6">
+                            <br>
+                            <label>Message (If any)</label>
+                            <br>
+                            <textarea class="form-control" name="message" placeholder="Enter message"></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <br>
+                            <input type="submit" class="btn btn-success">
+                            <br>
+                        </div>
                     </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="col-md-6">
-                        <br>
-                        <label>Cab Date</label>
-                        <br>
-                        <input type="text" class="form-control" placeholder="Enter cab date">                        
-                    </div>
-
-                    <div class="col-md-6">
-                        <br>
-                        <label>Cab Departure Time</label>
-                        <br>
-                        <select class="form-control">
-                            <option>Please Select</option>
-                            <option>0:00</option>
-                        </select>                   
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="col-md-6">
-                        <br>
-                        <label>Cab Pickup Time</label>
-                        <br>                   
-                    </div>
-
-                    <div class="col-md-12 text-center">
-                        <input type="submit" class="btn btn-success" value="Submit">
-                        <a href="#" class="btn btn-info">Cancel</a>
-                    </div>
-                    
                 </form>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                <br><br>
-                <ul>
-                    <li>( For International flights, 3 Hr reporting time to airport and 4 hr journey time so you need to select cab time before 7 hr)</li>
-                    <li>( For Domestic flights, 2 Hr reporting time to airport and 4 hr journey time so you need to select cab time before 6 hr)</li>
-                    <li>TELEVISIONS, BOXES, BICYCLES NOT ALLOWED IN SHARING CAB.</li>
-                </ul>
+                <h3>Terms &amp; Conditions:</h3>
+                {% autoescape off %}
+                    {{ term_and_cond.details }}
+                {% endautoescape %}
                 <br><br>
             </div>
         </div>
+        
     </div>
 {% endblock %}
 
@@ -284,16 +327,198 @@
     <script src="{% static 'js/jquery.validate.min.js' %}"></script>
     <script>
         $(document).ready(function(){
-            $("#flight_date, #cab_date").datepicker({ dateFormat: 'dd-mm-yy' }); 
-
+            $("#flight_date").datepicker({ dateFormat: 'dd-mm-yy' }); 
+            
             $('select[name="booking_type"]').on('change', function(){
-                booking_type = $(this).val();
-                if(booking_type == "individual"){
-                    $('#shared').addClass('hidden');
-                    $('#individual').removeClass('hidden');                    
+                var booking_type = $(this).val();
+                $('#individual').removeClass('hidden');
+                $('input[name="formname"]').val(booking_type);
+            });
+
+            $('#trip_desc_id').on('change', function(){
+                trip_id = $(this).val();
+                if (trip_id==1 || trip_id==3){
+                    $('#pickup_point_div').html('Residence');
+                    $('input[name="pick_up_point"]').val('Residence');
+                    $('#departure_label').html('Flight time of departure');
                 } else {
-                    $('#individual').addClass('hidden');
-                    $('#shared').removeClass('hidden');
+                    $('#pickup_point_div').html('Airport');
+                    $('input[name="pick_up_point"]').val('Airport');
+                    $('#departure_label').html('Flight time of arrival');
+                }
+
+                var address_point = $('input[name="pick_up_point"]').val();
+
+                if(address_point == 'Residence'){
+                    $('.drop-address-div').addClass('hidden');
+                    $('.pick-up-address-div').removeClass('hidden');
+                } else {
+                    $('.pick-up-address-div').addClass('hidden');
+                    $('.drop-address-div').removeClass('hidden');
+                }
+            });
+
+            $('#flight_hr, #flight_min').on('change', function(){
+                flight_hr = $('#flight_hr').val();
+                flight_hr = Number(flight_hr);
+                flight_min = $('#flight_min').val();
+                flight_min = Number(flight_min);
+
+                flight_date = $('#flight_date').val();
+                trip_id = $('#trip_desc_id').val();
+
+                flight_day = flight_date['0'] + flight_date['1'];
+                flight_mon = flight_date['3'] + flight_date['4'];
+                flight_year = flight_date['8'] + flight_date['9'];
+
+                booking_type = $('#booking_type').val();
+                airport = $("input[name='airport']:checked").val();
+
+                Date.prototype.setNewTime = function(){
+                    this.setHours(flight_hr);
+                    this.setMinutes(flight_min);
+                    return this;
+                }
+
+                Date.prototype.setNewDate = function(){
+                    this.setUTCFullYear(flight_year);
+                    this.setUTCDate(flight_day);
+                    this.setUTCMonth(flight_mon);
+                    return this;
+                }
+
+                newDate = new Date().setNewDate();
+                newTime = new Date().setNewTime();
+
+                Date.prototype.minusTime = function(h, m){
+                    this.setHours(flight_hr-h);
+                    this.setMinutes(flight_min-m);
+                    return this;
+                }
+
+                if((airport == "domestic") && (trip_id==1 || trip_id==3)){
+                    new_changed_time = newTime.minusTime(6, 00);
+                } else if((airport == "international") && (trip_id==1 || trip_id==3)){
+                    new_changed_time = newTime.minusTime(7, 00);
+                } else if((airport == "domestic") && (trip_id==2 || trip_id==4)){
+                    new_changed_time = newTime.minusTime(1, 00);
+                } else if((airport == "international") && (trip_id==2 || trip_id==4)){
+                    new_changed_time = newTime.minusTime(1, 00);
+                } 
+
+                new_hrs = new_changed_time.getHours();
+                new_min = new_changed_time.getMinutes();
+
+                if ((new_min == '0') || (new_min == '1') || (new_min == '2') || (new_min == '3') || (new_min == '4') || (new_min == '5') || (new_min == '6') || (new_min == '7') || (new_min == '8') || (new_min == '9')){
+                    new_min = '0'+new_min;
+                }
+
+                new_time = new_hrs+':'+new_min;
+
+
+                if((airport == "domestic") && (trip_id==1 || trip_id==3)){
+                    cab_pickup_time = newTime.minusTime(7, 00);
+                } else if((airport == "international") && (trip_id==1 || trip_id==3)){
+                    cab_pickup_time = newTime.minusTime(8, 00);
+                } else if((airport == "domestic") && (trip_id==2 || trip_id==4)){
+                    cab_pickup_time = newTime.minusTime(1, 00);
+                } else if((airport == "international") && (trip_id==2 || trip_id==4)){
+                    cab_pickup_time = newTime.minusTime(1, 00);
+                }
+
+                cab_hrs = cab_pickup_time.getHours();
+                cab_min = cab_pickup_time.getMinutes();
+
+                if ((cab_min == '0') || (cab_min == '1') || (cab_min == '2') || (cab_min == '3') || (cab_min == '4') || (cab_min == '5') || (cab_min == '6') || (cab_min == '7') || (cab_min == '8') || (cab_min == '9')){
+                    cab_min = '0'+cab_min;
+                }
+
+                cab_time = cab_hrs+':'+cab_min;
+
+                $('#cab_departure_time').val(new_time);
+                $('#cab_pickup_time').text(cab_time);
+                
+                $('input[name="cab_pickup_time"]').val(cab_time);
+                
+                
+                if((airport == "domestic") && (trip_id==1 || trip_id==3)){
+                    newchangeddate = newDate.minusTime(7, 00);
+                } else if((airport == "international") && (trip_id==1 || trip_id==3)){
+                    newchangeddate = newDate.minusTime(8, 00);
+                } else if((airport == "domestic") && (trip_id==2 || trip_id==4)){
+                    newchangeddate = newDate.minusTime(1, 00);
+                } else if((airport == "international") && (trip_id==2 || trip_id==4)){
+                    newchangeddate = newDate.minusTime(1, 00);
+                }
+
+                changed_day = newchangeddate.getDate();
+                changed_month = newchangeddate.getMonth();
+                changed_year = newchangeddate.getUTCFullYear();
+
+                if ((changed_month == '0') || (changed_month == '1') || (changed_month == '2') || (changed_month == '3') || (changed_month == '4') || (changed_month == '5') || (changed_month == '6') || (changed_month == '7') || (changed_month == '8') || (changed_month == '9')){
+                    changed_month = '0'+changed_month;
+                }
+
+                changed_date = changed_day+'-'+changed_month+'-20'+changed_year;
+                $('#cab_date').val(changed_date);
+
+            });
+
+            $('.next-btn').on('click', function(){
+                var frm_cab_new = $('#frm_cab_new').valid();
+
+                if (frm_cab_new == true){
+                    $('.next-div').addClass('hidden');
+                    $('.user-info').removeClass('hidden');
+                }
+            });
+
+            $('#frm_cab_new').validate({
+                rules: {
+                    trip_route: {
+                        required: true
+                    },
+                    num_of_seats: {
+                        required: true
+                    },
+                    flight_date: {
+                        required: true
+                    },
+                    flight_hr: {
+                        required: true
+                    },
+                    flight_min: {
+                        required: true
+                    },
+                    // cab_date: {
+                    //     required: true
+                    // },
+                    // cab_departure_time: {
+                    //     required: true
+                    // },
+                    cab_pickup_time: {
+                        required: true
+                    },
+                    mobile_num: {
+                        required: true,
+                        number: true
+                    },
+                    email_id:{
+                        required: true,
+                        email: true
+                    },
+                    first_name: {
+                        required: true
+                    },
+                    last_name: {
+                        required: true
+                    },
+                    pick_up_address: {
+                        required: true
+                    },
+                    drop_address: {
+                        required: true
+                    }
                 }
             });
         });

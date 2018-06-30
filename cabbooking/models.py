@@ -33,8 +33,8 @@ class TermsAndCondition(models.Model):
         return self.city.title
 
     class Meta:
-        verbose_name = 'Terms and Condition'
-        verbose_name_plural = 'Terms and Conditions'
+        verbose_name = 'Car Rental Term'
+        verbose_name_plural = 'Car Rental Terms'
 
 class TariffDetails(models.Model):
     city = models.ForeignKey(Cities, on_delete=models.CASCADE, related_name='CityTariff', verbose_name='City')
@@ -128,6 +128,8 @@ class ExtraPickUpDropRequest(models.Model):
     last_name = models.CharField(max_length=200, verbose_name='Last Name')
     pick_up_date = models.CharField(max_length=200, verbose_name='Pick Up Date')
     pick_up_time = models.CharField(max_length=200, verbose_name='Pick Up Time')
+    pickup_address_with_landmark = models.TextField(null=True, blank=True, verbose_name='Pick Up Address With Landmark')
+    drop_address_with_landmark = models.TextField(null=True, blank=True, verbose_name='Drop Address With Landmark')
     message = models.TextField(null=True, blank=True, verbose_name='Message')
 
     def __str__(self):
@@ -137,3 +139,51 @@ class ExtraPickUpDropRequest(models.Model):
         verbose_name = 'Extra Pick Up Drop Request'
         verbose_name_plural = 'Extra Pick Up Drop Requests'
 
+class ExtraPickUpDropTerms(models.Model):
+    title = models.CharField(max_length=200, verbose_name='Title')
+    details = models.TextField(verbose_name='Details')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Extra Pick Up Drop Term'
+        verbose_name_plural = 'Extra Pick Up Drop Terms'
+
+class PickUpDropLive(models.Model):
+    booking_type = models.CharField(max_length=300, verbose_name='Booking Type')
+    airport = models.CharField(max_length=300, verbose_name='Airport')
+    pick_up_point = models.CharField(max_length=300, verbose_name='Pick Up Point')
+    trip_route = models.CharField(max_length=300, verbose_name='Trip Route')
+    num_of_seats = models.CharField(max_length=300, verbose_name='Num of Seats')
+    flight_date = models.CharField(max_length=300, verbose_name='Flight Date')
+    flight_time = models.CharField(max_length=300, verbose_name='Flight Time')
+    cab_date = models.CharField(max_length=300, verbose_name='Cab Date')
+    cab_departure_time = models.CharField(max_length=300, verbose_name='Cab Departure Time')
+    cab_pickup_time = models.CharField(max_length=300, verbose_name='Cab Pickup Time')
+    mobile_num = models.CharField(max_length=300, verbose_name='Mobile Num')
+    email_id = models.CharField(max_length=300, verbose_name='Email Id')
+    first_name = models.CharField(max_length=300, verbose_name='First Name')
+    last_name = models.CharField(max_length=300, verbose_name='Last Name')
+    pick_up_address = models.CharField(blank=True, null=True, max_length=300, verbose_name='Pick Up Address')
+    drop_address = models.CharField(blank=True, null=True, max_length=300, verbose_name='Drop Address')
+    message = models.TextField(blank=True, null=True, verbose_name='Message')
+
+    def __str__(self):
+        return self.first_name
+
+    class Meta:
+        verbose_name = 'Pick Up Drop Live Request'
+        verbose_name_plural = 'Pick Up Drop Live Request'
+
+
+class PickUpDropLiveTerms(models.Model):
+    title = models.CharField(max_length=200, verbose_name='Title')
+    details = models.TextField(verbose_name='Details')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Pick Up Drop Live Term'
+        verbose_name_plural = 'Pick Up Drop Live Terms'

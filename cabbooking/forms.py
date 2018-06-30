@@ -131,3 +131,41 @@ class ExtraPickUpDropForm(forms.ModelForm):
                 choices = CHOICES
             )
         }
+
+class ExtraPickUpDropTermsForm(forms.ModelForm):
+    details = forms.CharField(widget=CKEditorWidget())
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(ExtraPickUpDropTermsForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = ExtraPickUpDropTerms
+        exclude = ()
+
+        widgets={
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter title'
+                }
+            )
+        }
+
+class PickUpDropLiveTermsForm(forms.ModelForm):
+    details = forms.CharField(widget=CKEditorWidget())
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(PickUpDropLiveTermsForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = PickUpDropLiveTerms
+        exclude = ()
+
+        widgets={
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter title'
+                }
+            )
+        }
