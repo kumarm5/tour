@@ -187,3 +187,19 @@ class PickUpDropLiveTerms(models.Model):
     class Meta:
         verbose_name = 'Pick Up Drop Live Term'
         verbose_name_plural = 'Pick Up Drop Live Terms'
+
+class TimeChange(models.Model):
+    title = models.CharField(max_length=200, blank=True, null=True, verbose_name='Title')
+    hour_for_airport_pickup_point = models.IntegerField(blank=True, null=True, verbose_name='Hour For Airport Pickup Point')
+    minute_for_airport_pickup_point = models.IntegerField(blank=True, null=True, verbose_name='Minute For Airport Pickup Point')
+    hour_for_residence_pickup_point_of_domestic_airport = models.IntegerField(blank=True, null=True, verbose_name='Hour For Residence Pickup Point  Of Domestic Airport')
+    minute_for_residence_pickup_point_of_domestic_airport = models.IntegerField(blank=True, null=True, verbose_name='Minute For Residence Pickup Point Of Domestic Airport')
+    hour_for_residence_pickup_point_of_international_airport = models.IntegerField(blank=True, null=True, verbose_name='Hour For Residence Pickup Point  Of International Airport')
+    minute_for_residence_pickup_point_of_international_airport = models.IntegerField(blank=True, null=True, verbose_name='Minute For Residence Pickup Point Of International Airport')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Time Change'
+        verbose_name_plural = 'Time Changes'

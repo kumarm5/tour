@@ -59,3 +59,7 @@ class PickUpDropLiveTermsAdmin(admin.ModelAdmin):
     list_display = ('title',)
     fields = (('title'),('details'),)
 admin.site.register(PickUpDropLiveTerms, PickUpDropLiveTermsAdmin)
+
+class TimeChangeAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+admin.site.register(TimeChange, TimeChangeAdmin)

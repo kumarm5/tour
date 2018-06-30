@@ -22,8 +22,8 @@
                     <td>{{ foreign_exchange.buy }}</td>
                     <td>{{ foreign_exchange.sale }}</td>
                     <td width="14%">
-                        <a href="{% url 'sendenquiry' id=foreign_exchange.id %}" class="btn btn-xs btn-info">Buying</a>
-                        <a href="{% url 'sendenquiry' id=foreign_exchange.id %}" class="btn btn-xs btn-success">Selling</a>
+                        <a href="{% url 'sendenquiry' status="Buying" id=foreign_exchange.id %}" class="btn btn-xs btn-info">Buying</a>
+                        <a href="{% url 'sendenquiry' status="Selling" id=foreign_exchange.id %}" class="btn btn-xs btn-success">Selling</a>
                     </td>
                 </tr>
                 {% endfor %}                

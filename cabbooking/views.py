@@ -106,13 +106,15 @@ class CabRegisteration(TemplateView):
 
 class PickDropLive(TemplateView):
     def get(self, request, *args, **kwargs):
+        timechange = TimeChange.objects.last()
         term_and_cond = ExtraPickUpDropTerms.objects.last()
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
-        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond })
+        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'timechange': timechange })
 
     def post(self, request, *args, **kwargs):
         term_and_cond = ExtraPickUpDropTerms.objects.last()
+        timechange = TimeChange.objects.last()
 
         booking_type = request.POST.get('formname')
         airport = request.POST.get('airport')
@@ -149,7 +151,7 @@ class PickDropLive(TemplateView):
 
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
-        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond})
+        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'timechange': timechange })
 
 class ExtraPickDrop(TemplateView):
     def get(self, request, *args, **kwargs):

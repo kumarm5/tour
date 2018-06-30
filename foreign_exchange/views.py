@@ -21,6 +21,8 @@ class ForeignExchangePage(TemplateView):
 class ForeignExchangeSendEnquiry(TemplateView):
     def get(self, request, *args, **kwargs):
         foreignexchange_id = int(kwargs['id'])
+        status = kwargs['status']
+
         try:
             foreign_exchange = ForeignExchange.objects.get(id = foreignexchange_id)
         except:
@@ -28,10 +30,12 @@ class ForeignExchangeSendEnquiry(TemplateView):
 
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)        
-        return render(request, 'send-enquiry.html', context={ 'foreign_exchange': foreign_exchange, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus })
-        
+        return render(request, 'send-enquiry.html', context={ 'foreign_exchange': foreign_exchange, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'status': status })
+
     def post(self, request, *args, **kwargs):
         foreignexchange_id = int(kwargs['id'])
+        status = kwargs['status']
+
         try:
             foreign_exchange = ForeignExchange.objects.get(id = foreignexchange_id)
         except:
@@ -53,4 +57,4 @@ class ForeignExchangeSendEnquiry(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True) 
 
-        return render(request, 'send-enquiry.html', context={ 'foreign_exchange': foreign_exchange, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus })
+        return render(request, 'send-enquiry.html', context={ 'foreign_exchange': foreign_exchange, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'status': status })

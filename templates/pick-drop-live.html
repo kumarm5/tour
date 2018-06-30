@@ -73,6 +73,15 @@
 
                     <input type="hidden" name="formname" value="">
 
+                    <input type="hidden" name="hour_for_airport_pickup_point" value="{{ timechange.hour_for_airport_pickup_point }}">
+                    <input type="hidden" name="minute_for_airport_pickup_point" value="{{ timechange.minute_for_airport_pickup_point }}">
+                    
+                    <input type="hidden" name="hour_for_residence_pickup_point_of_domestic_airport" value="{{ timechange.hour_for_residence_pickup_point_of_domestic_airport }}">
+                    <input type="hidden" name="minute_for_residence_pickup_point_of_domestic_airport" value="{{ timechange.minute_for_residence_pickup_point_of_domestic_airport }}">
+
+                    <input type="hidden" name="hour_for_residence_pickup_point_of_international_airport" value="{{ timechange.hour_for_residence_pickup_point_of_international_airport }}">
+                    <input type="hidden" name="minute_for_residence_pickup_point_of_international_airport" value="{{ timechange.hour_for_residence_pickup_point_of_international_airport }}">
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Pickup Point</label>
@@ -364,6 +373,18 @@
                 flight_min = $('#flight_min').val();
                 flight_min = Number(flight_min);
 
+                var hour_for_airport_pickup_point = Number($('input[name="hour_for_airport_pickup_point"]').val());
+
+                var  minute_for_airport_pickup_point = Number($('input[name="minute_for_airport_pickup_point"]').val());
+
+                var hour_for_residence_pickup_point_of_domestic_airport = Number($('input[name="hour_for_residence_pickup_point_of_domestic_airport"]').val());
+
+                var minute_for_residence_pickup_point_of_domestic_airport = Number($('input[name="minute_for_residence_pickup_point_of_domestic_airport"]').val());
+
+                var hour_for_residence_pickup_point_of_international_airport = Number($('input[name="hour_for_residence_pickup_point_of_international_airport"]').val());
+
+                var minute_for_residence_pickup_point_of_international_airport = Number($('input[name="minute_for_residence_pickup_point_of_international_airport"]').val());
+
                 flight_date = $('#flight_date').val();
                 trip_id = $('#trip_desc_id').val();
 
@@ -396,15 +417,21 @@
                     return this;
                 }
 
+                Date.prototype.plusTime = function(h, m){
+                    this.setHours(flight_hr+h);
+                    this.setMinutes(flight_min+m);
+                    return this;
+                }
+
                 if((airport == "domestic") && (trip_id==1 || trip_id==3)){
-                    new_changed_time = newTime.minusTime(6, 00);
+                    new_changed_time = newTime.minusTime(hour_for_residence_pickup_point_of_domestic_airport, minute_for_residence_pickup_point_of_domestic_airport);
                 } else if((airport == "international") && (trip_id==1 || trip_id==3)){
-                    new_changed_time = newTime.minusTime(7, 00);
+                    new_changed_time = newTime.minusTime(hour_for_residence_pickup_point_of_international_airport, minute_for_residence_pickup_point_of_international_airport);
                 } else if((airport == "domestic") && (trip_id==2 || trip_id==4)){
-                    new_changed_time = newTime.minusTime(1, 00);
+                    new_changed_time = newTime.plusTime(hour_for_airport_pickup_point, minute_for_airport_pickup_point);
                 } else if((airport == "international") && (trip_id==2 || trip_id==4)){
-                    new_changed_time = newTime.minusTime(1, 00);
-                } 
+                    new_changed_time = newTime.plusTime(hour_for_airport_pickup_point, minute_for_airport_pickup_point);
+                }
 
                 new_hrs = new_changed_time.getHours();
                 new_min = new_changed_time.getMinutes();
@@ -417,13 +444,13 @@
 
 
                 if((airport == "domestic") && (trip_id==1 || trip_id==3)){
-                    cab_pickup_time = newTime.minusTime(7, 00);
+                    cab_pickup_time = newTime.minusTime(hour_for_residence_pickup_point_of_domestic_airport+1, minute_for_residence_pickup_point_of_domestic_airport);
                 } else if((airport == "international") && (trip_id==1 || trip_id==3)){
-                    cab_pickup_time = newTime.minusTime(8, 00);
+                    cab_pickup_time = newTime.minusTime(hour_for_residence_pickup_point_of_international_airport+1, minute_for_residence_pickup_point_of_international_airport);
                 } else if((airport == "domestic") && (trip_id==2 || trip_id==4)){
-                    cab_pickup_time = newTime.minusTime(1, 00);
+                    cab_pickup_time = newTime.plusTime(hour_for_airport_pickup_point, minute_for_airport_pickup_point);
                 } else if((airport == "international") && (trip_id==2 || trip_id==4)){
-                    cab_pickup_time = newTime.minusTime(1, 00);
+                    cab_pickup_time = newTime.plusTime(hour_for_airport_pickup_point, minute_for_airport_pickup_point);
                 }
 
                 cab_hrs = cab_pickup_time.getHours();
@@ -442,13 +469,13 @@
                 
                 
                 if((airport == "domestic") && (trip_id==1 || trip_id==3)){
-                    newchangeddate = newDate.minusTime(7, 00);
+                    newchangeddate = newDate.minusTime(hour_for_residence_pickup_point_of_domestic_airport+1, minute_for_residence_pickup_point_of_domestic_airport);
                 } else if((airport == "international") && (trip_id==1 || trip_id==3)){
-                    newchangeddate = newDate.minusTime(8, 00);
+                    newchangeddate = newDate.minusTime(hour_for_residence_pickup_point_of_international_airport+1, minute_for_residence_pickup_point_of_international_airport);
                 } else if((airport == "domestic") && (trip_id==2 || trip_id==4)){
-                    newchangeddate = newDate.minusTime(1, 00);
+                    newchangeddate = newDate.plusTime(hour_for_airport_pickup_point, minute_for_airport_pickup_point);
                 } else if((airport == "international") && (trip_id==2 || trip_id==4)){
-                    newchangeddate = newDate.minusTime(1, 00);
+                    newchangeddate = newDate.plusTime(hour_for_airport_pickup_point, minute_for_airport_pickup_point);
                 }
 
                 changed_day = newchangeddate.getDate();
