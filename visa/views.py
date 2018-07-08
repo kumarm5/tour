@@ -16,7 +16,7 @@ class VisaTrack(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         return render(request, 'visa-tracking.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus })
-        
+
     def post(self, request, *args, **kwargs):
         passport_num = request.POST.get('passport_num')
         country = request.POST.get('country')

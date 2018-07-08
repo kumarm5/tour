@@ -5,7 +5,30 @@
     <title>Package Details</title>
 {% endblock %}
 
+{% block style %}
+    {{ block.super }}
+
+    <style>
+        @media print
+        {
+            body * { visibility: hidden; }
+            .print-div * { visibility: visible; }
+            .print-div { position: absolute; top: 40px; left: 30px; }
+        }
+    </style>
+
+{% endblock %}
+
 {% block content %}
+
+    <div class="container print-div" style="visibility:hidden;">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Hello World</p>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <br><br>
         <div class="row">
@@ -36,8 +59,8 @@
                 <br>
                 <div class="pull-right">
                     <a href="mailto:tanishtravels24@yahoo.co.in" class="btn btn-email"><i class="fa fa-envelope"></i> Mail</a>
-                    <a href="javascript:void(0);" class="btn btn-email" ><i class="fa fa-print"></i>Print</a>
-                    <a href="javascript:void(0);" class="btn btn-email" ><i class="fa fa-download"></i>Download</a>                    
+                    <a href="javascript:void(0);" class="btn btn-print" ><i class="fa fa-print"></i>Print</a>
+                    <a href="javascript:void(0);" class="btn btn-download" ><i class="fa fa-download"></i>Download</a>                    
                 </div>
                 <br>
             </div>
@@ -84,4 +107,14 @@
         </div>
         <br><br>
     </div>
+{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <script>
+        $('.btn-print').on('click', function(){
+            console.log('Hello world');
+            window.print();
+        });
+    </script>
 {% endblock %}

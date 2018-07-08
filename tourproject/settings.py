@@ -142,6 +142,12 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',        
+        'toolbar': 'full',
     },
 }
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mail.yahoo.com'
+EMAIL_HOST_USER = 'tanishtravels24@yahoo.co.in'
+EMAIL_HOST_PASSWORD = 'tanish24_king'
+EMAIL_PORT = 587

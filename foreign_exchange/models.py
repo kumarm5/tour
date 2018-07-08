@@ -17,10 +17,19 @@ class ForeignExchange(models.Model):
         verbose_name_plural = 'Foreign Exchanges'
 
 class EnquiryDetails(models.Model):
+    STATUS_CHOICES = (
+        ("IN-PROGRESS", "IN-PROGRESS"),
+        ("COMPLETED", "COMPLETED"),
+    )
+
     mobile_num = models.CharField(max_length=20, null=True, blank=True, verbose_name='Mobile Number')
     email_id = models.CharField(max_length=200, null=True, blank=True, verbose_name='Email Id')
     username = models.CharField(max_length=200, verbose_name='Username')
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="IN-PROGRESS")
     currency = models.CharField(max_length=200, null=True, blank=True, verbose_name='currency')
+    sms_or_email_message = models.TextField(null=True, blank=True, verbose_name='Email or SMS Message')
+    send_sms = models.BooleanField(default=False, verbose_name='Send SMS')
+    send_email = models.BooleanField(default=False, verbose_name='Send Email')
     message = models.TextField(verbose_name='Message')
 
     def __str__(self):

@@ -58,3 +58,25 @@ class TermsAndConditionForm(forms.ModelForm):
                 }
             )
         }
+
+class EnquiryDetailsForm(forms.ModelForm):
+    sms_or_email_message = forms.CharField(widget=CKEditorWidget())
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(EnquiryDetailsForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        send_sms = self.cleaned_data['send_sms']
+        send_email = self.cleaned_data['send_email']
+        sms_or_email_message = self.cleaned_data['sms_or_email_message']
+
+        if send_sms or send_email:
+            if sms_or_email_message == '':
+                self.add_error('sms_or_email_message', 'No sms or email message is given, Please specify message')
+                # raise forms.ValidationError("No sms or email message is given, Please specify message")
+
+        return self.cleaned_data
+
+    class Meta:
+        model = EnquiryDetails
+        exclude = ()
