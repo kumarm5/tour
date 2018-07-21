@@ -38,4 +38,5 @@ $(document).ready(function(){
         trip_type_content();        
     }); 
 
+    
 });
