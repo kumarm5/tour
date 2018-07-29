@@ -2,10 +2,93 @@
 {% load static %}
 
 {% block title %}
-    <title>Package Details</title>
+    <title>Hotel Details</title>
+{% endblock %}
+
+{% block style %}
+    {{ block.super }}
+
+    <style>
+        @media print
+        {
+            body * { visibility: hidden; }
+            .print-div * { visibility: visible; }
+            .print-div { position: absolute; top: 40px; left: 30px; }            
+        }
+        @media screen {
+            .print-pdf-div, .print-div { position: absolute; top: 0px; left: 0px; }
+            .header-logo{ display: none; }
+        }
+    </style>
+
 {% endblock %}
 
 {% block content %}
+
+    <div class="container print-div" style="visibility:hidden;">
+        <div class="row">
+            <img src="{% static 'images/header-logo.png' %}" class="header-logo">
+            <p>&nbsp;</p>
+            <h3 class="text-center">OVERVIEW</h3>
+            {% autoescape off %}
+                <p>{{ hotel_details.overview }}</p>
+            {% endautoescape %}
+            <p>&nbsp;</p>
+            <h3 class="text-center">INCLUSION</h3>
+            {% autoescape off %}
+                <p>{{ hotel_details.inclusion }}</p>
+            {% endautoescape %}
+            <p>&nbsp;</p>
+            <h3 class="text-center">EXCLUSION</h3>
+            {% autoescape off %}
+                <p>{{ hotel_details.exclusion }}</p>
+            {% endautoescape %}
+            <p>&nbsp;</p>
+            <h3 class="text-center">HOW TO BOOK</h3>
+            {% autoescape off %}
+                <p>{{ hotel_details.how_to_book }}</p>
+            {% endautoescape %}
+            <p>&nbsp;</p>
+            <h3 class="text-center">HOTEL INFO</h3>
+            {% autoescape off %}
+                <p>{{ hotel_details.hotel_info }}</p>
+            {% endautoescape %}
+        </div>
+    </div>
+
+    <div class="container print-pdf-div" style="visibility:hidden;">
+        <div class="row">
+            <img src="{% static 'images/header-logo.png' %}" width="522" height="150" class="header-logo">
+            <br><br>
+            <p style="text-align:center; font-size: 20px;"><strong>OVERVIEW</strong></p>
+            {% autoescape off %}
+                <p>{{ hotel_details.overview }}</p>
+            {% endautoescape %}
+            <br><br>
+            <p style="text-align:center; font-size: 20px;"><strong>INCLUSION</strong></p>            
+            {% autoescape off %}
+                {{ hotel_details.inclusion }}
+            {% endautoescape %}
+            <br><br>
+            <p style="text-align:center; font-size: 20px;"><strong>EXCLUSION</strong></p>
+            {% autoescape off %}
+                {{ hotel_details.exclusion }}
+            {% endautoescape %}
+            <br><br>
+            <p style="text-align:center; font-size: 20px;"><strong>HOW TO BOOK</strong></p>
+            {% autoescape off %}
+                {{ hotel_details.how_to_book }}
+            {% endautoescape %}
+            <br><br>
+            <p style="text-align:center; font-size: 20px;"><strong>HOTEL INFO</strong></p>
+            {% autoescape off %}
+                {{ hotel_details.hotel_info }}
+            {% endautoescape %}
+            <br><br>            
+        </div>
+        <div id="editor"></div>
+    </div>
+
     <div class="container">
         <br><br>
         <div class="row">
@@ -36,12 +119,12 @@
                 <br>
                 <div class="pull-right">
                     <a href="mailto:tanishtravels24@yahoo.co.in" class="btn btn-email"><i class="fa fa-envelope"></i> Mail</a>
-                    <a href="javascript:void(0);" class="btn btn-email" ><i class="fa fa-print"></i>Print</a>
-                    <a href="javascript:void(0);" class="btn btn-email" ><i class="fa fa-download"></i>Download</a>
+                    <a href="javascript:void(0);" class="btn btn-print" ><i class="fa fa-print"></i>Print</a>
+                    <a href="javascript:void(0);" class="btn btn-download" ><i class="fa fa-download"></i>Download</a>
                 </div>
                 <br>
             </div>
-            
+
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active"><a data-toggle="tab" href="#overview">Overview</a></li>
                 <li role="presentation"><a data-toggle="tab" href="#map">Map</a></li>
@@ -52,22 +135,83 @@
             <br>
             <div class="tab-content">
                 <div id="overview" class="tab-pane fade in active">
-                    {{ hotel_details.overview  | linebreaksbr }}                    
+                    {% autoescape off %}
+                        {{ hotel_details.overview }}
+                    {% endautoescape %}
                 </div>
                 <div id="map" class="tab-pane fade">
                     <img src="/media/{{ hotel_details.map_image }}" width="450" height="300"/>
                 </div>
                 <div id="inclusion" class="tab-pane fade">
-                    <p>{{ hotel_details.inclusion | linebreaksbr }}</p>
+                    {% autoescape off %}
+                        {{ hotel_details.inclusion }}
+                    {% endautoescape %}
                 </div>
                 <div id="book" class="tab-pane fade">
-                    <p>{{ hotel_details.how_to_book | linebreaksbr }}</p>
+                    {% autoescape off %}
+                        {{ hotel_details.how_to_book }}
+                    {% endautoescape %}
                 </div>
                 <div id="hotel" class="tab-pane fade">
-                    <p>{{ hotel_details.tour_info | linebreaksbr }}</p>
+                    {% autoescape off %}
+                        {{ hotel_details.hotel_info }}
+                    {% endautoescape %}
                 </div>
               </div>
         </div>
         <br><br>
     </div>
+{% endblock %}
+
+
+{% block footer %}
+    {{ block.super }}
+    <script src="{% static 'js/jspdf.min.js'%}"></script>    
+    <script>
+        $('.btn-print').on('click', function(){
+            window.print();
+        });
+
+        $('.btn-download').on('click', function(){
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            // source can be HTML-formatted string, or a reference
+            // to an actual DOM element from which the text will be scraped.
+            source = $('.print-pdf-div')[0];
+
+            // we support special element handlers. Register them with jQuery-style 
+            // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+            // There is no support for any other type of selectors 
+            // (class, of compound) at this time.
+            specialElementHandlers = {
+                // element with id of "bypass" - jQuery style selector
+                '#editor': function (element, renderer) {
+                    // true = "handled elsewhere, bypass text extraction"
+                    return true
+                }
+            };
+            margins = {
+                top: 80,
+                bottom: 60,
+                left: 40,
+                width: 522
+            };
+            // all coords and widths are in jsPDF instance's declared units
+            // 'inches' in this case
+            pdf.fromHTML(
+                source, // HTML string or DOM elem ref.
+                margins.left, // x coord
+                margins.top, { // y coord
+                    'width': margins.width, // max width of content on PDF
+                    'elementHandlers': specialElementHandlers
+                },
+
+                function (dispose) {
+                    // dispose: object with X, Y of the last line add to the PDF 
+                    //          this allow the insertion of new lines after html
+                    pdf.save('hotel-details.pdf');
+                }, margins
+            );
+        });
+
+    </script>
 {% endblock %}

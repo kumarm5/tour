@@ -2,7 +2,9 @@ from django.contrib import admin
 from .forms import *
 from .models import *
 from django.core.mail import EmailMessage
+# import httplib
 import http.client
+import re
 
 # Register your models here.
 class ForeignExchangeAdmin(admin.ModelAdmin):
@@ -12,14 +14,18 @@ class ForeignExchangeAdmin(admin.ModelAdmin):
 admin.site.register(ForeignExchange, ForeignExchangeAdmin)
 
 class EnquiryDetailsAdmin(admin.ModelAdmin):
-    list_display = ('username', 'currency', 'status')
+    list_display = ('username', 'currency', 'status', 'created_at')
     form = EnquiryDetailsForm
+    fields = (('mobile_num'), ('email_id'), ('username'), ('status'), ('currency'), ('sms_or_email_message'), ('send_sms'), ('send_email'), ('message'), )
 
     def save_model(self, request, obj, form, change):
 
         if obj.send_sms:
+            TAG_RE = re.compile(r'<[^>]+>')
+            sms_or_email_message = TAG_RE.sub('', obj.sms_or_email_message)
             conn = http.client.HTTPConnection("api.msg91.com")
-            conn.request("GET", "/api/sendhttp.php?sender=TANISH&route=4&mobiles="+obj.mobile_num+"&authkey=91178Ahf3JuOcJ41W581c6f41&country=91&message="+obj.sms_or_email_message+"")
+            # conn = httplib.HTTPConnection("api.msg91.com")
+            conn.request("GET", "/api/sendhttp.php?sender=TANISH&route=4&mobiles="+obj.mobile_num+"&authkey=91178Ahf3JuOcJ41W581c6f41&country=91&message="+sms_or_email_message+"")
             res = conn.getresponse()
             data = res.read()
 
@@ -53,7 +59,7 @@ class EnquiryDetailsAdmin(admin.ModelAdmin):
 
             html_message = obj.sms_or_email_message+'<br>'+html_message
             
-            msg = EmailMessage('subject', html_message, 'tanishtravels24@yahoo.co.in', [obj.email_id])
+            msg = EmailMessage('subject', html_message, 'tanishtravels24@yahoo.co.in', [obj.email_id],['tanishtravels24@yahoo.co.in'])
             msg.content_subtype = "html"
             msg.send()
 

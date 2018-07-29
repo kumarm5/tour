@@ -49,6 +49,6 @@ admin.site.register(VisaEnquiry, VisaEnquiryAdmin)
 
 class VisaHistoryAdmin(admin.ModelAdmin):
     form = VisaHistoryForm
-    list_display = ('username', 'mobile_num', 'email_id')
+    list_display = ('username', 'mobile_num', 'email_id', 'activity', 'created_at')
     fields = (('username','mobile_num','email_id'),('activity'))
 admin.site.register(VisaHistory, VisaHistoryAdmin)

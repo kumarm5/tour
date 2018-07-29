@@ -27,17 +27,24 @@ admin.site.register(TariffDetails)
 admin.site.register(TariffEnquiry)
 
 class CabRegisterAdmin(admin.ModelAdmin):
-    list_display = ('agency_name','full_name','mobile_no','email_id')
+    list_display = ('agency_name','full_name','mobile_no','email_id','created_at')
 admin.site.register(CabRegister, CabRegisterAdmin)
 
 class RegisterVehicleAdmin(admin.ModelAdmin):
-    list_display = ('type_vehicle','cab_no')
+    list_display = ('type_vehicle','cab_no','agencyname', 'createddate')
+
+    def agencyname(self, obj):
+        return obj.cabregister
+
+    def createddate(self, obj):
+        return obj.cabregister.created_at
+
 admin.site.register(RegisterVehicle, RegisterVehicleAdmin)
 
 class ExtraPickUpDropAdmin(admin.ModelAdmin):
-    form = ExtraPickUpDropForm
-    list_display = ('fromlocation', 'tolocation', 'vehiclename', 'status')
-    fields = (('routename','fromlocation', 'tolocation'),('vehiclename','vehicleprice','vehiclecategory'), ('vehicleimage','status'))
+    # form = ExtraPickUpDropForm
+    list_display = ('fromlocation', 'tolocation', 'vehiclename', 'action')
+    fields = (('fromlocation', 'tolocation'),('vehiclename','vehicleprice'),('vehiclecategory','action'), ('vehicleimage'))
 admin.site.register(ExtraPickUpDrop, ExtraPickUpDropAdmin)
 
 class ExtraPickUpDropRequestAdmin(admin.ModelAdmin):

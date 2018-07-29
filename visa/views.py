@@ -22,7 +22,7 @@ class VisaTrack(TemplateView):
         country = request.POST.get('country')
         enquiry_date = request.POST.get('enquiry_date')
 
-        passport_tracks = PassportTrack.objects.filter(passport_number = passport_num, added_date__gte = enquiry_date, country__icontains = country)
+        passport_tracks = PassportTrack.objects.filter(passport_number = passport_num, added_date__gte = enquiry_date, country__icontains = country).order_by('added_date')
 
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)

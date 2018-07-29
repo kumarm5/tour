@@ -199,21 +199,26 @@
                         ');
                     }
                 }
-                
+                // <input type="hidden" name="type_veh" value="'+type_vehicle+'">\
                 for(i=0;i<no_vehicles;i++){
                     $('.cabinfo').append('\
                     <div class="newrow">\
-                        <div class="col-md-5">\
+                        <div class="col-md-4">\
                             <div class="form-group">\
                                 <label class="label-control">Purchase Date:</label>\
                                 <input type="text" class="form-control datepicker" name="purchase_date" placeholder="Enter purchase date">\
                             </div>\
                         </div>\
-                        <input type="hidden" name="type_veh" value="'+type_vehicle+'">\
-                        <div class="col-md-5">\
+                        <div class="col-md-4">\
                             <div class="form-group">\
                                 <label class="label-control">Cab No:</label>\
                                 <input type="text" class="form-control" name="cab_no" placeholder="Enter Cab No.">\
+                            </div>\
+                        </div>\
+                        <div class="col-md-4">\
+                            <div class="form-group">\
+                                <label class="label-control">Vehicle Name</label>\
+                                <input type="text" class="form-control" name="type_veh" value="'+type_vehicle+'" placeholder="Enter Vehicle Name">\
                             </div>\
                         </div>\
                     </div>\

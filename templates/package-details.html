@@ -54,7 +54,6 @@
                 <p>{{ package_details.tour_info }}</p>
             {% endautoescape %}
         </div>
-        <div id="editor"></div>
     </div>
 
     <div class="container print-pdf-div" style="visibility:hidden;">
@@ -177,7 +176,7 @@
         $('.btn-print').on('click', function(){
             window.print();
         });
-        
+
         $('.btn-download').on('click', function(){
             var pdf = new jsPDF('p', 'pt', 'letter');
             // source can be HTML-formatted string, or a reference

@@ -315,3 +315,13 @@ body{
 .track-input{
     margin-bottom: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+    .header-logo{
+        margin: auto;
+        display: block;
+    }
+    .menu-ul {        
+        margin-top: 15px;
+    }
+}

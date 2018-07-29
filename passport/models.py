@@ -1,8 +1,15 @@
 from django.db import models
-
+from django.utils.timezone import now
 # Create your models here.
 
 class PassportInfo(models.Model):
+    STATUS_CHOICES = (
+        ("GENERATED", "GENERATED"),
+        ("IN-PROCESS", "IN-PROCESS"),
+        ("PENDING", "PENDING"),
+        ("COMPLETED", "COMPLETED"),        
+    )
+
     application = models.CharField(max_length=800, null=True, blank=True, verbose_name='Applying for')
     application_type = models.CharField(max_length=800, null=True, blank=True, verbose_name='Type of Application')
     pass_booklet = models.CharField(max_length=800, null=True, blank=True, verbose_name='Type of Passport Booklet')
@@ -62,7 +69,10 @@ class PassportInfo(models.Model):
     passport_impounded = models.CharField(max_length=800, null=True, blank=True, verbose_name='Has your passport ever been impounded or revoked ?')
     political_asylum = models.CharField(max_length=800, null=True, blank=True, verbose_name='Have you ever applied for or been granted political asylum to/by any foreign country ?')
     emergency_certificate = models.CharField(max_length=800, null=True, blank=True, verbose_name='Have you ever returned to India on Emergency Certificate (EC) or were ever deported or repatriated ?')
-    
+    comment = models.TextField(null=True, blank=True, verbose_name='Comment')
+    created_at = models.DateTimeField(default=now, verbose_name='Created At')
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="GENERATED")
+
     def __str__(self):
         return self.given_name
 

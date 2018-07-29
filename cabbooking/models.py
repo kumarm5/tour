@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 # Create your models here.
 
@@ -12,7 +13,7 @@ class Cities(models.Model):
     class Meta:
         verbose_name = '   City'
         verbose_name_plural = '   Cities'
-        
+
 
 class VehicleMaster(models.Model):
     vehicle_name = models.CharField(max_length=300, verbose_name='Vehicle Name')
@@ -81,7 +82,9 @@ class CabRegister(models.Model):
     ifsc_code = models.CharField(max_length=200, verbose_name='IFSC Code')
     branch = models.CharField(max_length=200, verbose_name='Branch')
     address = models.TextField(verbose_name='Address')
-    
+    comment = models.TextField(null=True, blank=True, verbose_name='Comment')
+    created_at = models.DateTimeField(default=now, verbose_name='Created At')
+
     def __str__(self):
         return self.agency_name
 
@@ -104,7 +107,13 @@ class RegisterVehicle(models.Model):
         verbose_name_plural = 'Registered Vehicles'
 
 class ExtraPickUpDrop(models.Model):
-    routename = models.CharField(max_length=200, verbose_name='Route Name')
+    STATUS_CHOICES = (
+        ("AVAILABLE", "AVAILABLE"),
+        ("NOT-AVAILABLE", "NOT-AVAILABLE"),
+        ("BOOKED", "BOOKED"),
+        ("DEACTIVATED", "DEACTIVATED"),        
+    )
+    routename = models.CharField(null=True, blank=True, max_length=200, verbose_name='Route Name')
     fromlocation = models.CharField(max_length=200, verbose_name='From Location')
     tolocation = models.CharField(max_length=200, verbose_name='To Location')
     vehiclename = models.CharField(max_length=200, verbose_name='Vehicle Name')    
@@ -112,9 +121,10 @@ class ExtraPickUpDrop(models.Model):
     vehiclecategory = models.CharField(max_length=200, verbose_name='Vehicle Category')
     vehicleprice = models.CharField(max_length=200, verbose_name='Vehicle Price')
     status = models.BooleanField(verbose_name="Status", default=True)
+    action = models.CharField(max_length=100, choices=STATUS_CHOICES, default="AVAILABLE")
 
     def __str__(self):
-        return self.routename
+        return self.fromlocation+'-'+self.tolocation
 
     class Meta:
         verbose_name = 'Extra Pick Up Drop'

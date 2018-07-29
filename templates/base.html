@@ -44,15 +44,22 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="{% url 'home' %}"><img src="{% static 'images/logo.jpg' %}"></a>
+                            <a href="{% url 'home' %}"><img src="{% static 'images/logo.jpg' %}" class="header-logo"></a>
 
-                            <div class="pull-right hidden-xs hidden-sm">
+                            <div class="pull-right">
                                 <ul class="menu-ul">
                                     <li><a href="mailto:tanishtravels24@yahoo.co.in" class="btn btn-email"><i class="fa fa-envelope"></i> tanishtravels24@yahoo.co.in</a></li>
                                     <li><a href="#" class="btn btn-phone"><i class="fa fa-phone"></i> 09890176353</a></li>
                                     <li class="menu-payubiz"><a href="#"></a></li>
                                 </ul>
                             </div>
+
+                            <!-- <div class="pull-right hidden-lg hidden-md">
+                                <a href="mailto:tanishtravels24@yahoo.co.in" class="btn btn-email"><i class="fa fa-envelope"></i> tanishtravels24@yahoo.co.in</a>
+                                <br>
+                                <a href="#" class="btn btn-phone"><i class="fa fa-phone"></i> 09890176353</a>
+                                <div class="menu-payubiz"></div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -67,9 +74,9 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand hidden-lg hidden-md" href="#">Brand</a>
+                            <a class="navbar-brand hidden-lg hidden-md" href="#">TANISH TRAVEL HUT</a>
                         </div>
-                    
+
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <div class="container">
@@ -159,10 +166,10 @@
                                     <h3>GALLERY</h3>
                                     <br>
                                     <div class="small-border"></div>
-                                    {% for gallery_image in gallery_images %}
+                                    {% for gallery_image in gallery_images %}                                        
                                         <div class="col-xs-6 col-md-6 thumbnail-container">
-                                            <a href="{% static 'images/{{ gallery_image.images }}' %}" class="thumbnail">
-                                                <img src="{% static 'images/image_3.jpeg' %}" alt="...">
+                                            <a href="/media/{{ gallery_image.images }}" target="_blank" class="thumbnail">
+                                                <img src="/media/{{ gallery_image.images }}" alt="...">
                                             </a>
                                         </div>
                                     {% endfor %}

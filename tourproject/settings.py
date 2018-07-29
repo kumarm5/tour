@@ -132,7 +132,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-
+TIME_ZONE =  'Asia/Kolkata'
 DATE_INPUT_FORMATS = ('%d-%m-%Y','%Y-%m-%d')
 
 MEDIA_URL = '/media/'

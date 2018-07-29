@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 # Create your models here.
 class PassportTrackType(models.Model):
@@ -92,6 +93,7 @@ class VisaHistory(models.Model):
     mobile_num = models.CharField(max_length=15, verbose_name='Mobile Number')
     email_id = models.CharField(max_length=100, verbose_name='Email Address')
     activity = models.CharField(max_length=500, verbose_name='Activity')
+    created_at = models.DateTimeField(default=now, verbose_name='Created At')
 
     def __str__(self):
         return self.username

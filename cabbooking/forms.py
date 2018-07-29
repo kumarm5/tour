@@ -74,7 +74,7 @@ class ExtraPickUpDropForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(ExtraPickUpDropForm, self).__init__(*args, **kwargs)
-        self.fields['status'].empty_label = 'Select status'
+        # self.fields['status'].empty_label = 'Select status'
 
     class Meta:
         model = ExtraPickUpDrop
@@ -91,45 +91,50 @@ class ExtraPickUpDropForm(forms.ModelForm):
             'fromlocation': forms.TextInput(
                 attrs = {
                     'class': 'form-control',
-                    'placeholder': 'Enter Trip Type'
+                    'placeholder': 'Enter From Location'
                 }
             ),
             'tolocation': forms.TextInput(
                 attrs = {
                     'class': 'form-control',
-                    'placeholder': 'Enter Trip Type'
+                    'placeholder': 'Enter To Location'
                 }
             ),
             'vehiclename': forms.TextInput(
                 attrs = {
                     'class': 'form-control',
-                    'placeholder': 'Enter Trip Type'
+                    'placeholder': 'Enter Vehicle Name'
                 }
             ),
             'vehicleimage': forms.FileInput(
                 attrs = {
                     'class': 'form-control',
-                    'placeholder': 'Enter Trip Type'
+                    'placeholder': 'Enter Vehicle Image'
                 }
             ),
             'vehiclecategory': forms.TextInput(
                 attrs = {
                     'class': 'form-control',
-                    'placeholder': 'Enter Trip Type'
+                    'placeholder': 'Enter Vehicle Category'
                 }
             ),
             'vehicleprice': forms.TextInput(
                 attrs = {
                     'class': 'form-control',
-                    'placeholder': 'Enter Trip Type'
+                    'placeholder': 'Enter Vehicle Price'
                 }
             ),
-            'status': widgets.Select(
-                attrs = {
-                    'class': 'form-control'
-                },
-                choices = CHOICES
-            )
+            # 'action': forms.TextInput(
+            #     attrs = {
+            #         'class': 'form-control',
+            #     }
+            # ),
+            # 'status': widgets.Select(
+            #     attrs = {
+            #         'class': 'form-control'
+            #     },
+            #     choices = CHOICES
+            # )
         }
 
 class ExtraPickUpDropTermsForm(forms.ModelForm):
