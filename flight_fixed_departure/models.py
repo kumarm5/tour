@@ -188,7 +188,7 @@ class EnquiryDetails(models.Model):
     mobile_num = models.CharField(max_length=20, null=True, blank=True, verbose_name='Mobile Number')
     email_id = models.CharField(max_length=200, null=True, blank=True, verbose_name='Email Id')
     username = models.CharField(max_length=200, verbose_name='Username')
-    supplier = models.CharField(max_length=200, null=True, blank=True, verbose_name='Supplier')
+    sector = models.CharField(max_length=200, null=True, blank=True, verbose_name='sector')
     message = models.TextField(verbose_name='Message')
 
     def __str__(self):

@@ -16,7 +16,7 @@
         }
         @media screen {
             .print-pdf-div, .print-div { position: absolute; top: 0px; left: 0px; }
-            .header-logo{ display: none; }
+            .head-logo{ display: none; }
         }
     </style>
 {% endblock %}
@@ -24,19 +24,27 @@
 {% block content %}
 
     <div class="container print-div" style="visibility:hidden;">
-        <h1 class="text-center">{{ country.name }}</h1>
-        <p class="text-center"><strong>{{ country.details }}</strong></p>
-        {% autoescape off %}
-            <p>{{ visa_info.visa_details }}</p>
-        {% endautoescape %}
+        <div class="row">
+            <img src="{% static 'images/header-logo.png' %}" class="head-logo">
+            <p>&nbsp;</p>
+            <h1 class="text-center">{{ country.name }}</h1>
+            <p class="text-center"><strong>{{ country.details }}</strong></p>
+            {% autoescape off %}
+                <p>{{ visa_info.visa_details }}</p>
+            {% endautoescape %}
+        </div>
     </div>
 
     <div class="container print-pdf-div" style="visibility:hidden;">
-        <p style="text-align:center; font-size: 26px;"><strong>{{ country.name }}</strong></p>
-        <p style="text-align:center;"><strong>{{ country.details }}</strong></p>
-        {% autoescape off %}
-            <p>{{ visa_info.visa_details }}</p>
-        {% endautoescape %}
+        <div class="row">
+            <img src="{% static 'images/header-logo.png' %}" width="522" height="150" class="head-logo">
+            <br><br>
+            <p style="text-align:center; font-size: 26px;"><strong>{{ country.name }}</strong></p>
+            <p style="text-align:center;"><strong>{{ country.details }}</strong></p>
+            {% autoescape off %}
+                <p>{{ visa_info.visa_details }}</p>
+            {% endautoescape %}
+        </div>
     </div>
     <div id="editor"></div>
 

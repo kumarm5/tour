@@ -166,10 +166,10 @@
                                     <h3>GALLERY</h3>
                                     <br>
                                     <div class="small-border"></div>
-                                    {% for gallery_image in gallery_images %}                                        
+                                    {% for footer_gallery in footer_galleries %}                                        
                                         <div class="col-xs-6 col-md-6 thumbnail-container">
-                                            <a href="/media/{{ gallery_image.images }}" target="_blank" class="thumbnail">
-                                                <img src="/media/{{ gallery_image.images }}" alt="...">
+                                            <a href="/media/{{ footer_gallery.images }}" target="_blank" class="thumbnail">
+                                                <img src="/media/{{ footer_gallery.images }}" alt="...">
                                             </a>
                                         </div>
                                     {% endfor %}

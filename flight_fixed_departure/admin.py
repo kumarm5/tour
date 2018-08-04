@@ -199,5 +199,5 @@ class TermsAndConditionsAdmin(admin.ModelAdmin):
 admin.site.register(TermsAndConditions, TermsAndConditionsAdmin)
 
 class EnquiryDetailsAdmin(admin.ModelAdmin):
-    list_display = ('username', 'supplier')
+    list_display = ('username', 'sector')
 admin.site.register(EnquiryDetails, EnquiryDetailsAdmin)    

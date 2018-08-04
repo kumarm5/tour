@@ -31,8 +31,9 @@ class EnquiryDetailsAdmin(admin.ModelAdmin):
 
         if obj.send_email:
             html_message = '\
+                <br>\
                 <p>Regards and Thanks,</p>\
-                <p>Jai D Solanki&nbsp;(Managing&nbsp;<strong>Partner)</strong></p>\
+                <p>Jai D Solanki&nbsp;<strong>(Managing&nbsp;Partner)</strong></p>\
                 <p><strong>Tanish Travel Hut</strong></p>\
                 <p><strong>HO :</strong>&nbsp;Sr No: 33, Ceratec City, Ph-2, No: 702 ,</p>\
                 <p>D wing , Katraj Kondhwa Road,</p>\
@@ -58,8 +59,8 @@ class EnquiryDetailsAdmin(admin.ModelAdmin):
                 <p><em>Note: This email message is for the sole use of the intended recipient(s) and may contain CONFIDENTIAL and PRIVILEGED information. Any unauthorized review; use, disclosure or distribution is prohibited.&nbsp; If you are not the intended recipient, please contact the sender by reply email and destroy all copies of the original message and any attachments. The recipient should check this email and any attachments for the presence of viruses. Tanish&nbsp;Travel Hut&nbsp;accepts no liability for any damage caused by any virus transmitted by this email.</em></p>'
 
             html_message = obj.sms_or_email_message+'<br>'+html_message
-            
-            msg = EmailMessage('subject', html_message, 'tanishtravels24@yahoo.co.in', [obj.email_id],['tanishtravels24@yahoo.co.in'])
+
+            msg = EmailMessage(obj.currency, html_message, 'tanishtravels24@yahoo.co.in', [obj.email_id],['tanishtravels24@yahoo.co.in'])
             msg.content_subtype = "html"
             msg.send()
 

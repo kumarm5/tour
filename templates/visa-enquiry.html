@@ -8,6 +8,11 @@
 <div class="container">
         <div class="row">
             <h1 class="text-center">Send Enquiry for Visa</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="text-center text-info"><strong>{{ message }}</strong></p>
+                {% endfor %}
+            {% endif %}
             <form method="POST">
                 {% csrf_token %}
                 <div class="col-md-6">
@@ -37,12 +42,7 @@
                 </div>
                 <div class="col-md-12">
                     <br>
-                    <input type="submit" class="btn btn-success" value="Send Enquiry">
-                    {% if messages %}
-                        {% for message in messages %}
-                            <p class="text-center text-info"><strong>{{ message }}</strong></p>
-                        {% endfor %}
-                    {% endif %}
+                    <input type="submit" class="btn btn-success" value="Send Enquiry">                    
                 </div>
             </form>
         </div>

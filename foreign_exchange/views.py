@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from tour_packages.models import Topics
-from gallery.models import GalleryMenu
+from gallery.models import GalleryMenu, GalleryImages
 from .models import *
 from django.contrib import messages
 from django.core.mail import EmailMessage
-# Create your views here.
+from news.models import NewsInfo
 
+# Create your views here.
 class ForeignExchangePage(TemplateView):
     def get(self, request, *args, **kwargs):
         try:
@@ -17,7 +18,11 @@ class ForeignExchangePage(TemplateView):
         foreign_exchanges = ForeignExchange.objects.filter(status=True)
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
-        return render(request, 'foreign-exchange.html', context= { 'foreign_exchanges': foreign_exchanges, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond })
+
+        footer_galleries = GalleryImages.objects.all()[:4]
+        footer_news = NewsInfo.objects.all()[:3]
+
+        return render(request, 'foreign-exchange.html', context= { 'foreign_exchanges': foreign_exchanges, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class ForeignExchangeSendEnquiry(TemplateView):
     def get(self, request, *args, **kwargs):
@@ -30,8 +35,12 @@ class ForeignExchangeSendEnquiry(TemplateView):
             foreign_exchange = None
 
         tour_packages = Topics.objects.filter(status = True)
-        gallery_menus = GalleryMenu.objects.filter(status = True)        
-        return render(request, 'send-enquiry.html', context={ 'foreign_exchange': foreign_exchange, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'status': status })
+        gallery_menus = GalleryMenu.objects.filter(status = True)
+
+        footer_galleries = GalleryImages.objects.all()[:4]
+        footer_news = NewsInfo.objects.all()[:3]
+
+        return render(request, 'send-enquiry.html', context={ 'foreign_exchange': foreign_exchange, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'status': status, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
     def post(self, request, *args, **kwargs):
         foreignexchange_id = int(kwargs['id'])
@@ -52,8 +61,9 @@ class ForeignExchangeSendEnquiry(TemplateView):
 
         if enquiry:
             html_message = '\
+                <br>\
                 <p>Regards and Thanks,</p>\
-                <p>Jai D Solanki&nbsp;(Managing&nbsp;<strong>Partner)</strong></p>\
+                <p>Jai D Solanki&nbsp;<strong>(Managing&nbsp;Partner)</strong></p>\
                 <p><strong>Tanish Travel Hut</strong></p>\
                 <p><strong>HO :</strong>&nbsp;Sr No: 33, Ceratec City, Ph-2, No: 702 ,</p>\
                 <p>D wing , Katraj Kondhwa Road,</p>\
@@ -80,7 +90,10 @@ class ForeignExchangeSendEnquiry(TemplateView):
 
             html_message = 'User Name is '+username+'<br>Mobile Number is '+mobile_num+'<br>Email Id is '+email_id+'<br>Currency is '+currency+'<br>Message is '+message+'<br>'+html_message
 
-            EmailMessage(currency, html_message, 'tanishtravels24@yahoo.co.in', [email_id],['tanishtravels24@yahoo.co.in'])
+            email_message = EmailMessage(currency, html_message, 'tanishtravels24@yahoo.co.in', [email_id],['tanishtravels24@yahoo.co.in'])
+            email_message.content_subtype = "html"
+            email_message.send()
+
             messages.success(request, 'Enquiry has been sent successfully.')
         else:
             messages.error(request, 'Enquiry Failed.')
@@ -88,4 +101,7 @@ class ForeignExchangeSendEnquiry(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True) 
 
-        return render(request, 'send-enquiry.html', context={ 'foreign_exchange': foreign_exchange, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'status': status })
+        footer_galleries = GalleryImages.objects.all()[:4]
+        footer_news = NewsInfo.objects.all()[:3]
+
+        return render(request, 'send-enquiry.html', context={ 'foreign_exchange': foreign_exchange, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'status': status, 'footer_news': footer_news, 'footer_galleries': footer_galleries })

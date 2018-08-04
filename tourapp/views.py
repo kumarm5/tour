@@ -13,11 +13,10 @@ class HomeView(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
-        gallery_images = GalleryImages.objects.all()[:4]
+        footer_galleries = GalleryImages.objects.all()[:4]
+        footer_news = NewsInfo.objects.all()[:3]
 
         new_infos = NewsInfo.objects.all()
-
-        footer_news = NewsInfo.objects.all()[:3]
 
         homeimagesliders = HomeImageSlider.objects.filter(status=True)
 
@@ -27,7 +26,7 @@ class HomeView(TemplateView):
         except:
             insurance_details = None
 
-        return render(request, 'home.html', context={ 'homeimagesliders': homeimagesliders, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'testimonial_details': testimonial_details, 'insurance_details': insurance_details, 'new_infos': new_infos, 'footer_news': footer_news, 'gallery_images': gallery_images })
+        return render(request, 'home.html', context={ 'homeimagesliders': homeimagesliders, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'testimonial_details': testimonial_details, 'insurance_details': insurance_details, 'new_infos': new_infos, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 # class Contact(TemplateView):
 #     def get(self, request, **kwargs):
