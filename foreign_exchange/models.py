@@ -22,7 +22,7 @@ class EnquiryDetails(models.Model):
         ("GENERATED", "GENERATED"),
         ("IN-PROCESS", "IN-PROCESS"),
         ("PENDING", "PENDING"),
-        ("COMPLETED", "COMPLETED"),        
+        ("COMPLETED", "COMPLETED"),
     )
 
     mobile_num = models.CharField(max_length=20, null=True, blank=True, verbose_name='Mobile Number')

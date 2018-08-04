@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 # Create your models here.
 
 class TripType(models.Model):
@@ -185,12 +186,24 @@ class TermsAndConditions(models.Model):
         
 
 class EnquiryDetails(models.Model):
+    STATUS_CHOICES = (
+        ("GENERATED", "GENERATED"),
+        ("IN-PROCESS", "IN-PROCESS"),
+        ("PENDING", "PENDING"),
+        ("COMPLETED", "COMPLETED"),
+    )
+
     mobile_num = models.CharField(max_length=20, null=True, blank=True, verbose_name='Mobile Number')
     email_id = models.CharField(max_length=200, null=True, blank=True, verbose_name='Email Id')
     username = models.CharField(max_length=200, verbose_name='Username')
     sector = models.CharField(max_length=200, null=True, blank=True, verbose_name='sector')
     message = models.TextField(verbose_name='Message')
-
+    sms_or_email_message = models.TextField(null=True, blank=True, verbose_name='Email or SMS Message')
+    send_sms = models.BooleanField(default=False, verbose_name='Send SMS')
+    send_email = models.BooleanField(default=False, verbose_name='Send Email')
+    created_at = models.DateTimeField(default=now)
+    status = models.CharField(max_length=100, choices=STATUS_CHOICES, default="GENERATED")
+    
     def __str__(self):
         return self.username
 
