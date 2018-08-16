@@ -126,3 +126,9 @@ admin.site.register(PickUpDropLiveTerms, PickUpDropLiveTermsAdmin)
 class TimeChangeAdmin(admin.ModelAdmin):
     list_display = ('title',)
 admin.site.register(TimeChange, TimeChangeAdmin)
+
+class PickDropLiveTripAdmin(admin.ModelAdmin):
+    form = PickDropLiveTripForm
+    list_display = ('title','status')
+    fields = (('title', 'status'),)
+admin.site.register(PickDropLiveTrip, PickDropLiveTripAdmin)

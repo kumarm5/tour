@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from .views import VisaTrack, VisaLogin, VisaCountries, VisaDetails, Enquiry
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import logout
 
 urlpatterns = [
     url(r'track/$', VisaTrack.as_view(), name='visatrack'),
@@ -8,4 +9,5 @@ urlpatterns = [
     url(r'country/$', login_required(VisaCountries.as_view(), login_url='visalogin'), name='visacountry'),
     url(r'visadetails/(?P<id>[0-9]+)$', login_required(VisaDetails.as_view(), login_url='visalogin'), name='visadetails'),
     url(r'enquiry/(?P<id>[0-9]+)$', login_required(Enquiry.as_view()), name='visaenquiry'),
+    url(r'visa-logout', logout, {'next_page': '/visa/visalogin'}, name='visa_logout'),
 ]

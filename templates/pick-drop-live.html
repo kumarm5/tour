@@ -98,10 +98,13 @@
                             <label>Trip</label>
                             <select class="form-control" name="trip_route" id="trip_desc_id" required>
                                 <option value="">Please Select</option>
-                                <option value="1">PUNE To  MUMBAI AIRPORT</option>
+                                <!-- <option value="1">PUNE To  MUMBAI AIRPORT</option>
                                 <option value="2">MUMBAI  AIRPORT To  PUNE</option>
                                 <option value="3">NASHIK To  MUMBAI AIRPORT</option>
-                                <option value="4">MUMBAI AIRPORT To  NASHIK</option>
+                                <option value="4">MUMBAI AIRPORT To  NASHIK</option> -->
+                                {% for trip in pickdroplivetrip %}
+                                    <option value="{{ trip.id }}">{{ trip.title }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -337,16 +340,29 @@
     <script>
         $(document).ready(function(){
             $("#flight_date").datepicker({ dateFormat: 'dd-mm-yy' }); 
-            
+
             $('select[name="booking_type"]').on('change', function(){
                 var booking_type = $(this).val();
                 $('#individual').removeClass('hidden');
                 $('input[name="formname"]').val(booking_type);
             });
 
+            toUpper = function(x){ 
+                return x.toUpperCase();
+            };
+
             $('#trip_desc_id').on('change', function(){
                 trip_id = $(this).val();
-                if (trip_id==1 || trip_id==3){
+
+                trip_value = $("#trip_desc_id option:selected").text();
+
+                trip_value_array = trip_value.split(" ");
+                trip_value_array = trip_value_array.map(toUpper);
+
+                var to_id = trip_value_array.indexOf("TO");
+                var airport_id = trip_value_array.indexOf("AIRPORT");
+
+                if (to_id < airport_id ){
                     $('#pickup_point_div').html('Residence');
                     $('input[name="pick_up_point"]').val('Residence');
                     $('#departure_label').html('Flight time of departure');

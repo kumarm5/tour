@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView, View
 from tour_packages.models import Topics
 from gallery.models import GalleryMenu, GalleryImages
 from news.models import NewsInfo

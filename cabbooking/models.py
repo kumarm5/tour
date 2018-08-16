@@ -225,3 +225,14 @@ class TimeChange(models.Model):
     class Meta:
         verbose_name = 'Time Change'
         verbose_name_plural = 'Time Changes'
+
+class PickDropLiveTrip(models.Model):
+    title = models.CharField(max_length=200, verbose_name='Title')
+    status = models.BooleanField(default=True, verbose_name='Status')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Pick Up Drop Live Trip'
+        verbose_name_plural = 'Pick Up Drop Live Trips'

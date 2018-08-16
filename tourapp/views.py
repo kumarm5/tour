@@ -5,7 +5,7 @@ from gallery.models import GalleryMenu, GalleryImages
 from testimonial.models import Testimonial
 from insurance.models import Insurance
 from news.models import NewsInfo
-from .models import HomeImageSlider
+from .models import HomeImageSlider, About
 
 # Create your views here.
 class HomeView(TemplateView):
@@ -20,13 +20,15 @@ class HomeView(TemplateView):
 
         homeimagesliders = HomeImageSlider.objects.filter(status=True)
 
+        about = About.objects.filter(status = True).last()
+
         testimonial_details = Testimonial.objects.all()
         try:
             insurance_details = Insurance.objects.latest('id')
         except:
             insurance_details = None
 
-        return render(request, 'home.html', context={ 'homeimagesliders': homeimagesliders, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'testimonial_details': testimonial_details, 'insurance_details': insurance_details, 'new_infos': new_infos, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        return render(request, 'home.html', context={ 'homeimagesliders': homeimagesliders, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'testimonial_details': testimonial_details, 'insurance_details': insurance_details, 'new_infos': new_infos, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'about': about })
 
 # class Contact(TemplateView):
 #     def get(self, request, **kwargs):

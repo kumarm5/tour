@@ -10,8 +10,20 @@ class HomeImageSlider(models.Model):
 
     def __str__(self):
         return self.title
-        
+
     class Meta:
         verbose_name = 'Image Slider'
         verbose_name_plural = 'Image Sliders'
 
+
+class About(models.Model):
+    title = models.CharField(max_length=500, verbose_name='Title')
+    about_text = models.TextField(verbose_name='Text')
+    status = models.BooleanField(default=True, verbose_name='Status')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'About'
+        verbose_name_plural = 'About'

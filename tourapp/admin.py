@@ -9,3 +9,10 @@ class HomeImageSliderAdmin(admin.ModelAdmin):
     fields = (('title','image','status'),('description'),)
 
 admin.site.register(HomeImageSlider, HomeImageSliderAdmin)
+
+class AboutAdmin(admin.ModelAdmin):
+    list_display = ('title','status')
+    form = AboutForm
+    fields = (('title','status'), ('about_text'))
+
+admin.site.register(About, AboutAdmin)

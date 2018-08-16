@@ -187,16 +187,15 @@
                 <h1 class="text-center"><u>Welcome to Tanish Travel Hut</u></h1>
                 <br>
             </div>
-        
-            <div class="col-md-10 col-md-offset-1">
-                <p>We are passionate about delivering exceptional consumer experiences and our purpose is to empower people by making Travel simple, efficient and stress-free. By offering a complete and comprehensive suite of Travel services, we ensure that we meet our client’s every need. Whether you’re just beginning your Travel journey or have had years of experience, Tanish Travel Hut is the place for people to come together to explore, research and share their passion for Travel.</p>
-                <p><strong>We provide professional services.</strong></p>
-                <p>Our vision and mission are in sync with the dynamics of the Travel industry, taking the levels of customer satisfaction and deliverables to new dimensions.</p>
 
+            <div class="col-md-10 col-md-offset-1">
+                {% autoescape off %}
+                    {{ about.about_text|safe }}
+                {% endautoescape %}
                 <div class="clearfix"></div>
                 <hr>
             </div>
-            
+
         </div>
 
         <div class="row">

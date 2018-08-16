@@ -174,3 +174,29 @@ class PickUpDropLiveTermsForm(forms.ModelForm):
                 }
             )
         }
+
+class PickDropLiveTripForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(PickDropLiveTripForm, self).__init__(*args, **kwargs)
+        self.fields['status'].empty_label = 'Select status'
+
+    class Meta:
+        model = PickDropLiveTrip
+        CHOICES=((True,'Available'),(False,'Booked'))
+        exclude = ()
+
+        widgets={
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter title' 
+                }
+            ),
+            'status': widgets.Select(
+                attrs={
+                    'class': 'form-control'
+                },
+                choices=CHOICES
+            )
+        }

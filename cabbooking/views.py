@@ -166,7 +166,9 @@ class PickDropLive(TemplateView):
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:3]
 
-        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'timechange': timechange, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        pickdroplivetrip = PickDropLiveTrip.objects.filter(status = True)
+
+        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'timechange': timechange, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'pickdroplivetrip': pickdroplivetrip })
 
     def post(self, request, *args, **kwargs):
         term_and_cond = ExtraPickUpDropTerms.objects.last()
@@ -211,7 +213,9 @@ class PickDropLive(TemplateView):
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:3]
 
-        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'timechange': timechange, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        pickdroplivetrip = PickDropLiveTrip.objects.filter(status = True)
+
+        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'timechange': timechange, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'pickdroplivetrip': pickdroplivetrip })
 
 class ExtraPickDrop(TemplateView):
     def get(self, request, *args, **kwargs):
