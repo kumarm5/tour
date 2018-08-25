@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^$', views.Cities.as_view(), name='cities'),
     url(r'^hotel/(?P<id>[0-9]+)$', views.Hotels.as_view(), name='hotel'),
     url(r'^hoteldetails/(?P<id>[0-9]+)$', views.HotelInfo.as_view(), name='hoteldetails'),
+    url(r'enquiry/(?P<id>[0-9]+)$', views.HotelEnquiry.as_view(), name='hotelenquiry'),
 ]

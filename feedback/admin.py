@@ -6,6 +6,6 @@ from .models import *
 
 class FeedbackAdmin(admin.ModelAdmin):
     form = FeedbackForm
-    list_display = ('name','mobile_number')
+    list_display = ('name','mobile_number','created_at')
     fields = (('name','mobile_number','rating'),('message'),('remark'))
 admin.site.register(Feedback, FeedbackAdmin)

@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils.timezone import now
 # Create your models here.
 
 class PreferredSalesAgent(models.Model):
@@ -25,3 +25,21 @@ class ContactInformation(models.Model):
     class Meta:
         verbose_name = 'Contact Information'
         verbose_name_plural = 'Contact Informations'
+
+class ContactEnquiry(models.Model):
+    mobile_num = models.CharField(max_length=20, null=True, blank=True, verbose_name='Mobile Number')
+    email_id = models.CharField(max_length=200, null=True, blank=True, verbose_name='Email Id')
+    username = models.CharField(max_length=200, verbose_name='Username')
+    subject = models.CharField(max_length=400, null=True, blank=True, verbose_name='Subject')
+    message = models.TextField(verbose_name='Message')
+    sms_or_email_message = models.TextField(null=True, blank=True, verbose_name='Email or SMS Message')
+    send_sms = models.BooleanField(default=False, verbose_name='Send SMS')
+    send_email = models.BooleanField(default=False, verbose_name='Send Email')
+    created_at = models.DateTimeField(default=now)
+
+    def __str__(self):
+        return self.username
+
+    class Meta:
+        verbose_name = 'Contact Enquiry Detail'
+        verbose_name_plural = 'Contact Enquiry Details'

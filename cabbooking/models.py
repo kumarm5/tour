@@ -101,8 +101,8 @@ class CabRegister(models.Model):
         return self.agency_name
 
     class Meta:
-        verbose_name = 'Cab Registeration'
-        verbose_name_plural = 'Cab Registerations'
+        verbose_name = 'Cab Registration'
+        verbose_name_plural = 'Cab Registrations'
 
 class RegisterVehicle(models.Model):
     cabregister = models.ForeignKey(CabRegister, on_delete=models.DO_NOTHING)
@@ -153,6 +153,10 @@ class ExtraPickUpDropRequest(models.Model):
     pickup_address_with_landmark = models.TextField(null=True, blank=True, verbose_name='Pick Up Address With Landmark')
     drop_address_with_landmark = models.TextField(null=True, blank=True, verbose_name='Drop Address With Landmark')
     message = models.TextField(null=True, blank=True, verbose_name='Message')
+    sms_or_email_message = models.TextField(null=True, blank=True, verbose_name='Email or SMS Message')
+    send_sms = models.BooleanField(default=False, verbose_name='Send SMS')
+    send_email = models.BooleanField(default=False, verbose_name='Send Email')
+    created_at = models.DateTimeField(default=now)
 
     def __str__(self):
         return self.first_name
@@ -190,6 +194,10 @@ class PickUpDropLive(models.Model):
     pick_up_address = models.CharField(blank=True, null=True, max_length=300, verbose_name='Pick Up Address')
     drop_address = models.CharField(blank=True, null=True, max_length=300, verbose_name='Drop Address')
     message = models.TextField(blank=True, null=True, verbose_name='Message')
+    sms_or_email_message = models.TextField(null=True, blank=True, verbose_name='Email or SMS Message')
+    send_sms = models.BooleanField(default=False, verbose_name='Send SMS')
+    send_email = models.BooleanField(default=False, verbose_name='Send Email')
+    created_at = models.DateTimeField(default=now)
 
     def __str__(self):
         return self.first_name

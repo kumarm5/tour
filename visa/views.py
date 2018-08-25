@@ -59,7 +59,7 @@ class VisaLogin(TemplateView):
         userpasswd = request.POST.get('userpasswd')
         formname = request.POST.get('formname')
 
-        if formname == 'register':            
+        if formname == 'register':
             dup_visa_profile = VisaProfile.objects.filter(mobile_num=phone)
             dup_user = User.objects.filter(email=email)
 

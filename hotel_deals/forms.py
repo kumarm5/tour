@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from ckeditor.widgets import CKEditorWidget
 
 class CityForm(forms.ModelForm):
 
@@ -99,7 +100,12 @@ class HotelImagesForm(forms.ModelForm):
         }
 
 class HotelDetailsForm(forms.ModelForm):
-    
+    overview = forms.CharField(widget=CKEditorWidget())
+    inclusion = forms.CharField(widget=CKEditorWidget())
+    exclusion = forms.CharField(widget=CKEditorWidget())
+    how_to_book = forms.CharField(widget=CKEditorWidget())
+    hotel_info = forms.CharField(widget=CKEditorWidget())
+
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         super(HotelDetailsForm, self).__init__(*args, **kwargs)
@@ -120,36 +126,10 @@ class HotelDetailsForm(forms.ModelForm):
                     'class': 'form-control',
                     'placeholder': 'Enter title'
                 }
-            ),
-            'overview': forms.Textarea(
-                attrs = {
-                    'class': 'form-control'
-                }
-            ),
-            'inclusion': forms.Textarea(
-                attrs = {
-                    'class': 'form-control'
-                }
-            ),
-            'exclusion': forms.Textarea(
-                attrs = {
-                    'class': 'form-control'
-                }
-            ),
-            'how_to_book': forms.Textarea(
-                attrs = {
-                    'class': 'form-control'
-                }
-            ),
-            'hotel_info': forms.Textarea(
-                attrs = {
-                    'class': 'form-control'
-                }
-            ),
+            ),            
             'map_image': forms.FileInput(
                 attrs = {
                     'class': 'form-control'
                 }
             )
         }
-                

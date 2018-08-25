@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Visa Enquiry</title>
+    <title>Hotel Enquiry</title>
 {% endblock %}
 
 {% block style %}
@@ -17,7 +17,7 @@
 {% block content %}
 <div class="container">
         <div class="row">
-            <h1 class="text-center">Send Enquiry for Visa</h1>
+            <h1 class="text-center">Send Enquiry for Hotel</h1>
             {% if messages %}
                 {% for message in messages %}
                     <p class="text-center text-info"><strong>{{ message }}</strong></p>
@@ -28,22 +28,22 @@
                 <div class="col-md-6">
                     <br>
                     <label class="label-control">Mobile Number</label>
-                    <input type="text" class="form-control" name="mobile_num" value="{{ visa_profile.mobile_num }}" placeholder="Enter your mobile number">
+                    <input type="text" class="form-control" name="mobile_num" placeholder="Enter your mobile number">
                 </div>
                 <div class="col-md-6">
                     <br>
                     <label class="label-control">Email Address</label>
-                    <input type="text" class="form-control" name="email_id" value="{{ request.user.email}}" placeholder="Enter your email id">
+                    <input type="text" class="form-control" name="email_id" placeholder="Enter your email id">
                 </div>
                 <div class="col-md-6">
                     <br>
                     <label class="label-control">Name</label>
-                    <input type="text" class="form-control" name="username" value="{{ request.user }}" placeholder="Enter your name">
+                    <input type="text" class="form-control" name="username" placeholder="Enter your name">
                 </div>
                 <div class="col-md-6">
                     <br>
                     <label class="label-control">Subject</label>
-                    <input type="text" class="form-control" name="subject" placeholder="Enter your subject" value="Visa: {{ country.name }}">
+                    <input type="text" class="form-control" name="subject" placeholder="Enter your subject" value="{{ hotel_details.title }}">
                 </div>
                 <div class="col-md-12">
                     <br>
