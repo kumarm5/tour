@@ -270,7 +270,7 @@ class Enquiry(TemplateView):
 
             html_message = 'User Name is '+username+'<br>Mobile Number is '+mobile_num+'<br>Email Id is '+email_id+'<br>Subject is '+subject+'<br>Message is '+message+'<br>'+html_message
 
-            email_message = EmailMessage(subject, html_message, 'tanishtravels24@yahoo.co.in', [email_id],['tanishtravels24@yahoo.co.in'])
+            email_message = EmailMessage(subject, html_message, 'tanishtravels24@yahoo.co.in', [],['tanishtravels24@yahoo.co.in'])
             email_message.content_subtype = "html"
             email_message.send()
 
