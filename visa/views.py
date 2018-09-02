@@ -215,8 +215,10 @@ class Enquiry(TemplateView):
 
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:3]
+        gallery_menus = GalleryMenu.objects.filter(status = True)
+        tour_packages = Topics.objects.filter(status = True)
 
-        return render(request, 'visa-enquiry.html', context={'country': country, 'visa_profile': visa_profile, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        return render(request, 'visa-enquiry.html', context={'country': country, 'visa_profile': visa_profile, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus  })
 
     def post(self, request, *args, **kwargs):
         country_id = kwargs['id']
@@ -280,5 +282,7 @@ class Enquiry(TemplateView):
 
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:3]
+        gallery_menus = GalleryMenu.objects.filter(status = True)
+        tour_packages = Topics.objects.filter(status = True)        
 
-        return render(request, 'visa-enquiry.html', context={'country': country, 'visa_profile': visa_profile, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        return render(request, 'visa-enquiry.html', context={'country': country, 'visa_profile': visa_profile, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus })

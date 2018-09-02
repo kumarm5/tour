@@ -37,7 +37,7 @@ admin.site.register(VisaCountry, VisaCountryAdmin)
 class VisaInfoAdmin(admin.ModelAdmin):
     form = VisaInfoForm
     list_display = ('visa_country',)
-    fields = (('visa_country'), ('visa_details'))
+    fields = (('visa_country'), ('visa_details'), ('message'))
 admin.site.register(VisaInfo, VisaInfoAdmin)
 
 class VisaDownloadsAdmin(admin.ModelAdmin):

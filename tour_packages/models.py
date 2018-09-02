@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 # Create your models here.
 class Topics(models.Model):
@@ -66,3 +67,21 @@ class PackageDetails(models.Model):
     class Meta:
         verbose_name = 'Package Details'
         verbose_name_plural = 'Package Details'
+
+class TourPackageEnquiry(models.Model):
+    username = models.CharField(max_length=200, verbose_name='Username')
+    mobile_num = models.CharField(max_length=15, verbose_name='Mobile Number')
+    email_id = models.CharField(max_length=100, verbose_name='Email Address')
+    subject = models.CharField(max_length=500, verbose_name='Subject')
+    message = models.TextField(verbose_name='Message')
+    sms_or_email_message = models.TextField(null=True, blank=True, verbose_name='Email or SMS Message')
+    send_sms = models.BooleanField(default=False, verbose_name='Send SMS')
+    send_email = models.BooleanField(default=False, verbose_name='Send Email')
+    created_at = models.DateTimeField(default=now)
+
+    def __str__(self):
+        return self.username
+
+    class Meta:
+        verbose_name = 'Enquiry'
+        verbose_name_plural = 'Enquiries'

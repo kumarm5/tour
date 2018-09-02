@@ -54,6 +54,7 @@ class VisaCountry(models.Model):
 class VisaInfo(models.Model):
     visa_country = models.ForeignKey(VisaCountry, on_delete=models.CASCADE)
     visa_details = models.TextField(verbose_name='visa details')
+    message = models.TextField(verbose_name='Message', null=True, blank=True)
 
     def __str__(self):
         return self.visa_country.name
