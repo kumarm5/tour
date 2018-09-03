@@ -80,7 +80,7 @@
                     <input type="hidden" name="minute_for_residence_pickup_point_of_domestic_airport" value="{{ timechange.minute_for_residence_pickup_point_of_domestic_airport }}">
 
                     <input type="hidden" name="hour_for_residence_pickup_point_of_international_airport" value="{{ timechange.hour_for_residence_pickup_point_of_international_airport }}">
-                    <input type="hidden" name="minute_for_residence_pickup_point_of_international_airport" value="{{ timechange.hour_for_residence_pickup_point_of_international_airport }}">
+                    <input type="hidden" name="minute_for_residence_pickup_point_of_international_airport" value="{{ timechange.minute_for_residence_pickup_point_of_domestic_airport }}">
 
                     <div class="col-md-6">
                         <div class="form-group">
@@ -453,7 +453,7 @@
                     new_changed_time = newTime.minusTime(hour_for_residence_pickup_point_of_international_airport, minute_for_residence_pickup_point_of_international_airport);
                 } else if((airport == "domestic") && (to_id > airport_id)){
                     new_changed_time = newTime.plusTime(hour_for_airport_pickup_point, minute_for_airport_pickup_point);
-                } else if((airport == "international") && (to_id > airport_id)){
+                } else if((airport == "international") && (to_id > airport_id)){                    
                     new_changed_time = newTime.plusTime(hour_for_airport_pickup_point, minute_for_airport_pickup_point);
                 }
 
