@@ -53,7 +53,9 @@
                         </div>
                     </div>
                 </form>
-                <br><hr><br>
+                <br><hr>
+                <h3 class="text-center" id="sub-title"></h3>
+                <br>
             </div>
         </div>
 
@@ -343,6 +345,12 @@
 
             $('select[name="booking_type"]').on('change', function(){
                 var booking_type = $(this).val();
+                if(booking_type == 'individual'){
+                    $('#sub-title').text('Individual Cab');
+                } else {
+                    $('#sub-title').text('Shared Cab');
+                }
+
                 $('#individual').removeClass('hidden');
                 $('input[name="formname"]').val(booking_type);
             });
