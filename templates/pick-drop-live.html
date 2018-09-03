@@ -350,6 +350,10 @@
         $(document).ready(function(){
             $("#flight_date").datepicker({ dateFormat: 'dd-mm-yy' }); 
 
+            $('input[type=radio][name=airport]').on('change', function(){
+                $("input[type='text']").val('');
+            });
+
             $('select[name="booking_type"]').on('change', function(){
                 var booking_type = $(this).val();
                 if(booking_type == 'individual'){
