@@ -194,6 +194,7 @@ class PickDropLive(TemplateView):
     def get(self, request, *args, **kwargs):
         timechange = TimeChange.objects.last()
         term_and_cond = PickUpDropLiveTerms.objects.last()
+        shared_terms = SharedLiveTerms.objects.last()
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
@@ -202,10 +203,11 @@ class PickDropLive(TemplateView):
 
         pickdroplivetrip = PickDropLiveTrip.objects.filter(status = True)
 
-        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'timechange': timechange, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'pickdroplivetrip': pickdroplivetrip })
+        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'timechange': timechange, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'pickdroplivetrip': pickdroplivetrip, 'shared_terms': shared_terms })
 
     def post(self, request, *args, **kwargs):
         term_and_cond = PickUpDropLiveTerms.objects.last()
+        shared_terms = SharedLiveTerms.objects.last()
         timechange = TimeChange.objects.last()
 
         booking_type = request.POST.get('formname')
@@ -249,7 +251,7 @@ class PickDropLive(TemplateView):
 
         pickdroplivetrip = PickDropLiveTrip.objects.filter(status = True)
 
-        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'timechange': timechange, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'pickdroplivetrip': pickdroplivetrip })
+        return render(request, 'pick-drop-live.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'timechange': timechange, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'pickdroplivetrip': pickdroplivetrip, 'shared_terms': shared_terms })
 
 class ExtraPickDrop(TemplateView):
     def get(self, request, *args, **kwargs):

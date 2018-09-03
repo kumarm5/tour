@@ -215,8 +215,19 @@ class PickUpDropLiveTerms(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = 'Pick Up Drop Live Term'
-        verbose_name_plural = 'Pick Up Drop Live Terms'
+        verbose_name = 'Individual Cab Term'
+        verbose_name_plural = 'Individual Cab Terms'
+
+class SharedLiveTerms(models.Model):
+    title = models.CharField(max_length=200, verbose_name='Title')
+    details = models.TextField(verbose_name='Details')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Shared Cab Term'
+        verbose_name_plural = 'Shared Cab Terms'
 
 class TimeChange(models.Model):
     title = models.CharField(max_length=200, blank=True, null=True, verbose_name='Title')

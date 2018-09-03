@@ -225,6 +225,12 @@ class PickUpDropLiveTermsAdmin(admin.ModelAdmin):
     fields = (('title'),('details'),)
 admin.site.register(PickUpDropLiveTerms, PickUpDropLiveTermsAdmin)
 
+class SharedLiveTermsAdmin(admin.ModelAdmin):
+    form = SharedLiveTermsForm
+    list_display = ('title',)
+    fields = (('title'),('details'),)
+admin.site.register(SharedLiveTerms, SharedLiveTermsAdmin)
+
 class TimeChangeAdmin(admin.ModelAdmin):
     list_display = ('title',)
 admin.site.register(TimeChange, TimeChangeAdmin)

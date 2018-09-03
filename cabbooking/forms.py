@@ -175,6 +175,26 @@ class PickUpDropLiveTermsForm(forms.ModelForm):
             )
         }
 
+class SharedLiveTermsForm(forms.ModelForm):
+    details = forms.CharField(widget=CKEditorWidget())
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(SharedLiveTermsForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = SharedLiveTerms
+        exclude = ()
+
+        widgets={
+            'title': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter title'
+                }
+            )
+        }
+
+
 class PickDropLiveTripForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
