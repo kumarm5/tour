@@ -16,7 +16,7 @@ class CabRentalCities(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
         cities = Cities.objects.all()
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'cab-rental-cities.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'cities': cities, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class Tariff(TemplateView):
@@ -39,7 +39,7 @@ class Tariff(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'car-tariff.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'city_detail': city_detail, 'tariff_details': tariff_details, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -53,7 +53,7 @@ class TariffDetailEnquiry(TemplateView):
             tariff_detail = None
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'tariff-enquiry.html', context={ 'tariff_detail': tariff_detail, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -113,14 +113,14 @@ class TariffDetailEnquiry(TemplateView):
             tariff_detail = None
         
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'tariff-enquiry.html', context={ 'tariff_detail': tariff_detail, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class CabRegisteration(TemplateView):
     def get(self, request, *args, **kwargs):
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'cab-registeration.html', context={ 'footer_news': footer_news, 'footer_galleries': footer_galleries })
         
     def post(self, request, *args, **kwargs):
@@ -186,7 +186,7 @@ class CabRegisteration(TemplateView):
             messages.error(request, 'Cab registration failed')
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'cab-registeration.html', context={ 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -199,7 +199,7 @@ class PickDropLive(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         pickdroplivetrip = PickDropLiveTrip.objects.filter(status = True)
 
@@ -247,7 +247,7 @@ class PickDropLive(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         pickdroplivetrip = PickDropLiveTrip.objects.filter(status = True)
 
@@ -259,7 +259,7 @@ class ExtraPickDrop(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'extra-pick-drop.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -290,7 +290,7 @@ class ExtraPickDrop(TemplateView):
             messages.error(request, 'Request Failed.')
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'extra-pick-drop.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 

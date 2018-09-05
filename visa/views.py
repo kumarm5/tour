@@ -18,7 +18,7 @@ class VisaTrack(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'visa-tracking.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -33,7 +33,7 @@ class VisaTrack(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'visa-tracking.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'passport_tracks': passport_tracks, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
         
@@ -47,7 +47,7 @@ class VisaLogin(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'visa-login.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
         
@@ -98,7 +98,7 @@ class VisaLogin(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'visa-login.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -110,7 +110,7 @@ class VisaCountries(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'visa-country.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'visacountries': visacountries, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -153,7 +153,7 @@ class VisaDetails(TemplateView):
         VisaHistory.objects.create(username = username, mobile_num = mobile_num, email_id = email_id, activity = activity)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'visa-details.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'country': country, 'visa_info': visa_info, 'visa_downloads': visa_downloads, 'country_id': country_id, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -195,7 +195,7 @@ class VisaDetails(TemplateView):
         VisaHistory.objects.create(username = username, mobile_num = mobile_num, email_id = email_id, activity = activity)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'visa-details.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'country': country, 'visa_info': visa_info, 'visa_downloads': visa_downloads, 'country_id': country_id, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -214,7 +214,7 @@ class Enquiry(TemplateView):
             visa_profile = None
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
 
@@ -281,7 +281,7 @@ class Enquiry(TemplateView):
             messages.error(request, "Enquiry Failure")
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)        
 

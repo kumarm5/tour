@@ -15,7 +15,7 @@ class ServicePage(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'services.html', context={ 'service_details': service_details, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class SendEnquiry(TemplateView):
@@ -29,7 +29,7 @@ class SendEnquiry(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'service-send-enquiry.html', context={ 'service': service, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
     def post(self, request, *args, **kwargs):
@@ -83,5 +83,5 @@ class SendEnquiry(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'service-send-enquiry.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })

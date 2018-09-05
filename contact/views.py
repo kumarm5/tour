@@ -17,7 +17,7 @@ class Contact(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
         contact_information = ContactInformation.objects.last()
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'contact.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'contact_information': contact_information, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
     def post(self, request, **kwargs):
@@ -72,7 +72,7 @@ class Contact(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
         contact_information = ContactInformation.objects.last()
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'contact.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'contact_information': contact_information, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class PreferredSalesAgentInfo(TemplateView):
@@ -81,5 +81,5 @@ class PreferredSalesAgentInfo(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'preferred-sales-agent.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'preferredsalesagents': preferredsalesagents, 'footer_news': footer_news, 'footer_galleries': footer_galleries })

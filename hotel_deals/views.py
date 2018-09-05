@@ -14,7 +14,7 @@ class Cities(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
         cities_details = City.objects.all()
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'cities.html', context={ 'tour_packages': tour_packages, 'cities_details': cities_details, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class Hotels(TemplateView):
@@ -24,7 +24,7 @@ class Hotels(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'hotels.html', context={ 'tour_packages': tour_packages, 'hotel_details': hotel_details, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class HotelInfo(TemplateView):
@@ -34,7 +34,7 @@ class HotelInfo(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'hotel-details.html', context= { 'hotel_details': hotel_details, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class HotelEnquiry(TemplateView):
@@ -43,7 +43,7 @@ class HotelEnquiry(TemplateView):
         hotel_details = HotelDetails.objects.get(pk = hotel_id)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'hotel-enquiry.html', { 'hotel_details': hotel_details, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -102,6 +102,6 @@ class HotelEnquiry(TemplateView):
             messages.error(request, "Enquiry Failure")
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'hotel-enquiry.html', context={'hotel_details': hotel_details, 'footer_news': footer_news, 'footer_galleries': footer_galleries })

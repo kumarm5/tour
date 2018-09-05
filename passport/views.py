@@ -12,7 +12,7 @@ from tour_packages.models import Topics
 class PassportView(TemplateView):
     def get(self, request, **kwargs):
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         return render(request, 'passport.html', context={ 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
@@ -62,7 +62,7 @@ class PassportView(TemplateView):
             messages.error(request, 'Passport form submission Failed.')
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)

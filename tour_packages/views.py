@@ -18,7 +18,7 @@ class Tour(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_details = Tours.objects.filter(tour_topic_id = tour_topic_id)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'tour.html', context={ 'tour_packages': tour_packages, 'tour_details': tour_details, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class Packages(TemplateView):
@@ -28,7 +28,7 @@ class Packages(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'package.html', context={ 'tour_packages': tour_packages, 'tour_package_details': tour_package_details, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class PackageInfo(TemplateView):
@@ -38,7 +38,7 @@ class PackageInfo(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         return render(request, 'package-details.html', context= { 'package_details': package_details, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class Enquiry(TemplateView):
@@ -49,7 +49,7 @@ class Enquiry(TemplateView):
         except:
             package_details = None
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
         return render(request, 'tour-enquiry.html', context={'package_details': package_details, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
@@ -109,7 +109,7 @@ class Enquiry(TemplateView):
             messages.error(request, "Enquiry Failure")
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
 

@@ -20,7 +20,7 @@ class ForeignExchangePage(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'foreign-exchange.html', context= { 'foreign_exchanges': foreign_exchanges, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'term_and_cond': term_and_cond, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -38,7 +38,7 @@ class ForeignExchangeSendEnquiry(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'send-enquiry.html', context={ 'foreign_exchange': foreign_exchange, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'status': status, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
@@ -102,6 +102,6 @@ class ForeignExchangeSendEnquiry(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True) 
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         return render(request, 'send-enquiry.html', context={ 'foreign_exchange': foreign_exchange, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'status': status, 'footer_news': footer_news, 'footer_galleries': footer_galleries })

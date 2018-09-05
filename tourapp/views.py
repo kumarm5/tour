@@ -14,7 +14,7 @@ class HomeView(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
         footer_galleries = GalleryImages.objects.all()[:4]
-        footer_news = NewsInfo.objects.all()[:3]
+        footer_news = NewsInfo.objects.all()[:2]
 
         new_infos = NewsInfo.objects.all()
 
