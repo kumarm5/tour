@@ -39,7 +39,7 @@ class PackageInfo(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:2]
-        return render(request, 'package-details.html', context= { 'package_details': package_details, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        return render(request, 'package-details.html', context= { 'package_details': package_details, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'package_id': package_id })
 
     def post(self, request, **kwargs):
         email_id = request.POST.get('email_id')
@@ -90,7 +90,7 @@ class PackageInfo(TemplateView):
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:2]
 
-        return render(request, 'package-details.html', context= { 'package_details': package_details, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        return render(request, 'package-details.html', context= { 'package_details': package_details, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'package_id': package_id })
 
 class Enquiry(TemplateView):
     def get(self, request, *args, **kwargs):
