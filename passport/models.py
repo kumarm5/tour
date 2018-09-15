@@ -37,6 +37,8 @@ class PassportInfo(models.Model):
     family_father_surname = models.CharField(max_length=800, null=True, blank=True, verbose_name='Surname')
     family_mother_name = models.CharField(max_length=800, null=True, blank=True, verbose_name='Mother\'s Given Name')
     family_mother_surname = models.CharField(max_length=800, null=True, blank=True, verbose_name='Surname')
+    spouse_name = models.CharField(max_length=800, null=True, blank=True, verbose_name='Spouse\'s Given Name')
+    spouse_surname = models.CharField(max_length=800, null=True, blank=True, verbose_name='Surname')
     legal_guardian_given_name = models.CharField(max_length=800, null=True, blank=True, verbose_name='Legal Guardian\'s Given Name')
     legal_guardian_given_surname = models.CharField(max_length=800, null=True, blank=True, verbose_name='Surname')
     father_or_legal_guardian_passport_number = models.CharField(max_length=800, null=True, blank=True, verbose_name='Father/Legal Guardian\'s File/Passport Number')
