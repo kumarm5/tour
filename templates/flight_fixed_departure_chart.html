@@ -59,12 +59,12 @@
                                 {% if supplier_detail.departure_time %}
                                     {{ supplier_detail.departure_time | date:'H:i' }} / {{ supplier_detail.departure_flt_no }}
                                 {% else %}
-                                    {{ supplier_detail.oneway_time | date:'H:i:' }}
+                                    {{ supplier_detail.oneway_time | date:'H:i' }}
                                 {% endif %}
                             </td>
                             <td>
                                 {% if supplier_detail.return_time %}
-                                    {{ supplier_detail.return_time | date:'H:i:' }} / {{ supplier_detail.return_flt_no }}
+                                    {{ supplier_detail.return_time | date:'H:i' }} / {{ supplier_detail.return_flt_no }}
                                 {% else %}
                                     -
                                 {% endif %}
