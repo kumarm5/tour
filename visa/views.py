@@ -160,7 +160,7 @@ class VisaDetails(TemplateView):
     def post(self, request, *args, **kwargs):
 
         try:
-            visa_profile = VisaProfile.objects.get(user=request.user.pk)
+            visa_profile = VisaProfile.objects.get(user=request.user)
         except:
             visa_profile = None
 
