@@ -145,12 +145,13 @@ class VisaDetails(TemplateView):
         gallery_menus = GalleryMenu.objects.filter(status = True)        
 
         # maintaing the history when the user visit any details page of visa
-        username = request.user
-        email_id = request.user.email
-        mobile_num = visa_profile.mobile_num
-        activity = "Visited "+country.name+" Details Page"
+        if visa_profile:
+            username = request.user
+            email_id = request.user.email
+            mobile_num = visa_profile.mobile_num
+            activity = "Visited "+country.name+" Details Page"
 
-        VisaHistory.objects.create(username = username, mobile_num = mobile_num, email_id = email_id, activity = activity)
+            VisaHistory.objects.create(username = username, mobile_num = mobile_num, email_id = email_id, activity = activity)
 
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:2]
@@ -219,12 +220,13 @@ class VisaDetails(TemplateView):
             download_text = request.POST.get('download_text')
 
             # maintaing the history when the user visit any details page of visa
-            username = request.user
-            email_id = request.user.email
-            mobile_num = visa_profile.mobile_num
-            activity = download_text+" is downloaded"
+            if visa_profile:
+                username = request.user
+                email_id = request.user.email
+                mobile_num = visa_profile.mobile_num
+                activity = download_text+" is downloaded"
 
-            VisaHistory.objects.create(username = username, mobile_num = mobile_num, email_id = email_id, activity = activity)
+                VisaHistory.objects.create(username = username, mobile_num = mobile_num, email_id = email_id, activity = activity)
 
         return render(request, 'visa-details.html', context={'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'country': country, 'visa_info': visa_info, 'visa_downloads': visa_downloads, 'country_id': country_id, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
