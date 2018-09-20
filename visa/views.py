@@ -105,7 +105,7 @@ class VisaLogin(TemplateView):
 
 class VisaCountries(TemplateView):    
     def get(self, request, *args, **kwargs):
-        visacountries = VisaCountry.objects.all()
+        visacountries = VisaCountry.objects.order_by('name')
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
