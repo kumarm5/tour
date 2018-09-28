@@ -34,7 +34,12 @@ class Packages(TemplateView):
 class PackageInfo(TemplateView):
     def get(self, request, **kwargs):
         package_id = int(kwargs['id'])
-        package_details = PackageDetails.objects.get(pk = package_id)
+
+        try:
+            package_details = PackageDetails.objects.get(id = package_id)
+        except:
+            package_details = None
+
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
