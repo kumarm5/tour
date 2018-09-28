@@ -26,6 +26,9 @@
                         <h3><a href="{% url 'Visa:visadetails' id=visacountry.id %}">{{ visacountry.name }}</a></h3>
                         <p>{{ visacountry.details }}</p>
                     </div>
+                    {% if forloop.counter|divisibleby:4 %}
+                        <div class="clearfix"></div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
