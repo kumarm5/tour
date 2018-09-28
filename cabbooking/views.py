@@ -33,7 +33,7 @@ class Tariff(TemplateView):
         except:
             term_and_cond = None
 
-        tariff_details = TariffDetails.objects.filter(pk=city_id)
+        tariff_details = TariffDetails.objects.filter(city_id=city_id)
 
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
