@@ -26,7 +26,9 @@ class TermsAndConditionAdmin(admin.ModelAdmin):
     fields = (('city'),('details'),)
 admin.site.register(TermsAndCondition, TermsAndConditionAdmin)
 
-admin.site.register(TariffDetails)
+class TariffDetailsAdmin(admin.ModelAdmin):
+    list_display = ('city','vehicle_master')
+admin.site.register(TariffDetails, TariffDetailsAdmin)
 
 class TariffEnquiryAdmin(admin.ModelAdmin):
     list_display = ('username','status','created_at')
