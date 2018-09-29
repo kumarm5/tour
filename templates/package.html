@@ -15,7 +15,7 @@
                     <a href="{% url 'packagedetails' id=tour_package_detail.tour_id %}" class="thumbnail">
                         <img src="{{ tour_package_detail.package_images.url }}" class="img-responsive">
                     </a>
-                    <h3><a href="{% url 'packagedetails' id=tour_package_detail.id %}">{{ tour_package_detail.title }}</a></h3>
+                    <h3><a href="{% url 'packagedetails' id=tour_package_detail.tour_id %}">{{ tour_package_detail.title }}</a></h3>
                     <p>{{ tour_package_detail.description }}</p>
                 </div>
                 {% endfor %}
