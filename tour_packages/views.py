@@ -23,7 +23,7 @@ class Tour(TemplateView):
 
 class Packages(TemplateView):
     def get(self, request, **kwargs):
-        tour_id = int(kwargs['id'])        
+        tour_id = int(kwargs['id'])
         tour_package_details = TourPackages.objects.filter(tour = tour_id)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
@@ -76,7 +76,12 @@ class PackageInfo(TemplateView):
 
         email_message = EmailMessage('Package Info for '+package_details.title, html_message, 'tanishtravels24@yahoo.co.in', [email_id],['tanishtravels24@yahoo.co.in'])
         email_message.content_subtype = "html"
-        email_message.send()
+        send_email = email_message.send()
+
+        if send_email:
+            messages.success(request, 'Email has been successfully sent to you.')
+        else:
+            messages.error(request, 'Failed to send an Email.')
 
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)

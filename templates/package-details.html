@@ -94,7 +94,17 @@
             <h1>{{ package_details.title }}</h1>
             <a href="{% url 'tourenquiry' id=package_details.id %}" class="btn btn-info">Send Enquiry</a>
         </div>
-        <br><br>
+        <br>
+        <div class="row text-center">
+            <div class="col-md-12">
+                {% if messages %}
+                    {% for message in messages %}
+                        <h4 class="text-info"><strong>{{ message }}</strong></h4><br>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-12">
                 

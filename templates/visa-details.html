@@ -54,14 +54,26 @@
                 <br>
                 <a href="{% url 'Visa:visa_logout' %}" class="btn btn-primary pull-right">Logout</a>
                 <br>
-                <h1>{{ country.name }}</h1>                
+                <h1>{{ country.name }}</h1>
             </div>
         </div>
         <div class="row text-center">
             <div class="col-md-12">
                 <p><strong>{{ country.details }}</strong></p>
                 <a href="{% url 'Visa:visaenquiry' id=country.id %}" class="btn btn-info">Send Enquiry</a>
-                <br><br>
+                <br>
+
+                <div class="row text-center">
+                    <div class="col-md-12">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <h4 class="text-info"><strong>{{ message }}</strong></h4><br>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <br>
                 <div class="pull-right">
                     <a href="mailto:tanishtravels24@yahoo.co.in" class="btn btn-email" data-toggle="modal" data-target="#myModal"><i class="fa fa-envelope"></i> Mail</a>
                     <a href="javascript:void(0);" class="btn btn-print" ><i class="fa fa-print"></i>Print</a>

@@ -215,7 +215,12 @@ class VisaDetails(TemplateView):
 
             email_message = EmailMessage('Visa Info for '+visa_info.visa_country.name, html_message, 'tanishtravels24@yahoo.co.in', [email_id],['tanishtravels24@yahoo.co.in'])
             email_message.content_subtype = "html"
-            email_message.send()
+            send_email = email_message.send()
+
+            if send_email:
+                messages.success(request, 'Email has been successfully sent to you.')
+            else:
+                messages.error(request, 'Failed to send an Email.')
         else:
             download_text = request.POST.get('download_text')
 
