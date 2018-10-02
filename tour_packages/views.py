@@ -15,11 +15,17 @@ class Tour(TemplateView):
     def get(self, request, **kwargs):
         tour_topic_id = int(kwargs['id'])
         tour_packages = Topics.objects.filter(status = True)
+
+        try:
+            title_tour_packages = Topics.objects.get(id = tour_topic_id)
+        except:
+            title_tour_packages = None
+
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_details = Tours.objects.filter(tour_topic_id = tour_topic_id)
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:2]
-        return render(request, 'tour.html', context={ 'tour_packages': tour_packages, 'tour_details': tour_details, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        return render(request, 'tour.html', context={ 'tour_packages': tour_packages, 'tour_details': tour_details, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'title_tour_packages': title_tour_packages })
 
 class Packages(TemplateView):
     def get(self, request, **kwargs):
