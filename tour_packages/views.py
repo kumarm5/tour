@@ -33,7 +33,7 @@ class Packages(TemplateView):
         tour_package_details = PackageDetails.objects.filter(package__tour_id = tour_id)
 
         try:
-            tour_package_title = TourPackages.objects.get(tour_id = tour_id)
+            tour_package_title = Tours.objects.get(id = tour_id)
         except:
             tour_package_title = None
 
