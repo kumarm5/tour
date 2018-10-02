@@ -24,7 +24,8 @@ class Tour(TemplateView):
 class Packages(TemplateView):
     def get(self, request, **kwargs):
         tour_id = int(kwargs['id'])
-        tour_package_details = TourPackages.objects.filter(tour = tour_id)
+        tour_package_details = PackageDetails.objects.filter(package__tour_id = tour_id)
+        # tour_package_details = TourPackages.objects.filter(tour = tour_id)
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
