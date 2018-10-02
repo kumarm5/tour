@@ -31,12 +31,17 @@ class Packages(TemplateView):
     def get(self, request, **kwargs):
         tour_id = int(kwargs['id'])
         tour_package_details = PackageDetails.objects.filter(package__tour_id = tour_id)
-        # tour_package_details = TourPackages.objects.filter(tour = tour_id)
+
+        try:
+            tour_package_title = TourPackages.objects.get(tour_id = tour_id)
+        except:
+            tour_package_title = None
+
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:2]
-        return render(request, 'package.html', context={ 'tour_packages': tour_packages, 'tour_package_details': tour_package_details, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        return render(request, 'package.html', context={ 'tour_packages': tour_packages, 'tour_package_details': tour_package_details, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'tour_package_title': tour_package_title })
 
 class PackageInfo(TemplateView):
     def get(self, request, **kwargs):
