@@ -21,11 +21,17 @@ class Hotels(TemplateView):
     def get(self, request, **kwargs):
         city_id = int(kwargs['id'])
         hotel_details = Hotel.objects.filter(city = city_id)
+
+        try:
+            city_title = City.objects.get(id = city_id)
+        except:
+            city_title = None
+
         gallery_menus = GalleryMenu.objects.filter(status = True)
         tour_packages = Topics.objects.filter(status = True)
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:2]
-        return render(request, 'hotels.html', context={ 'tour_packages': tour_packages, 'hotel_details': hotel_details, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        return render(request, 'hotels.html', context={ 'tour_packages': tour_packages, 'hotel_details': hotel_details, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries, 'city_title': city_title })
 
 class HotelInfo(TemplateView):
     def get(self, request, **kwargs):
