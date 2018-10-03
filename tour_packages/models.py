@@ -60,6 +60,7 @@ class PackageDetails(models.Model):
     tour_info = models.TextField(blank=True, null=True, verbose_name='Tour Info')
     map_image = models.FileField(upload_to='documents/', verbose_name='Map Image')
     package_images = models.ManyToManyField(PackageImages, verbose_name='Package Images')
+    remark = models.TextField(blank=True, null=True, verbose_name='Remark')
 
     def __str__(self):
         return self.title

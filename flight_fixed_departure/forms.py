@@ -83,6 +83,7 @@ class SupplierDepartureSeatInfoForm(forms.ModelForm):
         # self.fields['supplier'].queryset = SupplierDetails.objects.filter(triptype__id = 1).values_list('supplier_name','sectors__sector_name')        
         self.fields['supplier'].queryset = SupplierDetails.objects.filter(triptype__id = 1)
         self.fields['passport_exp'].required = False
+        self.fields['date_of_birth'].required = False
         self.fields['supplier'].empty_label = 'Select Supplier'
         # self.fields['sector'].queryset = Sector.objects.filter(triptype__id = 1)
         # self.fields['sector'].empty_label = 'Select Sector'
@@ -193,6 +194,7 @@ class SupplierReturnSeatInfoForm(forms.ModelForm):
         self.request = kwargs.pop('request', None)
         super(SupplierReturnSeatInfoForm, self).__init__(*args, **kwargs)
         self.fields['passport_exp'].required = False
+        self.fields['date_of_birth'].required = False
         # self.fields['supplier'].queryset = SupplierDetails.objects.filter(triptype__id = 1).values_list('supplier_name','sectors__sector_name')
         self.fields['supplier'].queryset = SupplierDetails.objects.filter(triptype__id = 1)
         self.fields['supplier'].empty_label = 'Select Supplier'

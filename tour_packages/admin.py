@@ -42,7 +42,7 @@ admin.site.register(PackageImages, PackageImagesAdmin)
 class PackageDetailsAdmin(admin.ModelAdmin):
     list_display = ('package', 'title')
     form = PackageDetailsForm
-    fields = (('package', 'package_images'), ('title'), ('overview'), ('inclusion'), ('exclusion'), ('how_to_book'), ('tour_info'), ('map_image'))
+    fields = (('package', 'package_images'), ('title'), ('overview'), ('inclusion'), ('exclusion'), ('how_to_book'), ('tour_info'), ('remark'), ('map_image'))
 
 admin.site.register(PackageDetails, PackageDetailsAdmin)
 

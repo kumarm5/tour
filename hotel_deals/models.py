@@ -48,7 +48,8 @@ class HotelDetails(models.Model):
     hotel_info = models.TextField(blank=True, null=True, verbose_name='Hotel Info')
     map_image = models.FileField(upload_to='documents/', verbose_name='Map Image')
     hotel_images = models.ManyToManyField(HotelImages, verbose_name='Hotel Images')
-
+    remark = models.TextField(blank=True, null=True, verbose_name='Remark')
+    
     def __str__(self):
         return self.title
 

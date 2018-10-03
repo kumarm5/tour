@@ -29,7 +29,7 @@ admin.site.register(HotelImages, HotelImagesAdmin)
 class HotelDetailsAdmin(admin.ModelAdmin):
     list_display = ('hotel', 'title')
     form = HotelDetailsForm
-    fields = (('hotel', 'hotel_images'), ('title'), ('overview'), ('inclusion'), ('exclusion'), ('how_to_book'), ('hotel_info'), ('map_image'))
+    fields = (('hotel', 'hotel_images'), ('title'), ('overview'), ('inclusion'), ('exclusion'), ('how_to_book'), ('hotel_info'), ('remark'), ('map_image'))
 
 admin.site.register(HotelDetails, HotelDetailsAdmin)
 
