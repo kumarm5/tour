@@ -9,11 +9,12 @@
     {{ block.super }}
 
     <style>
+        .print-div{ height: 10px; overflow: hidden;}
         @media print
         {
             body * { visibility: hidden; }
             .print-div * { visibility: visible; }
-            .print-div { position: absolute; top: 40px; left: 30px; }            
+            .print-div { position: absolute; top: 40px; left: 30px; height: auto; }
         }
         @media screen {
             .print-pdf-div, .print-div { position: absolute; top: 0px; left: 0px; }
@@ -56,7 +57,7 @@
         </div>
     </div>
 
-    <div class="container print-pdf-div" style="visibility:hidden;">
+    <div class="container print-pdf-div hidden">
         <div class="row">
             <img src="{% static 'images/header-logo.png' %}" width="522" height="150" class="head-logo">
             <br><br>
