@@ -35,10 +35,12 @@ class FlightFixedDepartureChart(TemplateView):
         tour_packages = Topics.objects.filter(status = True)
         gallery_menus = GalleryMenu.objects.filter(status = True)
 
+        terms_and_conditions = TermsAndConditions.objects.filter(status = True)
+
         footer_galleries = GalleryImages.objects.all()[:4]
         footer_news = NewsInfo.objects.all()[:2]
 
-        return render(request, self.template_name, {'sector_id': int(sector_id), 'sector_details': sector_details, 'supplier_details': supplier_details, 'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
+        return render(request, self.template_name, {'sector_id': int(sector_id), 'sector_details': sector_details, 'supplier_details': supplier_details, 'terms_and_conditions': terms_and_conditions,'tour_packages': tour_packages, 'gallery_menus': gallery_menus, 'footer_news': footer_news, 'footer_galleries': footer_galleries })
 
 class FlightFixedEnquiryDetails(TemplateView):
     def get(self, request, *args, **kwargs):
