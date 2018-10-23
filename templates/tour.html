@@ -16,8 +16,11 @@
                         <img src="{{ tour_detail.tour_images.url }}" class="img-responsive">
                     </a>
                     <h3><a href="{% url 'package' id=tour_detail.id %}">{{ tour_detail.title }}</a></h3>
-                </div>                    
-                {% endfor %}              
+                </div>
+                {% if forloop.counter|divisibleby:4 %}
+                    <div class="clearfix"></div>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
